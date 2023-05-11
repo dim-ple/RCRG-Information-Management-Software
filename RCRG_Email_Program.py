@@ -1210,8 +1210,34 @@ class NewListing(tk.Frame):
 
 
             def seller_folder():
+                
+                if os.getcwd() != 'C:\\Users\\rcrgr\\Desktop\\E-mail Programs':
+                    os.chdir('C:\\Users\\rcrgr\\Desktop\\E-mail Programs')
+                
                 Property_Address = txt1.get()
                 Listing_Agent = clicked_agents.get()
+
+                fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
+
+
+                data_dict = {'Property Address': Property_Address, 'City': '', 'State': '', 'Zip': '', 'County': '',
+                        'CVRMLS': '', 'Sales Price': '', 'Offer Date_af_date': '', 'Date2_af_date': '',
+                        'Rat-Date_af_date': '', 'Closing Date_af_date': '', 'List Price': '', 'Closing Costs Paid by Seller': '',
+                        'Seller': '', 'Purchaser': '', 'Seller 1': '', 'Seller 2': '', 'Seller Email 1': '', 'Seller Email 2': '',
+                        'Seller Cell': '', 'Seller Work': '', 'Seller Home': '', 'Seller Fax': '', 'Seller Forwarding Address': '',
+                        'Seller City': '', 'Seller State': '', 'Seller Zip': '', 'Buyer 1': '', 'Buyer 2': '',
+                        'Buyer Email': '', 'Buyer Email 2': '', 'Buyer Cell': '', 'Buyer Work': '', 'Buyer Home': '',
+                        'Buyer Fax': '', 'Home Warranty': '', 'Home Inspec\x98on Co': '', 'Termite Co': '', 'FuelOil Co': '',
+                        'Well  Sep\x98c Co': '', 'Lender': '', 'Loan Officer Name': '', 'Loan Officer Phone': '', 'Loan Officer Email': '',
+                        'Seller Attorney Firm': '', 'Seller Attorney Contact': '', 'Seller Office Phone': '', 'Seller Attorney Fax': '',
+                        'Seller Attorney Email': '', 'Buyer Attorney Firm': '', 'Buyer Attorney Contact': '', 'Buyer Attorney Office Phone': '',
+                        'Buyer Attorney Fax': '', 'Buyer Attorney Email': '', 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
+                        'Listing Company Name': 'The Rick Cox Realty Group', 'Listing Agent Name': rcrg[Listing_Agent][1], 'Transaction Coordinator': 'Harrison Goehring - harrison@rickcoxrealty.com', 'Listing Agent Phone': rcrg[Listing_Agent][4],
+                        'Listing Agent E-mail': rcrg[Listing_Agent][0], 'Selling Company Name': '', 'Selling Agent Name': '', 'Selling Agent TC': '',
+                        'Selling Agent Phone': '', 'Selling Agent Email': '', 'Escrow Deposit': '', 'Held by': '', 'Commission': '',
+                        'Transac\x98on Fee': '395.00', 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
+            
+                fillpdfs.write_fillable_pdf('Transaction Info Sheet(Fillable).pdf', 'Transaction Info Sheet(f).pdf', data_dict)
 
                 if Listing_Agent == "Other":
                     path = " "
@@ -1227,6 +1253,8 @@ class NewListing(tk.Frame):
                 os.mkdir("Invoices-Inspections")
                 os.mkdir("Photos")
 
+                shutil.copy('C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\{Property_Address}\\Contract-Addenda')
+                
             #Execute Button
             submit_button = Button(self, text = 'Submit', command = seller_folder)
             submit_button.grid(column = 3, row = 3)
