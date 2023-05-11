@@ -864,12 +864,12 @@ class ZillowTeam(tk.Frame):
             #Addressee Operating Logic - Database
             if Team_On == "Alpha":
                 mailItem.To = ""
-                mailItem.CC = ""
-                mailItem.BCC = "eleni@findhomerva.com; melanies1274@yahoo.com; brettmlynes@gmail.com; kathyhole1@gmail.com; rick@rickcoxrealty.com"
+                mailItem.CC = "eleni@findhomerva.com; melanies1274@yahoo.com; brettmlynes@gmail.com;"
+                mailItem.BCC = "rick@rickcoxrealty.com"
             elif Team_On == "Bravo":
                 mailItem.To = ""
-                mailItem.CC = ""
-                mailItem.BCC = " GregSellsVA@Gmail.com; MBarlowRVAHomes@gmail.com; ChristineMottleyRVA@gmail.com; Rick@RickCoxRealty.com"
+                mailItem.CC = "GregSellsVA@Gmail.com; tundehasthekey@gmail.com; kathyhole1@gmail.com;"
+                mailItem.BCC = "Rick@RickCoxRealty.com"
             else:
                 mailItem.To= ""
                 mailItem.CC = ""
@@ -906,12 +906,12 @@ class ZillowTeam(tk.Frame):
             #Addressee Operating Logic - Database
             if Team_Off == "Alpha":
                 mailItem.To = ""
-                mailItem.CC = ""
-                mailItem.BCC = "eleni@findhomerva.com; melanies1274@yahoo.com; brettmlynes@gmail.com; kathyhole1@gmail.com; rick@rickcoxrealty.com"
+                mailItem.CC = "eleni@findhomerva.com; melanies1274@yahoo.com; brettmlynes@gmail.com;"
+                mailItem.BCC = "rick@rickcoxrealty.com"
             elif Team_Off == "Bravo":
                 mailItem.To = ""
-                mailItem.CC = ""
-                mailItem.BCC = "GregSellsVA@Gmail.com; MBarlowRVAHomes@gmail.com; ChristineMottleyRVA@gmail.com; Rick@RickCoxRealty.com"
+                mailItem.CC = "GregSellsVA@Gmail.com; tundehasthekey@gmail.com; kathyhole1@gmail.com;"
+                mailItem.BCC = "Rick@RickCoxRealty.com"
             else:
                 mailItem.To= ""
                 mailItem.CC = ""
@@ -993,8 +993,6 @@ class BuyerZillow(tk.Frame):
                 Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUy0ye6f74j2tl_9hc6g'>Link to Zillow Review for {Selling_Agent}</a>"
             elif Selling_Agent == "Christine":
                 Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUw5sfhm4mnvgp_9y704'>Link to Zillow Review for {Selling_Agent}</a>"
-            elif Selling_Agent == "Jessica":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZU15heqyb7atkw9_6y17r'>Link to Zillow Review for {Selling_Agent}</a>"
             elif Selling_Agent == "Tunde":
                 Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUxqyuo617aoeh_1zmzs'>Link to Zillow Review for {Selling_Agent}</a>"
             elif Selling_Agent == "Matt":
@@ -1118,8 +1116,6 @@ class SellerZillow(tk.Frame):
                 Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUy0ye6f74j2tl_9hc6g'>Link to Zillow Review for {Listing_Agent}</a>"
             elif Listing_Agent == "Christine":
                 Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUw5sfhm4mnvgp_9y704'>Link to Zillow Review for {Listing_Agent}</a>"
-            elif Listing_Agent == "Jessica":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZU15heqyb7atkw9_6y17r'>Link to Zillow Review for {Listing_Agent}</a>"
             elif Listing_Agent == "Tunde":
                 Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUxqyuo617aoeh_1zmzs'>Link to Zillow Review for {Listing_Agent}</a>"
             elif Listing_Agent == "Matt":
