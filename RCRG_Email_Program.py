@@ -161,6 +161,28 @@ class BuyerTran(tk.Frame):
         txt1 = Entry(self, width=38)
         txt1.grid(column = 3, row = 0)
 
+        #City
+
+        #Zip
+
+        #County
+
+        #MLS Number
+
+        #Sales Price
+
+        #List Price
+
+        #Offer Date
+
+        #Ratification Date
+
+        #Close Date
+
+        #Seller Paid Closing Costs
+
+        #Seller Name
+
         #2nd Q & A - Agent
         lbl2 = Label(self, text = "Who is the Selling Agent?")
         lbl2.grid(column = 2, row = 1)
@@ -173,11 +195,15 @@ class BuyerTran(tk.Frame):
         txt2 = Entry(self, width=8)
         txt2.grid(column = 3, row = 2)
 
+        #Transaction Fee (Radio 3 option - 395, 495, 0)
+
         #5th Q & A - Client Name
         lbl4 = Label(self, text = "What is the Client's Full Name? For Multiple Names, separate with a ';'")
         lbl4.grid(column = 2, row = 3)
         txt3 = Entry(self, width=38)
         txt3.grid(column = 3, row = 3)
+
+        #Client Phone Number(s)
 
         #6th Q & A - Lender
         lbl4 = Label(self, text = "Who is the Lender?")
@@ -207,13 +233,15 @@ class BuyerTran(tk.Frame):
         txt4 = Entry(self, width=38)
         txt4.grid(column = 3, row = 7)
 
+        #Listing Agent Company
+        
         #10th Q & A - Listing Agent Name
         lbl7 = Label(self, text = "What is the Listing Agent's Name")
         lbl7.grid(column = 2, row = 8)
         txt5 = Entry(self, width=38)
         txt5.grid(column = 3, row = 8)
 
-        #11th Q & A - Listing Agent Name
+        #11th Q & A - Listing Agent E-mail
         lbl7 = Label(self, text = "What is the Listing Agent's E-mail")
         lbl7.grid(column = 2, row = 9)
         txt6 = Entry(self, width=38)
@@ -269,10 +297,10 @@ class BuyerTran(tk.Frame):
             fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
 
 
-            data_dict = {'Property Address': Property_Address, 'City': '', 'State': '', 'Zip': '', 'County': '',
+            data_dict = {'Property Address': Property_Address, 'City': '', 'State': 'VA', 'Zip': '', 'County': '',
                         'CVRMLS': '', 'Sales Price': '', 'Offer Date_af_date': '', 'Date2_af_date': '',
                         'Rat-Date_af_date': '', 'Closing Date_af_date': '', 'List Price': '', 'Closing Costs Paid by Seller': '',
-                        'Seller': '', 'Purchaser': '', 'Seller 1': '', 'Seller 2': '', 'Seller Email 1': '', 'Seller Email 2': '',
+                        'Seller': '', 'Purchaser': 'Yes', 'Seller 1': '', 'Seller 2': '', 'Seller Email 1': '', 'Seller Email 2': '',
                         'Seller Cell': '', 'Seller Work': '', 'Seller Home': '', 'Seller Fax': '', 'Seller Forwarding Address': '',
                         'Seller City': '', 'Seller State': '', 'Seller Zip': '', 'Buyer 1': Client1, 'Buyer 2': Client2,
                         'Buyer Email': client_email1, 'Buyer Email 2': client_email2, 'Buyer Cell': '', 'Buyer Work': '', 'Buyer Home': '',
@@ -284,7 +312,7 @@ class BuyerTran(tk.Frame):
                         'Listing Company Name': '', 'Listing Agent Name': Listing_Agent, 'Transaction Coordinator': '', 'Listing Agent Phone': '',
                         'Listing Agent E-mail': Listing_Email, 'Selling Company Name': 'The Rick Cox Realty Group', 'Selling Agent Name': rcrg[Selling_Agent][1], 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
                         'Selling Agent Phone': rcrg[Selling_Agent][4], 'Selling Agent Email': rcrg[Selling_Agent][0], 'Escrow Deposit': '', 'Held by': '', 'Commission': Commission + ' to Selling Agent',
-                        'Transac\x98on Fee': '395.00', 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
+                        'Transac\x98on Fee': '', 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
             
             fillpdfs.write_fillable_pdf('Transaction Info Sheet(Fillable).pdf', 'Transaction Info Sheet(f).pdf', data_dict)
             
@@ -307,8 +335,15 @@ class BuyerTran(tk.Frame):
             Property_Address = txt1.get()
             Selling_Agent = clicked_agents.get()
             Commission = txt2.get()
-            Client_Name = txt3.get()
+            Client_Name1 = txt3.get()
             client_email = txt4.get()
+            Address_To_Client = f"{Client_Name1}"
+
+            if ";" in Client_Name1:
+                i = Client_Name1.find(";")
+                Client_Name2 = Client_Name1[(i+2):]
+                Client_Name1 = Client_Name1[0:i]
+                Address_To_Client = f"{Client_Name1} & {Client_Name2}"
 
             olApp = win32.Dispatch('Outlook.Application')
             olNS = olApp.GetNameSpace('MAPI')
@@ -325,7 +360,7 @@ class BuyerTran(tk.Frame):
                 mailItem.CC = rcrg[Selling_Agent][0] + " amy@rickcoxrealty.com;"
 
             html_body = f"""
-                <p class=MsoNormal>Good {Time}, {Client_Name}!<br><br></p>
+                <p class=MsoNormal>Good {Time}, {Address_To_Client}!<br><br></p>
                 <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I work with {Agent_Name} and will be assisting with your purchase of {Property_Address}. Attached, you will find copies of the fully-executed contract and any addenda or disclosures in conjunction with your closing.<br><br></p>
                 <p class=MsoNormal>Should you have any questions regarding closing or any aspect of the transaction leading up to that point, please feel free to reach out me. My congratulations to you on your upcoming home purchase!<br><br></p>
                 <p class=MsoNormal>CC: Your agent, {Agent_Name}; Team Administrator, Amy Foldes; <br><br></p>
@@ -407,17 +442,22 @@ class BuyerTran(tk.Frame):
             Selling_Agent = clicked_agents.get()
             Client_Name1 = txt3.get()
             Client_Name2 = ' '
-            
+            Client_Email_Message = f"client, {Client_Name1}"
+            Client_Subject_Line = f"{Client_Name1}"
+    
             if ";" in Client_Name1:
                 i = Client_Name1.find(";")
                 Client_Name2 = Client_Name1[(i+2):]
                 Client_Name1 = Client_Name1[0:i]
+                Client_Email_Message = f"clients, {Client_Name1} & {Client_Name2}"
+                Client_Subject_Line = f"{Client_Name1} & {Client_Name2}"
+                
             
             olApp = win32.Dispatch('Outlook.Application')
             olNS = olApp.GetNameSpace('MAPI')
 
             mailItem = olApp.CreateItem(0)
-            mailItem.Subject = f'New Purchase Contract - {Property_Address} for ({Client_Name1})'
+            mailItem.Subject = f'New Purchase Contract - {Property_Address} for ({Client_Subject_Line})'
             mailItem.BodyFormat = 1
             mailItem.HTMLBody = 'Lender E-mail'
 
@@ -446,7 +486,7 @@ class BuyerTran(tk.Frame):
                 
             html_body =f"""
                 <p class=MsoNormal>Good {Time}, {Lender_Name}!<br><br></p>
-                <p class=MsoNormal>Please find a ratified contract attached for {Agent_Name}'s client, {Client_Name}! {EMD}<br><br></p>
+                <p class=MsoNormal>Please find a ratified contract attached for {Agent_Name}'s {Client_Email_Message}! {EMD}<br><br></p>
                 <p class=MsoNormal> Kind Regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
@@ -784,7 +824,7 @@ class TeamMeeting(tk.Frame):
             mailItem.HTMLBody = html_body
 
             #BCC List for Distribution of E-mail
-            mailItem.BCC = "eleni@findhomerva.com; melanies1274@yahoo.com; rick@rickcoxrealty.com; brettmlynes@gmail.com; gregsellsva@gmail.com; mbarlowrvahomes@gmail.com;  kathyhole1@gmail.com; tundehasthekey@gmail.com; christinemottleyrva@gmail.com; amy@rickcoxrealty.com"
+            mailItem.BCC = "eleni@findhomerva.com; melanies1274@yahoo.com; rick@rickcoxrealty.com; brettmlynes@gmail.com; gregsellsva@gmail.com; mbarlowrvahomes@gmail.com; kathyhole1@gmail.com; tundehasthekey@gmail.com; amy@rickcoxrealty.com; morgan@byrdpm.com; soldbygizzirva@gmail.com; benny@richmondwithbenny.com"
             mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('harrison@rickcoxrealty.com')))
 
             mailItem.Display()
@@ -1218,7 +1258,6 @@ class NewListing(tk.Frame):
                 Listing_Agent = clicked_agents.get()
 
                 fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
-
 
                 data_dict = {'Property Address': Property_Address, 'City': '', 'State': '', 'Zip': '', 'County': '',
                         'CVRMLS': '', 'Sales Price': '', 'Offer Date_af_date': '', 'Date2_af_date': '',
