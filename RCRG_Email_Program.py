@@ -253,6 +253,7 @@ class BuyerTran(tk.Frame):
         radio5 = Radiobutton(self, text="$395", variable = clicked_admin_fee,
                              value="395")
         radio5.grid(column=5, row=3)
+        clicked_admin_fee.set("395")
 
         #5th Q & A - Client Name
         lbl5 = Label(self, text = "What is the Client's Full Name? For Multiple Names, separate with a ';'")
