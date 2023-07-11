@@ -12,7 +12,7 @@ from Contact_Dictionaries import rcrg, lender, attorney
 from DateAndTime import Time
 from DateAndTime import datetime
 
-from fillpdf import fillpdfs
+from fillpdf import fillpdfs 
 
 agents = []
 lenders = []
@@ -161,27 +161,67 @@ class BuyerTran(tk.Frame):
         txt1 = Entry(self, width=38)
         txt1.grid(column = 3, row = 0)
 
-        #City
+        '''#City
+        lbl1 = Label(self, text = "What is the Property City?")
+        lbl1.grid(column = 2, row = 0)
+        txt1 = Entry(self, width=38)
+        txt1.grid(column = 3, row = 0)
 
         #Zip
+        lbl1 = Label(self, text = "What is the Property Zip?")
+        lbl1.grid(column = 2, row = 0)
+        txt1 = Entry(self, width=38)
+        txt1.grid(column = 3, row = 0)
 
         #County
+        lbl1 = Label(self, text = "What is the Property County?")
+        lbl1.grid(column = 2, row = 0)
+        txt1 = Entry(self, width=38)
+        txt1.grid(column = 3, row = 0)
 
         #MLS Number
+        lbl1 = Label(self, text = "What is the MLS Number?")
+        lbl1.grid(column = 2, row = 0)
+        txt1 = Entry(self, width=38)
+        txt1.grid(column = 3, row = 0)
 
         #Sales Price
+        lbl1 = Label(self, text = "What is the Sales Price?")
+        lbl1.grid(column = 2, row = 0)
+        txt1 = Entry(self, width=38)
+        txt1.grid(column = 3, row = 0)
 
         #List Price
+        lbl1 = Label(self, text = "What was the List Price?")
+        lbl1.grid(column = 2, row = 0)
+        txt1 = Entry(self, width=38)
+        txt1.grid(column = 3, row = 0)
 
         #Offer Date
+        lbl1 = Label(self, text = "What was the Offer Date?")
+        lbl1.grid(column = 2, row = 0)
+        txt1 = Entry(self, width=38)
+        txt1.grid(column = 3, row = 0)
 
         #Ratification Date
+        lbl1 = Label(self, text = "What was the Date of Ratification?")
+        lbl1.grid(column = 2, row = 0)
+        txt1 = Entry(self, width=38)
+        txt1.grid(column = 3, row = 0)
 
         #Close Date
+        lbl1 = Label(self, text = "What is the Closing Date?")
+        lbl1.grid(column = 2, row = 0)
+        txt1 = Entry(self, width=38)
+        txt1.grid(column = 3, row = 0)
 
         #Seller Paid Closing Costs
+        lbl1 = Label(self, text = "What is the Property City?")
+        lbl1.grid(column = 2, row = 0)
+        txt1 = Entry(self, width=38)
+        txt1.grid(column = 3, row = 0)
 
-        #Seller Name
+        #Seller Name'''
 
         #2nd Q & A - Agent
         lbl2 = Label(self, text = "Who is the Selling Agent?")
