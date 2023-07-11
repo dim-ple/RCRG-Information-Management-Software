@@ -151,6 +151,8 @@ class BuyerTran(tk.Frame):
 
         clicked_boolean = BooleanVar()
 
+        clicked_admin_fee = StringVar()
+
         clicked_attorneys = StringVar()
         clicked_attorneys.set("Attorneys")
 
@@ -221,7 +223,11 @@ class BuyerTran(tk.Frame):
         txt1 = Entry(self, width=38)
         txt1.grid(column = 3, row = 0)
 
-        #Seller Name'''
+        #Seller Name
+        lbl4 = Label(self, text = "What is the Seller(s) Full Name? For Multiple Names, separate with a ';'")
+        lbl4.grid(column = 2, row = 3)
+        txt3 = Entry(self, width=38)
+        txt3.grid(column = 3, row = 3)'''
 
         #2nd Q & A - Agent
         lbl2 = Label(self, text = "Who is the Selling Agent?")
@@ -236,70 +242,73 @@ class BuyerTran(tk.Frame):
         txt2.grid(column = 3, row = 2)
 
         #Transaction Fee (Radio 3 option - 395, 495, 0)
+        lbl4 = Label(self, text="What is the Admin Fee?")
+        lbl4.grid(column=2, row=3)
+        radio3 = Radiobutton(self, text="N/A", variable = clicked_admin_fee,
+                            value="0")
+        radio3.grid(column=3, row=3)
+        radio4 = Radiobutton(self, text="$495", variable = clicked_admin_fee,
+                            value="495")
+        radio4.grid(column=4, row=3)
+        radio5 = Radiobutton(self, text="$395", variable = clicked_admin_fee,
+                             value="395")
+        radio5.grid(column=5, row=3)
 
         #5th Q & A - Client Name
-        lbl4 = Label(self, text = "What is the Client's Full Name? For Multiple Names, separate with a ';'")
-        lbl4.grid(column = 2, row = 3)
+        lbl5 = Label(self, text = "What is the Client's Full Name? For Multiple Names, separate with a ';'")
+        lbl5.grid(column=2, row=4)
         txt3 = Entry(self, width=38)
-        txt3.grid(column = 3, row = 3)
+        txt3.grid(column=3, row=4)
 
         #Client Phone Number(s)
 
         #6th Q & A - Lender
-        lbl4 = Label(self, text = "Who is the Lender?")
-        lbl4.grid(column = 2, row = 4)
+        lbl6 = Label(self, text = "Who is the Lender?")
+        lbl6.grid(column = 2, row = 5)
         drop2 = OptionMenu(self, clicked_lenders, *lenders)
-        drop2.grid(column = 3, row = 4)
+        drop2.grid(column = 3, row = 5)
 
         #7th Q & A - EMD
-        lbl5 = Label(self, text="Do we have the EMD?")
-        lbl5.grid(column = 2, row = 5)
+        lbl7 = Label(self, text="Do we have the EMD?")
+        lbl7.grid(column = 2, row = 6)
         radio1 = Radiobutton(self, text = "Yes", variable = clicked_boolean,
                             value=True)
-        radio1.grid(column = 3, row = 5)
+        radio1.grid(column = 3, row = 6)
         radio2 = Radiobutton(self, text = "No", variable = clicked_boolean,
                             value=False)
-        radio2.grid(column = 4, row = 5)
+        radio2.grid(column = 4, row = 6)
 
         #8th Q & A - Attorney Contact
-        lbl6 = Label(self, text = "Who is the Attorney?")
-        lbl6.grid(column = 2, row = 6)
+        lbl8 = Label(self, text = "Who is the Attorney?")
+        lbl8.grid(column = 2, row = 7)
         drop3 = OptionMenu(self, clicked_attorneys, *attorneys)
-        drop3.grid(column = 3, row = 6)
+        drop3.grid(column = 3, row = 7)
 
         #9th Q & A - Client E-mail
-        lbl7 = Label(self, text = "What is the Client's E-mail?")
-        lbl7.grid(column = 2, row = 7)
+        lbl9 = Label(self, text = "What is the Client's E-mail?")
+        lbl9.grid(column = 2, row = 8)
         txt4 = Entry(self, width=38)
-        txt4.grid(column = 3, row = 7)
+        txt4.grid(column = 3, row = 8)
 
         #Listing Agent Company
         
         #10th Q & A - Listing Agent Name
-        lbl7 = Label(self, text = "What is the Listing Agent's Name")
-        lbl7.grid(column = 2, row = 8)
+        lbl10 = Label(self, text = "What is the Listing Agent's Name")
+        lbl10.grid(column = 2, row = 9)
         txt5 = Entry(self, width=38)
-        txt5.grid(column = 3, row = 8)
+        txt5.grid(column = 3, row = 9)
 
         #11th Q & A - Listing Agent E-mail
-        lbl7 = Label(self, text = "What is the Listing Agent's E-mail")
-        lbl7.grid(column = 2, row = 9)
+        lbl11 = Label(self, text = "What is the Listing Agent's E-mail")
+        lbl11.grid(column = 2, row = 10)
         txt6 = Entry(self, width=38)
-        txt6.grid(column = 3, row = 9)
+        txt6.grid(column = 3, row = 10)
 
 
         #Initialize Variables for E-mail program
-        Property_Address = txt1.get()
-        Selling_Agent = clicked_agents.get()
-        Commission = txt2.get()
-        Client_Name = txt3.get()
-        client_email = txt4.get()
-        Lender_Contact = clicked_lenders.get()
-        EMD_Status = clicked_boolean.get()
-        Attorney_Contact = clicked_attorneys.get()
+        
         Attorney_Status = False
-        Listing_Agent = txt5.get()
-        Listing_Email = txt6.get()
+        
 
         if clicked_attorneys.get() == "Other":
             Attorney_Status = False
@@ -322,6 +331,8 @@ class BuyerTran(tk.Frame):
             client_email2 = ' '
             Attorney_Contact = clicked_attorneys.get()
             Lender_Contact = clicked_lenders.get()
+            admin_fee = clicked_admin_fee()
+
             
 
             if ";" in Client1:
@@ -352,7 +363,7 @@ class BuyerTran(tk.Frame):
                         'Listing Company Name': '', 'Listing Agent Name': Listing_Agent, 'Transaction Coordinator': '', 'Listing Agent Phone': '',
                         'Listing Agent E-mail': Listing_Email, 'Selling Company Name': 'The Rick Cox Realty Group', 'Selling Agent Name': rcrg[Selling_Agent][1], 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
                         'Selling Agent Phone': rcrg[Selling_Agent][4], 'Selling Agent Email': rcrg[Selling_Agent][0], 'Escrow Deposit': '', 'Held by': '', 'Commission': Commission + ' to Selling Agent',
-                        'Transac\x98on Fee': '', 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
+                        'Transac\x98on Fee': admin_fee, 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
             
             fillpdfs.write_fillable_pdf('Transaction Info Sheet(Fillable).pdf', 'Transaction Info Sheet(f).pdf', data_dict)
             
@@ -605,19 +616,36 @@ class BuyerTran(tk.Frame):
 
             mailItem.Display()
         
-        
+        def clear_fields():
+            clicked_agents.set("Agents")
+            clicked_lenders.set("Lenders")
+            clicked_attorneys.set("Attorneys")
+            txt1.delete("0", "end")
+            txt2.delete("0", "end")
+            txt3.delete("0", "end")
+            txt4.delete("0", "end")
+            txt5.delete("0", "end")
+            txt6.delete("0", "end")
+            clicked_boolean.set(False)
+            clicked_admin_fee.set("395")
+
+
         #Execute Button
         submit_button = Button(self, text = 'Submit',
                                command = lambda:[buyer_email(), attorney_email(), listing_agent_email(), lender_email()])
-        submit_button.grid(column = 3, row = 10)
+        submit_button.grid(column = 3, row = 11)
 
         new_folder_button = Button(self, text = "Create New Folder",
                                    command = lambda:[buyer_folder()])
-        new_folder_button.grid(column=3, row=11)
+        new_folder_button.grid(column=3, row=12)
+
+        clear_fields_button = Button(self, text = "Reset Fields",
+                                     command = lambda:[clear_fields()])
+        clear_fields_button.grid(column=3, row=13)
 
         close_button = Button(self, text = "Close the Window",
                               command= controller.destroy)
-        close_button.grid(column=3, row=12)
+        close_button.grid(column=3, row=14)
 
 
 class  SellerTran(tk.Frame):
@@ -944,11 +972,11 @@ class ZillowTeam(tk.Frame):
             #Addressee Operating Logic - Database
             if Team_On == "Alpha":
                 mailItem.To = ""
-                mailItem.CC = "eleni@findhomerva.com; melanies1274@yahoo.com; brettmlynes@gmail.com;"
+                mailItem.CC = "eleni@findhomerva.com; melanies1274@yahoo.com; brettmlynes@gmail.com; benny@richmondwithbenny.com"
                 mailItem.BCC = "rick@rickcoxrealty.com"
             elif Team_On == "Bravo":
                 mailItem.To = ""
-                mailItem.CC = "GregSellsVA@Gmail.com; tundehasthekey@gmail.com; kathyhole1@gmail.com;"
+                mailItem.CC = "GregSellsVA@Gmail.com; tundehasthekey@gmail.com; kathyhole1@gmail.com; soldbygizzirva@gmail.com"
                 mailItem.BCC = "Rick@RickCoxRealty.com"
             else:
                 mailItem.To= ""
