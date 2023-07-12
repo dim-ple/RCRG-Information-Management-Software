@@ -332,7 +332,7 @@ class BuyerTran(tk.Frame):
             client_email2 = ' '
             Attorney_Contact = clicked_attorneys.get()
             Lender_Contact = clicked_lenders.get()
-            admin_fee = clicked_admin_fee()
+            admin_fee = clicked_admin_fee.get()
 
             
 
