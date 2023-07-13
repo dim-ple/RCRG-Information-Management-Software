@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import font as tkfont
-from tkinter import StringVar, BooleanVar, Label, Entry, OptionMenu, Radiobutton, Button
+from tkinter import StringVar, BooleanVar, Label, Entry, OptionMenu, Radiobutton, Button, Toplevel
 
 import shutil
 
@@ -67,7 +67,7 @@ class MainFrame(tk.Tk):
 
         self.geometry('1000x800')
         self.id = tk.StringVar()
-        self.id.set("Harrison Goehring")
+        self.id.set("RCRG Admin")
 
         self.listing = {}
         
@@ -157,7 +157,6 @@ class BuyerTran(tk.Frame):
         clicked_attorneys.set("Attorneys")
 
         Attorney_Status = False
-
 
         #1st Q & A - Property Address
         lbl1 = Label(self, text = "What is the Property Address?")
@@ -306,9 +305,6 @@ class BuyerTran(tk.Frame):
         lbl11.grid(column = 2, row = 16)
         txt6 = Entry(self, width=38)
         txt6.grid(column = 3, row = 16)
-        
-        
-        
 
         if clicked_attorneys.get() == "Other":
             Attorney_Status = False
@@ -629,9 +625,57 @@ class BuyerTran(tk.Frame):
             clicked_boolean.set(False)
             clicked_admin_fee.set("395")
 
+        def data_submit(table_name):
+            pass
+            
+        def new_agent_info():
+            
+            agent_table = ""
+            
+            top = Toplevel(parent)
+            top.geometry("450x175")
+            top.title("New Agent Info - Input Form")
+
+            agent_first_lbl = Label(top, text = "Agent First Name:")
+            agent_first_lbl.grid(column = 2, row = 0)
+            agent_first_ent = Entry(top, width=20)
+            agent_first_ent.grid(column = 3, row = 0)
+
+            agent_last_lbl = Label(top, text = "Agent Last Name:")
+            agent_last_lbl.grid(column = 2, row = 1)
+            agent_last_ent = Entry(top, width=20)
+            agent_last_ent.grid(column = 3, row = 1)
+
+            agent_email_lbl = Label(top, text = "Agent E-mail:")
+            agent_email_lbl.grid(column = 2, row = 2)
+            agent_email_ent = Entry(top, width=38)
+            agent_email_ent.grid(column = 3, row = 2)
+
+            agent_cell_lbl = Label(top, text = "Agent Cell:")
+            agent_cell_lbl.grid(column = 2, row = 3)
+            agent_cell_ent = Entry(top, width=20)
+            agent_cell_ent.grid(column = 3, row = 3)
+
+            agent_dpor_lbl = Label(top, text = "Agent DPOR License Number:")
+            agent_dpor_lbl.grid(column = 2, row = 4)
+            agent_dpor_ent = Entry(top, width=17)
+            agent_dpor_ent.grid(column = 3, row = 4)
+
+            agent_broker_lbl = Label(top, text = "Agent Brokerage Name:")
+            agent_broker_lbl.grid(column = 2, row = 5)
+            agent_broker_ent = Entry(top, width=30)
+            agent_broker_ent.grid(column = 3, row = 5)
+
+            pass_data_button = Button(top, text = "Submit Data",
+                                      command = lambda:[data_submit(agent_table)])
+            pass_data_button.grid(column=3, row=6)
+            
+
+
+
 
         #Execute Button
-        submit_button = Button(self, text = 'Submit',
+        submit_button = Button(self, text = "Submit",
                                command = lambda:[buyer_email(), attorney_email(), listing_agent_email(), lender_email()])
         submit_button.grid(column = 3, row = 17)
 
@@ -646,6 +690,10 @@ class BuyerTran(tk.Frame):
         close_button = Button(self, text = "Close the Window",
                               command= controller.destroy)
         close_button.grid(column=3, row=20)
+
+        new_agent_button = Button(self, text="New Agent",
+                                  command = lambda: new_agent_info())
+        new_agent_button.grid(column=4, row=15)
 
 
 class  SellerTran(tk.Frame):
