@@ -381,7 +381,6 @@ class BuyerTran(tk.Frame):
         def buyer_email():
             Property_Address = txt1.get()
             Selling_Agent = clicked_agents.get()
-            Commission = txt2.get()
             Client_Name1 = txt3.get()
             client_email = txt4.get()
             Address_To_Client = f"{Client_Name1}"
