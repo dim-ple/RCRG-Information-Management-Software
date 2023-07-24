@@ -304,35 +304,30 @@ class BuyerTran(tk.Frame):
         txt6 = Entry(self, width=38)
         txt6.grid(column = 3, row = 16)
 
-        if clicked_attorneys.get() == "Other":
-            Attorney_Status = False
-        else:
-            Attorney_Status = True
-
 
         def buyer_folder():
             if os.getcwd() != 'C:\\Users\\rcrgr\\Desktop\\E-mail Programs':
                 os.chdir('C:\\Users\\rcrgr\\Desktop\\E-mail Programs')
         
-            Property_Address = txt1.get()
-            Selling_Agent = clicked_agents.get()
-            Listing_Agent = txt5.get()
-            Listing_Email = txt6.get()
-            Commission = txt2.get()
-            Client1 = txt3.get()
-            Client2 = ' '
+            property_address = txt1.get()
+            selling_agent = clicked_agents.get()
+            listing_agent = txt5.get()
+            listing_email = txt6.get()
+            commission = txt2.get()
+            client1 = txt3.get()
+            client2 = ' '
             client_email1 = txt4.get()
             client_email2 = ' '
-            Attorney_Contact = clicked_attorneys.get()
-            Lender_Contact = clicked_lenders.get()
+            attorney_contact = clicked_attorneys.get()
+            lender_contact = clicked_lenders.get()
             admin_fee = clicked_admin_fee.get()
 
             
 
-            if ";" in Client1:
-                i = Client1.find(";")
-                Client2 = Client1[(i+2):]
-                Client1 = Client1[0:i]
+            if ";" in client1:
+                i = client1.find(";")
+                client2 = client1[(i+2):]
+                client1 = client1[0:i]
 
             if ";" in client_email1:
                 i = client_email1.find(";")
@@ -342,72 +337,72 @@ class BuyerTran(tk.Frame):
             fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
 
 
-            data_dict = {'Property Address': Property_Address, 'City': '', 'State': 'VA', 'Zip': '', 'County': '',
+            data_dict = {'Property Address': property_address, 'City': '', 'State': 'VA', 'Zip': '', 'County': '',
                         'CVRMLS': '', 'Sales Price': '', 'Offer Date_af_date': '', 'Date2_af_date': '',
                         'Rat-Date_af_date': '', 'Closing Date_af_date': '', 'List Price': '', 'Closing Costs Paid by Seller': '',
                         'Seller': '', 'Purchaser': 'Yes', 'Seller 1': '', 'Seller 2': '', 'Seller Email 1': '', 'Seller Email 2': '',
                         'Seller Cell': '', 'Seller Work': '', 'Seller Home': '', 'Seller Fax': '', 'Seller Forwarding Address': '',
-                        'Seller City': '', 'Seller State': '', 'Seller Zip': '', 'Buyer 1': Client1, 'Buyer 2': Client2,
+                        'Seller City': '', 'Seller State': '', 'Seller Zip': '', 'Buyer 1': client1, 'Buyer 2': client2,
                         'Buyer Email': client_email1, 'Buyer Email 2': client_email2, 'Buyer Cell': '', 'Buyer Work': '', 'Buyer Home': '',
                         'Buyer Fax': '', 'Home Warranty': '', 'Home Inspec\x98on Co': '', 'Termite Co': '', 'FuelOil Co': '',
-                        'Well  Sep\x98c Co': '', 'Lender': Lender_Contact, 'Loan Officer Name': lender[Lender_Contact][2], 'Loan Officer Phone': lender[Lender_Contact][3], 'Loan Officer Email': lender[Lender_Contact][0],
+                        'Well  Sep\x98c Co': '', 'Lender': lender_contact, 'Loan Officer Name': lender[lender_contact][2], 'Loan Officer Phone': lender[lender_contact][3], 'Loan Officer Email': lender[lender_contact][0],
                         'Seller Attorney Firm': '', 'Seller Attorney Contact': '', 'Seller Office Phone': '', 'Seller Attorney Fax': '',
-                        'Seller Attorney Email': '', 'Buyer Attorney Firm': attorney[Attorney_Contact][2], 'Buyer Attorney Contact': attorney[Attorney_Contact][3], 'Buyer Attorney Office Phone': '',
-                        'Buyer Attorney Fax': '', 'Buyer Attorney Email': attorney[Attorney_Contact][0], 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
-                        'Listing Company Name': '', 'Listing Agent Name': Listing_Agent, 'Transaction Coordinator': '', 'Listing Agent Phone': '',
-                        'Listing Agent E-mail': Listing_Email, 'Selling Company Name': 'The Rick Cox Realty Group', 'Selling Agent Name': rcrg[Selling_Agent][1], 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
-                        'Selling Agent Phone': rcrg[Selling_Agent][4], 'Selling Agent Email': rcrg[Selling_Agent][0], 'Escrow Deposit': '', 'Held by': '', 'Commission': Commission + ' to Selling Agent',
+                        'Seller Attorney Email': '', 'Buyer Attorney Firm': attorney[attorney_contact][2], 'Buyer Attorney Contact': attorney[attorney_contact][3], 'Buyer Attorney Office Phone': '',
+                        'Buyer Attorney Fax': '', 'Buyer Attorney Email': attorney[attorney_contact][0], 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
+                        'Listing Company Name': '', 'Listing Agent Name': listing_agent, 'Transaction Coordinator': '', 'Listing Agent Phone': '',
+                        'Listing Agent E-mail': listing_email, 'Selling Company Name': 'The Rick Cox Realty Group', 'Selling Agent Name': rcrg[selling_agent][1], 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
+                        'Selling Agent Phone': rcrg[selling_agent][4], 'Selling Agent Email': rcrg[selling_agent][0], 'Escrow Deposit': '', 'Held by': '', 'Commission': commission + ' to Selling Agent',
                         'Transac\x98on Fee': admin_fee, 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
             
             fillpdfs.write_fillable_pdf('Transaction Info Sheet(Fillable).pdf', 'Transaction Info Sheet(f).pdf', data_dict)
             
-            if Selling_Agent == "Other":
+            if selling_agent == "Other":
                 path = " "
             else:
-                path = rcrg[Selling_Agent][3]
+                path = rcrg[selling_agent][3]
                 os.chdir(path)
 
-            os.mkdir(Property_Address)
+            os.mkdir(property_address)
 
-            os.chdir(f"{path}\\{Property_Address}")
+            os.chdir(f"{path}\\{property_address}")
 
             os.mkdir("Contract-Addenda")
             os.mkdir("Invoices-Inspections")
 
-            shutil.copy('C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\{Property_Address}\\Contract-Addenda')
+            shutil.copy('C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\{property_address}\\Contract-Addenda')
 
         def buyer_email():
-            Property_Address = txt1.get()
-            Selling_Agent = clicked_agents.get()
-            Client_Name1 = txt3.get()
+            property_address = txt1.get()
+            selling_agent = clicked_agents.get()
+            client_name1 = txt3.get()
             client_email = txt4.get()
-            Address_To_Client = f"{Client_Name1}"
+            Address_To_Client = f"{client_name1}"
 
-            if ";" in Client_Name1:
-                i = Client_Name1.find(";")
-                Client_Name2 = Client_Name1[(i+2):]
-                Client_Name1 = Client_Name1[0:i]
-                Address_To_Client = f"{Client_Name1} & {Client_Name2}"
+            if ";" in client_name1:
+                i = client_name1.find(";")
+                client_name2 = client_name1[(i+2):]
+                client_name1 = client_name1[0:i]
+                Address_To_Client = f"{client_name1} & {client_name2}"
 
             olApp = win32.Dispatch('Outlook.Application')
             olNS = olApp.GetNameSpace('MAPI')
 
             mailItem = olApp.CreateItem(0)
-            mailItem.Subject = 'Your New Purchase of ' + Property_Address
+            mailItem.Subject = 'Your New Purchase of ' + property_address
             mailItem.BodyFormat = 1
 
-            if Selling_Agent == "Other":
-                Agent_Name = " "
+            if selling_agent == "Other":
+                agent_name = " "
                 mailItem.CC = " "
             else:
-                Agent_Name = rcrg[Selling_Agent][1]
-                mailItem.CC = rcrg[Selling_Agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = rcrg[selling_agent][1]
+                mailItem.CC = rcrg[selling_agent][0] + " amy@rickcoxrealty.com;"
 
             html_body = f"""
                 <p class=MsoNormal>Good {Time}, {Address_To_Client}!<br><br></p>
-                <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I work with {Agent_Name} and will be assisting with your purchase of {Property_Address}. Attached, you will find copies of the fully-executed contract and any addenda or disclosures in conjunction with your closing.<br><br></p>
+                <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I work with {agent_name} and will be assisting with your purchase of {property_address}. Attached, you will find copies of the fully-executed contract and any addenda or disclosures in conjunction with your closing.<br><br></p>
                 <p class=MsoNormal>Should you have any questions regarding closing or any aspect of the transaction leading up to that point, please feel free to reach out me. My congratulations to you on your upcoming home purchase!<br><br></p>
-                <p class=MsoNormal>CC: Your agent, {Agent_Name}; Team Administrator, Amy Foldes; <br><br></p>
+                <p class=MsoNormal>CC: Your agent, {agent_name}; Team Administrator, Amy Foldes; <br><br></p>
                 <p class=MsoNormal>Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
@@ -427,42 +422,42 @@ class BuyerTran(tk.Frame):
             mailItem.Display()
 
         def attorney_email():
-            Property_Address = txt1.get()
-            Selling_Agent = clicked_agents.get()
-            Commission = txt2.get()
-            Attorney_Contact = clicked_attorneys.get()
+            property_address = txt1.get()
+            selling_agent = clicked_agents.get()
+            commission = txt2.get()
+            attorney_contact = clicked_attorneys.get()
 
             
             olApp = win32.Dispatch('Outlook.Application')
             olNS = olApp.GetNameSpace('MAPI')
 
             mailItem = olApp.CreateItem(0)
-            mailItem.Subject = 'New Purchase-Side Transaction - ' + Property_Address
+            mailItem.Subject = 'New Purchase-Side Transaction - ' + property_address
             mailItem.BodyFormat = 1
             mailItem.HTMLBody = 'Attorney E-mail'
 
             #To: Operating Logic - Dictionary Call
-            if Attorney_Contact == "Other":
+            if attorney_contact == "Other":
                 Attorney_Name = " "
                 mailItem.To = " "
             else:
-                Attorney_Name = attorney[Attorney_Contact][1]
-                mailItem.To = attorney[Attorney_Contact][0]
+                Attorney_Name = attorney[attorney_contact][1]
+                mailItem.To = attorney[attorney_contact][0]
 
             #CC: Operating Logic - Dictionary Call
-            if Selling_Agent == "Other":
-                Agent_Name = " "
+            if selling_agent == "Other":
+                agent_name = " "
                 mailItem.CC = " "
             else:
-                Agent_Name = rcrg[Selling_Agent][1]
-                mailItem.CC = rcrg[Selling_Agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = rcrg[selling_agent][1]
+                mailItem.CC = rcrg[selling_agent][0] + " amy@rickcoxrealty.com;"
                 
 
             html_body =f"""
                 <p class=MsoNormal>Good {Time}, {Attorney_Name}!<br><br></p>
-                <p class=MsoNormal>{Agent_Name}'s client would like to use your office for the title and settlement work needed for their purchase of {Property_Address}. Please find the ratified contract, transaction information sheet and tax record attached!<br><br></p>
-                <p class=MsoNormal> Please note that the selling agent's commission for this transaction will be {Commission}. Additionally, our brokerage will charge a $395.00 Administrative Fee to the purchaser at closing. Please overnight both checks to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
-                <p class=MsoNormal>CC: {Agent_Name}, Selling Agent; Team Administrator, Amy Foldes;<br><br></p>
+                <p class=MsoNormal>{agent_name}'s client would like to use your office for the title and settlement work needed for their purchase of {property_address}. Please find the ratified contract, transaction information sheet and tax record attached!<br><br></p>
+                <p class=MsoNormal> Please note that the selling agent's commission for this transaction will be {commission}. Additionally, our brokerage will charge a $395.00 Administrative Fee to the purchaser at closing. Please overnight both checks to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
+                <p class=MsoNormal>CC: {agent_name}, Selling Agent; Team Administrator, Amy Foldes;<br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
@@ -480,45 +475,45 @@ class BuyerTran(tk.Frame):
             mailItem.Display()
 
         def lender_email():
-            Lender_Contact = clicked_lenders.get()
+            lender_contact = clicked_lenders.get()
             EMD_Status = clicked_boolean.get()
-            Property_Address = txt1.get()
-            Selling_Agent = clicked_agents.get()
-            Client_Name1 = txt3.get()
-            Client_Name2 = ' '
-            Client_Email_Message = f"client, {Client_Name1}"
-            Client_Subject_Line = f"{Client_Name1}"
+            property_address = txt1.get()
+            selling_agent = clicked_agents.get()
+            client_name1 = txt3.get()
+            client_name2 = ' '
+            client_email_Message = f"client, {client_name1}"
+            Client_Subject_Line = f"{client_name1}"
     
-            if ";" in Client_Name1:
-                i = Client_Name1.find(";")
-                Client_Name2 = Client_Name1[(i+2):]
-                Client_Name1 = Client_Name1[0:i]
-                Client_Email_Message = f"clients, {Client_Name1} & {Client_Name2}"
-                Client_Subject_Line = f"{Client_Name1} & {Client_Name2}"
+            if ";" in client_name1:
+                i = client_name1.find(";")
+                client_name2 = client_name1[(i+2):]
+                client_name1 = client_name1[0:i]
+                client_email_Message = f"clients, {client_name1} & {client_name2}"
+                Client_Subject_Line = f"{client_name1} & {client_name2}"
                 
             
             olApp = win32.Dispatch('Outlook.Application')
             olNS = olApp.GetNameSpace('MAPI')
 
             mailItem = olApp.CreateItem(0)
-            mailItem.Subject = f'New Purchase Contract - {Property_Address} for ({Client_Subject_Line})'
+            mailItem.Subject = f'New Purchase Contract - {property_address} for ({Client_Subject_Line})'
             mailItem.BodyFormat = 1
             mailItem.HTMLBody = 'Lender E-mail'
 
             #Addressee Operating Logic - Database
-            if Lender_Contact == "Other":
+            if lender_contact == "Other":
                 Lender_Name = " "
                 mailItem.To = " "
             else:
-                Lender_Name = lender[Lender_Contact][1]
-                mailItem.To = lender[Lender_Contact][0]
+                Lender_Name = lender[lender_contact][1]
+                mailItem.To = lender[lender_contact][0]
                 
-            if Selling_Agent == "Other":
-                Agent_Name = " "
+            if selling_agent == "Other":
+                agent_name = " "
                 mailItem.CC = " "
             else:
-                Agent_Name = rcrg[Selling_Agent][1]
-                mailItem.CC = rcrg[Selling_Agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = rcrg[selling_agent][1]
+                mailItem.CC = rcrg[selling_agent][0] + " amy@rickcoxrealty.com;"
 
             #EMD Logic
             if EMD_Status == True:
@@ -530,7 +525,7 @@ class BuyerTran(tk.Frame):
                 
             html_body =f"""
                 <p class=MsoNormal>Good {Time}, {Lender_Name}!<br><br></p>
-                <p class=MsoNormal>Please find a ratified contract attached for {Agent_Name}'s {Client_Email_Message}! {EMD}<br><br></p>
+                <p class=MsoNormal>Please find a ratified contract attached for {agent_name}'s {client_email_Message}! {EMD}<br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
@@ -548,15 +543,15 @@ class BuyerTran(tk.Frame):
             mailItem.Display()
 
         def listing_agent_email():
-            Property_Address = txt1.get()
-            Selling_Agent = clicked_agents.get()
-            Attorney_Contact = clicked_attorneys.get()
-            Listing_Agent = txt5.get()
-            Listing_Email = txt6.get()
+            property_address = txt1.get()
+            selling_agent = clicked_agents.get()
+            attorney_contact = clicked_attorneys.get()
+            listing_agent = txt5.get()
+            listing_email = txt6.get()
             
             
             if clicked_attorneys.get() == "Other":
-                attorney_msg = f"Our purchaser will be using {attorney[Attorney_Contact][2]} for their title and settlement needs. The primary contact will be {attorney[Attorney_Contact][3]}, their e-mail is {attorney[Attorney_Contact][0]}."
+                attorney_msg = f"Our purchaser will be using {attorney[attorney_contact][2]} for their title and settlement needs. The primary contact will be {attorney[attorney_contact][3]}, their e-mail is {attorney[attorney_contact][0]}."
             else:
                 attorney_msg = "Our purchaser has not yet decided on who they will be using for their title and settlement needs. Once they have decided, I will let you know!"
 
@@ -565,31 +560,31 @@ class BuyerTran(tk.Frame):
             olNS = olApp.GetNameSpace('MAPI')
 
             mailItem = olApp.CreateItem(0)
-            mailItem.Subject = 'Coordinator Introduction - ' + Property_Address
+            mailItem.Subject = 'Coordinator Introduction - ' + property_address
             mailItem.BodyFormat = 1
             mailItem.HTMLBody = 'Coordinator Introduction'
 
             #To: Operating Logic - Dictionary Call
-            if Listing_Email == "":
+            if listing_email == "":
                 mailItem.To = " "
             else:
-                mailItem.To = Listing_Email
+                mailItem.To = listing_email
 
             #CC: Operating Logic - Dictionary Call
-            if Selling_Agent == "Other":
-                Agent_Name = " "
+            if selling_agent == "Other":
+                agent_name = " "
                 mailItem.CC = " "
             else:
-                Agent_Name = rcrg[Selling_Agent][1]
-                mailItem.CC = rcrg[Selling_Agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = rcrg[selling_agent][1]
+                mailItem.CC = rcrg[selling_agent][0] + " amy@rickcoxrealty.com;"
                 
 
             html_body =f"""
-                <p class=MsoNormal>Good {Time}, {Listing_Agent}!<br><br></p>
-                <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I will be assisting {Agent_Name} and their client on the purchase of {Property_Address}. I look forward to working with you!<br><br></p>
+                <p class=MsoNormal>Good {Time}, {listing_agent}!<br><br></p>
+                <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I will be assisting {agent_name} and their client on the purchase of {property_address}. I look forward to working with you!<br><br></p>
                 <p class=MsoNormal>{attorney_msg} Would you mind providing me with the contact for the Seller's Attorney or Title Company who will be handling the deed preparation for the Seller once that information becomes available?<br><br></p>
                 <p class=MsoNormal>Additionally, would your seller be willing to share who their current utility providers for Electricity, Water/Sewer, Internet, Trash and Gas are?<br><br></p>
-                <p class=MsoNormal>CC: {Agent_Name}, Selling Agent; Team Administrator, Amy Foldes;<br><br></p>
+                <p class=MsoNormal>CC: {agent_name}, Selling Agent; Team Administrator, Amy Foldes;<br><br></p>
                 <p class=MsoNormal>Kind regards & thanks,<br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
@@ -756,27 +751,27 @@ class  SellerTran(tk.Frame):
 
 
         def seller_email():
-            Property_Address = txt1.get()
-            Listing_Agent = clicked_agents.get()
-            Client_Name = txt3.get()
-            Client_Email = txt4.get()
+            property_address = txt1.get()
+            listing_agent = clicked_agents.get()
+            client_name = txt3.get()
+            client_email = txt4.get()
             olApp = win32.Dispatch('Outlook.Application')
             olNS = olApp.GetNameSpace('MAPI')
 
             mailItem = olApp.CreateItem(0)
-            mailItem.Subject = 'Your Sale of ' + Property_Address
+            mailItem.Subject = 'Your Sale of ' + property_address
             mailItem.BodyFormat = 1
 
-            if Listing_Agent == "Other":
-                Agent_Name = " "
+            if listing_agent == "Other":
+                agent_name = " "
                 mailItem.CC = " "
             else:
-                Agent_Name = rcrg[Listing_Agent][1]
-                mailItem.CC = rcrg[Listing_Agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = rcrg[listing_agent][1]
+                mailItem.CC = rcrg[listing_agent][0] + " amy@rickcoxrealty.com;"
 
             html_body =f"""
-                <p class=MsoNormal>Good {Time}, {Client_Name}!<br><br></p>
-                <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I work with {Agent_Name} and will be assisting with your sale of {Property_Address}. Attached, you will find copies of the fully-executed contract and any addenda or disclosures in conjunction with your sale.<br><br></p>
+                <p class=MsoNormal>Good {Time}, {client_name}!<br><br></p>
+                <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I work with {agent_name} and will be assisting with your sale of {property_address}. Attached, you will find copies of the fully-executed contract and any addenda or disclosures in conjunction with your sale.<br><br></p>
                 <p class=MsoNormal>It should be noted that as a part of your real estate transaction, we will need to have a Termite inspection done at your property within 30 days of closing. Either myself or our Team Administrator, Amy Foldes (CC’d on this e-mail), will reach out to schedule a convenient time and date to complete this inspection!<br><br></p>
                 <p class=MsoNormal>Should you have any questions regarding closing or any aspect of the sale leading up to that point, please feel free to reach out me. My congratulations to you on your upcoming home sale!<br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
@@ -790,57 +785,57 @@ class  SellerTran(tk.Frame):
                 """
             
             mailItem.HTMLBody = html_body
-            mailItem.To = Client_Email
+            mailItem.To = client_email
             mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('harrison@rickcoxrealty.com')))
 
             mailItem.Display()
 
         def attorney_email():
-            Property_Address = txt1.get()
-            Listing_Agent = clicked_agents.get()
-            Commission = clicked_commissions.get()
-            Attorney_Contact = clicked_attorneys.get()
+            property_address = txt1.get()
+            listing_agent = clicked_agents.get()
+            commission = clicked_commissions.get()
+            attorney_contact = clicked_attorneys.get()
 
             
             olApp = win32.Dispatch('Outlook.Application')
             olNS = olApp.GetNameSpace('MAPI')
 
             mailItem = olApp.CreateItem(0)
-            mailItem.Subject = 'New Seller-Side Transaction - ' + Property_Address
+            mailItem.Subject = 'New Seller-Side Transaction - ' + property_address
             mailItem.BodyFormat = 1
             mailItem.HTMLBody = 'Attorney E-mail'
 
             #To: Operating Logic - Dictionary Call
-            if Attorney_Contact == "Other":
+            if attorney_contact == "Other":
                 Attorney_Name = " "
                 mailItem.To = " "
             else:
-                Attorney_Name = attorney[Attorney_Contact][1]
-                mailItem.To = attorney[Attorney_Contact][0]
+                Attorney_Name = attorney[attorney_contact][1]
+                mailItem.To = attorney[attorney_contact][0]
 
             #CC: Operating Logic - Dictionary Call
-            if Listing_Agent == "Other":
-                Agent_Name = " "
+            if listing_agent == "Other":
+                agent_name = " "
                 mailItem.CC = " "
             else:
-                Agent_Name = rcrg[Listing_Agent][1]
-                mailItem.CC = rcrg[Listing_Agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = rcrg[listing_agent][1]
+                mailItem.CC = rcrg[listing_agent][0] + " amy@rickcoxrealty.com;"
             
             #Operation Logic - Commission String based on Option Menu choice
-            if Commission == "Other":
-                Commission_Split = "*ENTER COMMISSION HERE*"
-            elif Commission == "6% Total, 3/3":
-                Commission_Split = "6% total, split 3% to the Listing Agent and 3% to the Selling Agent"
-            elif Commission == "5.5% Total, 2.75/2.75":
-                Commission_Split = "5.5% total, split 2.75% to the Listing Agent and 2.75% to the Selling Agent"
+            if commission == "Other":
+                commission_split = "*ENTER COMMISSION HERE*"
+            elif commission == "6% Total, 3/3":
+                commission_split = "6% total, split 3% to the Listing Agent and 3% to the Selling Agent"
+            elif commission == "5.5% Total, 2.75/2.75":
+                commission_split = "5.5% total, split 2.75% to the Listing Agent and 2.75% to the Selling Agent"
             else:
-                Commission_Split = "5% total, split 2.5% to the Listing Agent and 2.5% to the Selling Agent"    
+                commission_split = "5% total, split 2.5% to the Listing Agent and 2.5% to the Selling Agent"    
 
             html_body =f"""
                 <p class=MsoNormal>Good {Time}, {Attorney_Name}!<br><br></p>
-                <p class=MsoNormal>{Agent_Name}'s client would like to use your office for the deed preparation necessary for their sale of {Property_Address}. Please find the ratified contract, transaction information sheet and tax record attached!<br><br></p>
-                <p class=MsoNormal> Please note that the commission for this transaction will be {Commission_Split}. Additionally, our brokerage will charge a $395.00 Administrative Fee to the seller at closing. Should the purchaser's attorney ask, we would like both checks mailed to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
-                <p class=MsoNormal>CC: {Agent_Name}, Listing Agent; Amy Foldes, Team Administrator<br><br></p>
+                <p class=MsoNormal>{agent_name}'s client would like to use your office for the deed preparation necessary for their sale of {property_address}. Please find the ratified contract, transaction information sheet and tax record attached!<br><br></p>
+                <p class=MsoNormal> Please note that the commission for this transaction will be {commission_split}. Additionally, our brokerage will charge a $395.00 Administrative Fee to the seller at closing. Should the purchaser's attorney ask, we would like both checks mailed to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
+                <p class=MsoNormal>CC: {agent_name}, Listing Agent; Amy Foldes, Team Administrator<br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
@@ -1116,31 +1111,31 @@ class BuyerZillow(tk.Frame):
 
 
         def buyer_zillow_email():
-            Property_Address = txt1.get()
-            Selling_Agent = clicked_agents.get()
-            Client_Name = txt2.get()
-            Client_Email = txt3.get()
+            property_address = txt1.get()
+            selling_agent = clicked_agents.get()
+            client_name = txt2.get()
+            client_email = txt3.get()
             
-            if Selling_Agent == "Melanie":    
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzhc49pnkdwcp_31kcj'>Link to Zillow Review for {Selling_Agent}</a>"
-            elif Selling_Agent == "Eleni":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzptgpd1ekdu1_5886z'>Link to Zillow Review for {Selling_Agent}</a>"
-            elif Selling_Agent == "Rick":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzagn27cmg8i1_1y8fb'>Link to Zillow Review for {Selling_Agent}</a>"
-            elif Selling_Agent == "Greg":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUy0ye6f74j2tl_9hc6g'>Link to Zillow Review for {Selling_Agent}</a>"
-            elif Selling_Agent == "Christine":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUw5sfhm4mnvgp_9y704'>Link to Zillow Review for {Selling_Agent}</a>"
-            elif Selling_Agent == "Tunde":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUxqyuo617aoeh_1zmzs'>Link to Zillow Review for {Selling_Agent}</a>"
-            elif Selling_Agent == "Matt":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUt5yuy1qjw3k9_8jmj4'>Link to Zillow Review for {Selling_Agent}</a>"
-            elif Selling_Agent == "Brett":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUw5xj0syh2ivd_wb2k'>Link to Zillow Review for {Selling_Agent}</a>"
-            elif Selling_Agent == "Kathy":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZU10zkkrzdo9csp_4ok8d'>Link to Zillow Review for {Selling_Agent}</a>"
+            if selling_agent == "Melanie":    
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzhc49pnkdwcp_31kcj'>Link to Zillow Review for {selling_agent}</a>"
+            elif selling_agent == "Eleni":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzptgpd1ekdu1_5886z'>Link to Zillow Review for {selling_agent}</a>"
+            elif selling_agent == "Rick":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzagn27cmg8i1_1y8fb'>Link to Zillow Review for {selling_agent}</a>"
+            elif selling_agent == "Greg":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUy0ye6f74j2tl_9hc6g'>Link to Zillow Review for {selling_agent}</a>"
+            elif selling_agent == "Christine":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUw5sfhm4mnvgp_9y704'>Link to Zillow Review for {selling_agent}</a>"
+            elif selling_agent == "Tunde":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUxqyuo617aoeh_1zmzs'>Link to Zillow Review for {selling_agent}</a>"
+            elif selling_agent == "Matt":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUt5yuy1qjw3k9_8jmj4'>Link to Zillow Review for {selling_agent}</a>"
+            elif selling_agent == "Brett":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUw5xj0syh2ivd_wb2k'>Link to Zillow Review for {selling_agent}</a>"
+            elif selling_agent == "Kathy":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZU10zkkrzdo9csp_4ok8d'>Link to Zillow Review for {selling_agent}</a>"
             else:
-                Zillow_Link = "**PUT ZILLOW LINK HERE**"
+                zillow_link = "**PUT ZILLOW LINK HERE**"
 
 
 
@@ -1150,22 +1145,22 @@ class BuyerZillow(tk.Frame):
             
             mailItem = olApp.CreateItem(0)
             
-            if Selling_Agent == "Other":
-                Agent_Name = " "
+            if selling_agent == "Other":
+                agent_name = " "
                 mailItem.CC = " "
             else:
-                Agent_Name = rcrg[Selling_Agent][1]
-                mailItem.CC = rcrg[Selling_Agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = rcrg[selling_agent][1]
+                mailItem.CC = rcrg[selling_agent][0] + " amy@rickcoxrealty.com;"
             
-            mailItem.To = Client_Email
-            mailItem.Subject = f'Zillow Review - Your Sale of {Property_Address}'
+            mailItem.To = client_email
+            mailItem.Subject = f'Zillow Review - Your Sale of {property_address}'
             mailItem.BodyFormat = 1
 
             html_body =f"""
-                <p class=MsoNormal>Good {Time}, {Client_Name}! <br><br></p>
-                <p class=MsoNormal>Congratulations on your purchase of {Property_Address}! Thank you for choosing to work with {Agent_Name} and our real estate group. <br><br></p>
-                <p class=MsoNormal>The purpose of this e-mail and the reason I am reaching out to you today is to ask for your assistance in determining how our team and team members preformed for you. If you have some time and felt like our team provided exceptional service to you, would you be able to give {Selling_Agent} a 5-star review on Zillow via the link below? We would love to hear from you! <br><br></p>
-                <p class=MsoNormal>{Zillow_Link} <br><br></p>
+                <p class=MsoNormal>Good {Time}, {client_name}! <br><br></p>
+                <p class=MsoNormal>Congratulations on your purchase of {property_address}! Thank you for choosing to work with {agent_name} and our real estate group. <br><br></p>
+                <p class=MsoNormal>The purpose of this e-mail and the reason I am reaching out to you today is to ask for your assistance in determining how our team and team members preformed for you. If you have some time and felt like our team provided exceptional service to you, would you be able to give {selling_agent} a 5-star review on Zillow via the link below? We would love to hear from you! <br><br></p>
+                <p class=MsoNormal>{zillow_link} <br><br></p>
                 <p class=MsoNormal>We sincerely appreciate your business! <br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
@@ -1233,31 +1228,31 @@ class SellerZillow(tk.Frame):
         txt3.grid(column = 3, row = 3)
 
         def seller_zillow_email():
-            Property_Address = txt1.get()
-            Listing_Agent = clicked_agents.get()
-            Client_Name = txt2.get()
-            Client_Email = txt3.get()
+            property_address = txt1.get()
+            listing_agent = clicked_agents.get()
+            client_name = txt2.get()
+            client_email = txt3.get()
             
-            if Listing_Agent == "Melanie":    
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzhc49pnkdwcp_31kcj'>Link to Zillow Review for {Listing_Agent}</a>"
-            elif Listing_Agent == "Eleni":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzptgpd1ekdu1_5886z'>Link to Zillow Review for {Listing_Agent}</a>"
-            elif Listing_Agent == "Rick":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzagn27cmg8i1_1y8fb'>Link to Zillow Review for {Listing_Agent}</a>"
-            elif Listing_Agent == "Greg":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUy0ye6f74j2tl_9hc6g'>Link to Zillow Review for {Listing_Agent}</a>"
-            elif Listing_Agent == "Christine":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUw5sfhm4mnvgp_9y704'>Link to Zillow Review for {Listing_Agent}</a>"
-            elif Listing_Agent == "Tunde":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUxqyuo617aoeh_1zmzs'>Link to Zillow Review for {Listing_Agent}</a>"
-            elif Listing_Agent == "Matt":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUt5yuy1qjw3k9_8jmj4'>Link to Zillow Review for {Listing_Agent}</a>"
-            elif Listing_Agent == "Brett":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUw5xj0syh2ivd_wb2k'>Link to Zillow Review for {Listing_Agent}</a>"
-            elif Listing_Agent == "Kathy":
-                Zillow_Link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZU10zkkrzdo9csp_4ok8d'>Link to Zillow Review for {Listing_Agent}</a>"
+            if listing_agent == "Melanie":    
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzhc49pnkdwcp_31kcj'>Link to Zillow Review for {listing_agent}</a>"
+            elif listing_agent == "Eleni":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzptgpd1ekdu1_5886z'>Link to Zillow Review for {listing_agent}</a>"
+            elif listing_agent == "Rick":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUzagn27cmg8i1_1y8fb'>Link to Zillow Review for {listing_agent}</a>"
+            elif listing_agent == "Greg":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUy0ye6f74j2tl_9hc6g'>Link to Zillow Review for {listing_agent}</a>"
+            elif listing_agent == "Christine":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUw5sfhm4mnvgp_9y704'>Link to Zillow Review for {listing_agent}</a>"
+            elif listing_agent == "Tunde":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUxqyuo617aoeh_1zmzs'>Link to Zillow Review for {listing_agent}</a>"
+            elif listing_agent == "Matt":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUt5yuy1qjw3k9_8jmj4'>Link to Zillow Review for {listing_agent}</a>"
+            elif listing_agent == "Brett":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZUw5xj0syh2ivd_wb2k'>Link to Zillow Review for {listing_agent}</a>"
+            elif listing_agent == "Kathy":
+                zillow_link = f"<a href='https://www.zillow.com/reviews/write/?s=X1-ZU10zkkrzdo9csp_4ok8d'>Link to Zillow Review for {listing_agent}</a>"
             else:
-                Zillow_Link = "**PUT ZILLOW LINK HERE**"
+                zillow_link = "**PUT ZILLOW LINK HERE**"
 
 
 
@@ -1267,22 +1262,22 @@ class SellerZillow(tk.Frame):
             
             mailItem = olApp.CreateItem(0)
             
-            if Listing_Agent == "Other":
-                Agent_Name = " "
+            if listing_agent == "Other":
+                agent_name = " "
                 mailItem.CC = " "
             else:
-                Agent_Name = rcrg[Listing_Agent][1]
-                mailItem.CC = rcrg[Listing_Agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = rcrg[listing_agent][1]
+                mailItem.CC = rcrg[listing_agent][0] + " amy@rickcoxrealty.com;"
             
-            mailItem.To = Client_Email
-            mailItem.Subject = f'Zillow Review - Your Sale of {Property_Address}'
+            mailItem.To = client_email
+            mailItem.Subject = f'Zillow Review - Your Sale of {property_address}'
             mailItem.BodyFormat = 1
 
             html_body =f"""
-                <p class=MsoNormal>Good {Time}, {Client_Name}! <br><br></p>
-                <p class=MsoNormal>Congratulations on your sale of {Property_Address}! Thank you for choosing to work with {Agent_Name} and our real estate group. <br><br></p>
-                <p class=MsoNormal>The purpose of this e-mail and the reason I am reaching out to you today is to ask for your assistance in determining how our team and team members preformed for you. If you have some time and felt like our team provided exceptional service to you, would you be able to give {Listing_Agent} a 5-star review on Zillow via the link below? We would love to hear from you!<br><br></p>
-                <p class=MsoNormal>{Zillow_Link} <br><br></p>
+                <p class=MsoNormal>Good {Time}, {client_name}! <br><br></p>
+                <p class=MsoNormal>Congratulations on your sale of {property_address}! Thank you for choosing to work with {agent_name} and our real estate group. <br><br></p>
+                <p class=MsoNormal>The purpose of this e-mail and the reason I am reaching out to you today is to ask for your assistance in determining how our team and team members preformed for you. If you have some time and felt like our team provided exceptional service to you, would you be able to give {listing_agent} a 5-star review on Zillow via the link below? We would love to hear from you!<br><br></p>
+                <p class=MsoNormal>{zillow_link} <br><br></p>
                 <p class=MsoNormal>We sincerely appreciate your business! <br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
@@ -1342,12 +1337,12 @@ class NewListing(tk.Frame):
                 if os.getcwd() != 'C:\\Users\\rcrgr\\Desktop\\E-mail Programs':
                     os.chdir('C:\\Users\\rcrgr\\Desktop\\E-mail Programs')
                 
-                Property_Address = txt1.get()
-                Listing_Agent = clicked_agents.get()
+                property_address = txt1.get()
+                listing_agent = clicked_agents.get()
 
                 fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
 
-                data_dict = {'Property Address': Property_Address, 'City': '', 'State': '', 'Zip': '', 'County': '',
+                data_dict = {'Property Address': property_address, 'City': '', 'State': '', 'Zip': '', 'County': '',
                         'CVRMLS': '', 'Sales Price': '', 'Offer Date_af_date': '', 'Date2_af_date': '',
                         'Rat-Date_af_date': '', 'Closing Date_af_date': '', 'List Price': '', 'Closing Costs Paid by Seller': '',
                         'Seller': '', 'Purchaser': '', 'Seller 1': '', 'Seller 2': '', 'Seller Email 1': '', 'Seller Email 2': '',
@@ -1359,28 +1354,28 @@ class NewListing(tk.Frame):
                         'Seller Attorney Firm': '', 'Seller Attorney Contact': '', 'Seller Office Phone': '', 'Seller Attorney Fax': '',
                         'Seller Attorney Email': '', 'Buyer Attorney Firm': '', 'Buyer Attorney Contact': '', 'Buyer Attorney Office Phone': '',
                         'Buyer Attorney Fax': '', 'Buyer Attorney Email': '', 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
-                        'Listing Company Name': 'The Rick Cox Realty Group', 'Listing Agent Name': rcrg[Listing_Agent][1], 'Transaction Coordinator': 'Harrison Goehring - harrison@rickcoxrealty.com', 'Listing Agent Phone': rcrg[Listing_Agent][4],
-                        'Listing Agent E-mail': rcrg[Listing_Agent][0], 'Selling Company Name': '', 'Selling Agent Name': '', 'Selling Agent TC': '',
+                        'Listing Company Name': 'The Rick Cox Realty Group', 'Listing Agent Name': rcrg[listing_agent][1], 'Transaction Coordinator': 'Harrison Goehring - harrison@rickcoxrealty.com', 'Listing Agent Phone': rcrg[listing_agent][4],
+                        'Listing Agent E-mail': rcrg[listing_agent][0], 'Selling Company Name': '', 'Selling Agent Name': '', 'Selling Agent TC': '',
                         'Selling Agent Phone': '', 'Selling Agent Email': '', 'Escrow Deposit': '', 'Held by': '', 'Commission': '',
                         'Transac\x98on Fee': '395.00', 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
             
                 fillpdfs.write_fillable_pdf('Transaction Info Sheet(Fillable).pdf', 'Transaction Info Sheet(f).pdf', data_dict)
 
-                if Listing_Agent == "Other":
+                if listing_agent == "Other":
                     path = " "
                 else:
-                    path = rcrg[Listing_Agent][3]
+                    path = rcrg[listing_agent][3]
                     os.chdir(path)
 
-                os.mkdir(Property_Address)
+                os.mkdir(property_address)
 
-                os.chdir(f"{path}\\{Property_Address}")
+                os.chdir(f"{path}\\{property_address}")
 
                 os.mkdir("Contract-Addenda")
                 os.mkdir("Invoices-Inspections")
                 os.mkdir("Photos")
 
-                shutil.copy('C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\{Property_Address}\\Contract-Addenda')
+                shutil.copy('C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\{property_address}\\Contract-Addenda')
                 
             #Execute Button
             submit_button = Button(self, text = 'Submit', command = seller_folder)
