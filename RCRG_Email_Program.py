@@ -411,7 +411,7 @@ class BuyerTran(tk.Frame):
                 <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I work with {Agent_Name} and will be assisting with your purchase of {Property_Address}. Attached, you will find copies of the fully-executed contract and any addenda or disclosures in conjunction with your closing.<br><br></p>
                 <p class=MsoNormal>Should you have any questions regarding closing or any aspect of the transaction leading up to that point, please feel free to reach out me. My congratulations to you on your upcoming home purchase!<br><br></p>
                 <p class=MsoNormal>CC: Your agent, {Agent_Name}; Team Administrator, Amy Foldes; <br><br></p>
-                <p class=MsoNormal>Kind Regards, <br><br></p>
+                <p class=MsoNormal>Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
@@ -464,9 +464,9 @@ class BuyerTran(tk.Frame):
             html_body =f"""
                 <p class=MsoNormal>Good {Time}, {Attorney_Name}!<br><br></p>
                 <p class=MsoNormal>{Agent_Name}'s client would like to use your office for the title and settlement work needed for their purchase of {Property_Address}. Please find the ratified contract, transaction information sheet and tax record attached!<br><br></p>
-                <p class=MsoNormal> Please note that the selling agent's commission for this transaction will be {Commission}. Additionally, our brokerage will chargea $395.00 Administrative Fee to the purchaser at closing. Please overnight both checks to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
+                <p class=MsoNormal> Please note that the selling agent's commission for this transaction will be {Commission}. Additionally, our brokerage will charge a $395.00 Administrative Fee to the purchaser at closing. Please overnight both checks to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
                 <p class=MsoNormal>CC: {Agent_Name}, Selling Agent; Team Administrator, Amy Foldes;<br><br></p>
-                <p class=MsoNormal> Kind Regards, <br><br></p>
+                <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
@@ -534,7 +534,7 @@ class BuyerTran(tk.Frame):
             html_body =f"""
                 <p class=MsoNormal>Good {Time}, {Lender_Name}!<br><br></p>
                 <p class=MsoNormal>Please find a ratified contract attached for {Agent_Name}'s {Client_Email_Message}! {EMD}<br><br></p>
-                <p class=MsoNormal> Kind Regards, <br><br></p>
+                <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
@@ -790,7 +790,7 @@ class  SellerTran(tk.Frame):
                 <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I work with {Agent_Name} and will be assisting with your sale of {Property_Address}. Attached, you will find copies of the fully-executed contract and any addenda or disclosures in conjunction with your sale.<br><br></p>
                 <p class=MsoNormal>It should be noted that as a part of your real estate transaction, we will need to have a Termite inspection done at your property within 30 days of closing. Either myself or our Team Administrator, Amy Foldes (CC’d on this e-mail), will reach out to schedule a convenient time and date to complete this inspection!<br><br></p>
                 <p class=MsoNormal>Should you have any questions regarding closing or any aspect of the sale leading up to that point, please feel free to reach out me. My congratulations to you on your upcoming home sale!<br><br></p>
-                <p class=MsoNormal> Kind Regards, <br><br></p>
+                <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
@@ -852,7 +852,7 @@ class  SellerTran(tk.Frame):
                 <p class=MsoNormal>{Agent_Name}'s client would like to use your office for the deed preparation necessary for their sale of {Property_Address}. Please find the ratified contract, transaction information sheet and tax record attached!<br><br></p>
                 <p class=MsoNormal> Please note that the commission for this transaction will be {Commission_Split}. Additionally, our brokerage will charge a $395.00 Administrative Fee to the seller at closing. Should the purchaser's attorney ask, we would like both checks mailed to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
                 <p class=MsoNormal>CC: {Agent_Name}, Listing Agent; Amy Foldes, Team Administrator<br><br></p>
-                <p class=MsoNormal> Kind Regards, <br><br></p>
+                <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
@@ -927,7 +927,7 @@ class TeamMeeting(tk.Frame):
             html_body =f"""
                 <p class=MsoNormal>Good {AM_PM}, RCRG Team!<br><br></p>
                 <p class=MsoNormal>Friendly reminder that we will be conducting our meeting this Wednesday, {Date}, at {Time}. Hope to see you all then!<br><br></p>
-                <p class=MsoNormal> Kind Regards, <br><br></p>
+                <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
@@ -1005,7 +1005,7 @@ class ZillowTeam(tk.Frame):
             html_body =f"""
                 <p class=MsoNormal>Good {AM_PM}, {Team_On} Team!<br><br></p>
                 <p class=MsoNormal>This is a friendly reminder that you are now on to receive Zillow leads for the week.<br><br></p>
-                <p class=MsoNormal> Kind Regards, <br><br></p>
+                <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
@@ -1047,7 +1047,7 @@ class ZillowTeam(tk.Frame):
             html_body =f"""
                 <p class=MsoNormal>Good {AM_PM}, {Team_Off} Team! <br><br></p>
                 <p class=MsoNormal>This is a friendly reminder that you are now paused for Zillow leads for the week. <br><br></p>
-                <p class=MsoNormal> Kind Regards, <br><br></p>
+                <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
@@ -1185,7 +1185,7 @@ class BuyerZillow(tk.Frame):
                 <p class=MsoNormal>The purpose of this e-mail and the reason I am reaching out to you today is to ask for your assistance in determining how our team and team members preformed for you. If you have some time and felt like our team provided exceptional service to you, would you be able to give {Selling_Agent} a 5-star review on Zillow via the link below? We would love to hear from you! <br><br></p>
                 <p class=MsoNormal>{Zillow_Link} <br><br></p>
                 <p class=MsoNormal>We sincerely appreciate your business! <br><br></p>
-                <p class=MsoNormal> Kind Regards, <br><br></p>
+                <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
@@ -1308,7 +1308,7 @@ class SellerZillow(tk.Frame):
                 <p class=MsoNormal>The purpose of this e-mail and the reason I am reaching out to you today is to ask for your assistance in determining how our team and team members preformed for you. If you have some time and felt like our team provided exceptional service to you, would you be able to give {Listing_Agent} a 5-star review on Zillow via the link below? We would love to hear from you!<br><br></p>
                 <p class=MsoNormal>{Zillow_Link} <br><br></p>
                 <p class=MsoNormal>We sincerely appreciate your business! <br><br></p>
-                <p class=MsoNormal> Kind Regards, <br><br></p>
+                <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
