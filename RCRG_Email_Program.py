@@ -156,8 +156,6 @@ class BuyerTran(tk.Frame):
         clicked_attorneys = StringVar()
         clicked_attorneys.set("Attorneys")
 
-        Attorney_Status = False
-
         #1st Q & A - Property Address
         lbl1 = Label(self, text = "What is the Property Address?")
         lbl1.grid(column = 2, row = 0)
@@ -552,18 +550,15 @@ class BuyerTran(tk.Frame):
         def listing_agent_email():
             Property_Address = txt1.get()
             Selling_Agent = clicked_agents.get()
-            Commission = txt2.get()
             Attorney_Contact = clicked_attorneys.get()
             Listing_Agent = txt5.get()
             Listing_Email = txt6.get()
-
-
-            if Attorney_Status == True:
+            
+            
+            if clicked_attorneys.get() == "Other":
                 attorney_msg = f"Our purchaser will be using {attorney[Attorney_Contact][2]} for their title and settlement needs. The primary contact will be {attorney[Attorney_Contact][3]}, their e-mail is {attorney[Attorney_Contact][0]}."
-            elif Attorney_Status == False:
-                attorney_msg = "Our purchaser has not yet decided on who they will be using for their title and settlement needs. Once they have decided, I will let you know!"
             else:
-                attorney_msg = ""
+                attorney_msg = "Our purchaser has not yet decided on who they will be using for their title and settlement needs. Once they have decided, I will let you know!"
 
             
             olApp = win32.Dispatch('Outlook.Application')
@@ -665,9 +660,14 @@ class BuyerTran(tk.Frame):
             agent_broker_ent = Entry(top, width=30)
             agent_broker_ent.grid(column = 3, row = 5)
 
+            #Need to See if we can use lambda to close the pop-up window when the data is successfully passed. This would allow us to remove the close button.
             pass_data_button = Button(top, text = "Submit Data",
                                       command = lambda:[data_submit(agent_table)])
             pass_data_button.grid(column=3, row=6)
+
+            close_button = Button(top, text = "Close the Window",
+                              command= top.destroy)
+            close_button.grid(column=3, row=7)
             
 
 
@@ -755,21 +755,11 @@ class  SellerTran(tk.Frame):
         drop3.grid(column = 3, row = 5)
 
 
-        #Initialize Variables for E-mail program
-        Property_Address = txt1.get()
-        Listing_Agent = clicked_agents.get()
-        Commission = clicked_commissions.get()
-        Client_Name = txt3.get()
-        Client_Email = txt4.get()
-        Attorney_Contact = clicked_attorneys.get()
-
-
         def seller_email():
             Property_Address = txt1.get()
             Listing_Agent = clicked_agents.get()
             Client_Name = txt3.get()
             Client_Email = txt4.get()
-
             olApp = win32.Dispatch('Outlook.Application')
             olNS = olApp.GetNameSpace('MAPI')
 
@@ -977,8 +967,6 @@ class ZillowTeam(tk.Frame):
         drop1 = OptionMenu(self, clicked_team, *teams)
         drop1.grid(column =3, row=3)
 
-        Team_On = clicked_team.get()
-
 
         def team_meeting_email():
             Team_On = clicked_team.get()
@@ -1127,11 +1115,6 @@ class BuyerZillow(tk.Frame):
         txt3.grid(column = 3, row = 3)
 
 
-        Property_Address = txt1.get()
-        Selling_Agent = clicked_agents.get()
-        Client_Name = txt2.get()
-        Client_Email = txt3.get()
-
         def buyer_zillow_email():
             Property_Address = txt1.get()
             Selling_Agent = clicked_agents.get()
@@ -1249,12 +1232,6 @@ class SellerZillow(tk.Frame):
         txt3 = Entry(self, width=38)
         txt3.grid(column = 3, row = 3)
 
-
-        Property_Address = txt1.get()
-        Listing_Agent = clicked_agents.get()
-        Client_Name = txt2.get()
-        Client_Email = txt3.get()
-
         def seller_zillow_email():
             Property_Address = txt1.get()
             Listing_Agent = clicked_agents.get()
@@ -1359,10 +1336,6 @@ class NewListing(tk.Frame):
             lbl2.grid(column = 2, row = 1)
             drop1 = OptionMenu(self, clicked_agents, *agents)
             drop1.grid(column = 3, row = 1)
-
-            Property_Address = txt1.get()
-            Listing_Agent = clicked_agents.get()
-
 
             def seller_folder():
                 
