@@ -13,7 +13,8 @@ c.execute("""CREATE TABLE agents (
         agentphone TEXT NOT NULL,
         agentemail TEXT NOT NULL,
         agenttype TEXT NOT NULL,
-        agentlicensenum TEXT NOT NULL           
+        agentlicensenum TEXT NOT NULL,
+        agentbroker TEXT NOT NULL                 
     )""")
 
 c.execute("""CREATE TABLE lenders (

@@ -17,14 +17,13 @@ from fillpdf import fillpdfs
 import sqlite3
 
 # **Note for Later** Possibly nest within MainFrame class
-'''
 try:
     conn = sqlite3.connect('rcrg.db')
     c = conn.cursor()
     print("Successfully Connected to Database!")
 
 except:
-    '''
+    pass
 
 agents = []
 lenders = []
@@ -630,7 +629,17 @@ class BuyerTran(tk.Frame):
             
             #Need to add SQL query statement to add data to RCRG Database
             
-            #c.execute(f"""INSERT INTO agents""")
+            c.execute(f"""
+            
+            INSERT INTO {table_name}
+            (agentid, agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
+            
+            VALUES 
+            (1, {agent_first_ent.get()}, {agent_last_ent.get()}, {agent_cell_ent.get()}, 
+            {agent_email_ent.get()}, {agent_type_select.get()}, {agent_dpor_ent.get()}, 
+            {agent_broker_ent.get()})
+            
+            """)
             
             pass
             
@@ -652,15 +661,17 @@ class BuyerTran(tk.Frame):
             agent_last_ent = Entry(top, width=20)
             agent_last_ent.grid(column = 3, row = 1)
 
-            agent_email_lbl = Label(top, text = "Agent E-mail:")
-            agent_email_lbl.grid(column = 2, row = 2)
-            agent_email_ent = Entry(top, width=38)
-            agent_email_ent.grid(column = 3, row = 2)
-
             agent_cell_lbl = Label(top, text = "Agent Cell:")
-            agent_cell_lbl.grid(column = 2, row = 3)
+            agent_cell_lbl.grid(column = 2, row = 2)
             agent_cell_ent = Entry(top, width=20)
-            agent_cell_ent.grid(column = 3, row = 3)
+            agent_cell_ent.grid(column = 3, row = 2)
+           
+            agent_email_lbl = Label(top, text = "Agent E-mail:")
+            agent_email_lbl.grid(column = 2, row = 3)
+            agent_email_ent = Entry(top, width=38)
+            agent_email_ent.grid(column = 3, row = 3)
+
+            # Add Agent Type field (Dropdown selection, default to 'Salesperson')
 
             agent_dpor_lbl = Label(top, text = "Agent DPOR License Number:")
             agent_dpor_lbl.grid(column = 2, row = 4)
