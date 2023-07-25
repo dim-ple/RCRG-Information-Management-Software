@@ -14,6 +14,18 @@ from DateAndTime import datetime
 
 from fillpdf import fillpdfs 
 
+import sqlite3
+
+# **Note for Later** Possibly nest within MainFrame class
+'''
+try:
+    conn = sqlite3.connect('rcrg.db')
+    c = conn.cursor()
+    print("Successfully Connected to Database!")
+
+except:
+    '''
+
 agents = []
 lenders = []
 attorneys =[]
@@ -615,6 +627,11 @@ class BuyerTran(tk.Frame):
             clicked_admin_fee.set("395")
 
         def data_submit(table_name):
+            
+            #Need to add SQL query statement to add data to RCRG Database
+            
+            #c.execute(f"""INSERT INTO agents""")
+            
             pass
             
         def new_agent_info():
@@ -690,7 +707,7 @@ class BuyerTran(tk.Frame):
         new_agent_button.grid(column=4, row=15)
 
 
-class  SellerTran(tk.Frame):
+class SellerTran(tk.Frame):
     
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -1385,6 +1402,7 @@ class NewListing(tk.Frame):
             close_button = Button(self, text = "Close the Window",
                               command= controller.destroy)
             close_button.grid(column=3, row=4)
+
 
 if __name__ == '__main__':
     app = MainFrame()
