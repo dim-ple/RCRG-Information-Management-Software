@@ -755,6 +755,7 @@ class  SellerTran(tk.Frame):
             listing_agent = clicked_agents.get()
             client_name = txt3.get()
             client_email = txt4.get()
+            
             olApp = win32.Dispatch('Outlook.Application')
             olNS = olApp.GetNameSpace('MAPI')
 
@@ -964,11 +965,11 @@ class ZillowTeam(tk.Frame):
 
 
         def team_meeting_email():
-            Team_On = clicked_team.get()
-            if Team_On == "Alpha":
-                Team_Off = "Bravo"
-            elif Team_On == "Bravo":
-                Team_Off = "Alpha"
+            team_on = clicked_team.get()
+            if team_on == "Alpha":
+                team_off = "Bravo"
+            elif team_on == "Bravo":
+                team_off = "Alpha"
 
             e = datetime.datetime.now()
             if e.strftime("%p") == "AM": 
@@ -981,11 +982,11 @@ class ZillowTeam(tk.Frame):
             olNS = olApp.GetNameSpace('MAPI')
 
             mailItem = olApp.CreateItem(0)
-            mailItem.Subject = f'{Team_On} Team Active for Zillow Leads'
+            mailItem.Subject = f'{team_on} Team Active for Zillow Leads'
             mailItem.BodyFormat = 1
 
             html_body =f"""
-                <p class=MsoNormal>Good {AM_PM}, {Team_On} Team!<br><br></p>
+                <p class=MsoNormal>Good {AM_PM}, {team_on} Team!<br><br></p>
                 <p class=MsoNormal>This is a friendly reminder that you are now on to receive Zillow leads for the week.<br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
@@ -1000,11 +1001,11 @@ class ZillowTeam(tk.Frame):
             mailItem.HTMLBody = html_body
 
             #Addressee Operating Logic - Database
-            if Team_On == "Alpha":
+            if team_on == "Alpha":
                 mailItem.To = ""
                 mailItem.CC = "eleni@findhomerva.com; melanies1274@yahoo.com; brettmlynes@gmail.com; benny@richmondwithbenny.com"
                 mailItem.BCC = "rick@rickcoxrealty.com"
-            elif Team_On == "Bravo":
+            elif team_on == "Bravo":
                 mailItem.To = ""
                 mailItem.CC = "GregSellsVA@Gmail.com; tundehasthekey@gmail.com; kathyhole1@gmail.com; soldbygizzirva@gmail.com"
                 mailItem.BCC = "Rick@RickCoxRealty.com"
@@ -1023,11 +1024,11 @@ class ZillowTeam(tk.Frame):
             olNS = olApp.GetNameSpace('MAPI')
 
             mailItem = olApp.CreateItem(0)
-            mailItem.Subject = f'{Team_Off} Team Paused for Zillow Leads'
+            mailItem.Subject = f'{team_off} Team Paused for Zillow Leads'
             mailItem.BodyFormat = 1
 
             html_body =f"""
-                <p class=MsoNormal>Good {AM_PM}, {Team_Off} Team! <br><br></p>
+                <p class=MsoNormal>Good {AM_PM}, {team_off} Team! <br><br></p>
                 <p class=MsoNormal>This is a friendly reminder that you are now paused for Zillow leads for the week. <br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
@@ -1042,11 +1043,11 @@ class ZillowTeam(tk.Frame):
             mailItem.HTMLBody = html_body
 
             #Addressee Operating Logic - Database
-            if Team_Off == "Alpha":
+            if team_off == "Alpha":
                 mailItem.To = ""
                 mailItem.CC = "eleni@findhomerva.com; melanies1274@yahoo.com; brettmlynes@gmail.com;"
                 mailItem.BCC = "rick@rickcoxrealty.com"
-            elif Team_Off == "Bravo":
+            elif team_off == "Bravo":
                 mailItem.To = ""
                 mailItem.CC = "GregSellsVA@Gmail.com; tundehasthekey@gmail.com; kathyhole1@gmail.com;"
                 mailItem.BCC = "Rick@RickCoxRealty.com"
