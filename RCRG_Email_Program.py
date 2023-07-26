@@ -627,15 +627,15 @@ class BuyerTran(tk.Frame):
 
         def data_submit(table_name):
             
-            #Need to add SQL query statement to add data to RCRG Database
-            
+            # Need to add SQL query statement to add data to RCRG Database
+            # Statement is ready, will autoincrement agentid as data is entered
             c.execute(f"""
             
-            INSERT INTO {table_name}
-            (agentid, agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
+            INSERT INTO {table_name} 
+            (agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
             
             VALUES 
-            (1, {agent_first_ent.get()}, {agent_last_ent.get()}, {agent_cell_ent.get()}, 
+            ({agent_first_ent.get()}, {agent_last_ent.get()}, {agent_cell_ent.get()}, 
             {agent_email_ent.get()}, {agent_type_select.get()}, {agent_dpor_ent.get()}, 
             {agent_broker_ent.get()})
             
