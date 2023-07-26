@@ -24,7 +24,7 @@ c.execute("""CREATE TABLE lenders (
         lolast TEXT NOT NULL,
         lophone TEXT NOT NULL,
         loemail TEXT NOT NULL,
-        lpemail TEXT,           
+        lpemail TEXT           
     )""")
 
 c.execute("""CREATE TABLE clients (
@@ -39,6 +39,8 @@ c.execute("""CREATE TABLE clients (
         malingcity TEXT,
         malingstate TEXT,
         malingzip TEXT,
+        agentid INTEGER NOT NULL,
+        lenderid INTERGER NOT NULL,
         FOREIGN KEY(agentid) REFERENCES agents(agentid),
         FOREIGN KEY(lenderid) REFERENCES lenders(lenderid)                  
     )""")
@@ -48,7 +50,7 @@ c.execute("""CREATE TABLE hoas (
         hoaname TEXT NOT NULL,
         hoamgmtco TEXT NOT NULL,
         hoaphone TEXT,
-        hoaemail TEXT,               
+        hoaemail TEXT               
     )""")
 
 c.execute("""CREATE TABLE properties (
@@ -59,6 +61,7 @@ c.execute("""CREATE TABLE properties (
         propcity TEXT NOT NULL,
         propstate TEXT NOT NULL,
         propzip TEXT NOT NULL,
+        hoaid INTEGER NOT NULL,
         FOREIGN KEY(hoaid) REFERENCES hoas(hoaid)                 
     )""")
 
