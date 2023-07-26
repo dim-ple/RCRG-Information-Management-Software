@@ -625,28 +625,27 @@ class BuyerTran(tk.Frame):
             clicked_boolean.set(False)
             clicked_admin_fee.set("395")
 
-        def data_submit(table_name):
+        def data_submit(table_name, first, last, cell, email, agent_type, dpor, broker):
             
-            # Need to add SQL query statement to add data to RCRG Database
-            # Statement is ready, will autoincrement agentid as data is entered
             c.execute(f"""
             
-            INSERT INTO {table_name} 
-            (agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
+                INSERT INTO {table_name} 
+                (agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
             
-            VALUES 
-            ({agent_first_ent.get()}, {agent_last_ent.get()}, {agent_cell_ent.get()}, 
-            {agent_email_ent.get()}, {agent_type_select.get()}, {agent_dpor_ent.get()}, 
-            {agent_broker_ent.get()})
+                VALUES 
+                ({first}, {last}, {cell}, 
+                {email}, {agent_type}, {dpor}, 
+                {broker})
             
-            """)
+                """)
             
-            pass
             
         def new_agent_info():
             
-            agent_table = ""
-            
+            agent_table = "agents"
+            clicked_agent_type = StringVar()
+
+
             top = Toplevel(parent)
             top.geometry("450x175")
             top.title("New Agent Info - Input Form")
@@ -672,20 +671,25 @@ class BuyerTran(tk.Frame):
             agent_email_ent.grid(column = 3, row = 3)
 
             # Add Agent Type field (Dropdown selection, default to 'Salesperson')
+            agent_type_lbl = Label(top, text = "Agent Type:")
+            agent_type_lbl.grid(column = 2, row = 4)
+            agent_type_select = OptionMenu(top, clicked_agent_type, "Salesperson", "Principal Broker")
+            agent_type_select.grid(column = 3, row = 4)
 
             agent_dpor_lbl = Label(top, text = "Agent DPOR License Number:")
-            agent_dpor_lbl.grid(column = 2, row = 4)
+            agent_dpor_lbl.grid(column = 2, row = 5)
             agent_dpor_ent = Entry(top, width=17)
-            agent_dpor_ent.grid(column = 3, row = 4)
+            agent_dpor_ent.grid(column = 3, row = 5)
 
             agent_broker_lbl = Label(top, text = "Agent Brokerage Name:")
-            agent_broker_lbl.grid(column = 2, row = 5)
+            agent_broker_lbl.grid(column = 2, row = 6)
             agent_broker_ent = Entry(top, width=30)
-            agent_broker_ent.grid(column = 3, row = 5)
+            agent_broker_ent.grid(column = 3, row = 6)
 
             #Need to See if we can use lambda to close the pop-up window when the data is successfully passed. This would allow us to remove the close button.
             pass_data_button = Button(top, text = "Submit Data",
-                                      command = lambda:[data_submit(agent_table)])
+                                      command = lambda:[data_submit(agent_table, first=agent_first_ent.get(), last=agent_last_ent.get(), cell=agent_cell_ent.get(), 
+                                                        email=agent_email_ent.get(), agent_type=agent_type_select.get(), dpor=agent_dpor_ent.get(), broker=agent_broker_ent.get())])
             pass_data_button.grid(column=3, row=6)
 
             close_button = Button(top, text = "Close the Window",
