@@ -7,7 +7,7 @@ c = conn.cursor()
 
 #Create our Table
 c.execute("""CREATE TABLE agents (
-        agentid INTEGER NOT NULL PRIMARY KEY,
+        agentid INTEGER PRIMARY KEY AUTOINCREMENT,
         agentfirst TEXT NOT NULL,
         agentlast TEXT NOT NULL,
         agentphone TEXT NOT NULL,

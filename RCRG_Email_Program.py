@@ -16,15 +16,6 @@ from fillpdf import fillpdfs
 
 import sqlite3
 
-# **Note for Later** Possibly nest within MainFrame class
-try:
-    conn = sqlite3.connect('rcrg.db')
-    c = conn.cursor()
-    print("Successfully Connected to Database!")
-
-except:
-    pass
-
 agents = []
 lenders = []
 attorneys =[]
@@ -612,6 +603,7 @@ class BuyerTran(tk.Frame):
 
             mailItem.Display()
         
+
         def clear_fields():
             clicked_agents.set("Agents")
             clicked_lenders.set("Lenders")
@@ -624,20 +616,6 @@ class BuyerTran(tk.Frame):
             txt6.delete("0", "end")
             clicked_boolean.set(False)
             clicked_admin_fee.set("395")
-
-        def data_submit(table_name, first, last, cell, email, agent_type, dpor, broker):
-            
-            c.execute(f"""
-            
-                INSERT INTO {table_name} 
-                (agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
-            
-                VALUES 
-                ({first}, {last}, {cell}, 
-                {email}, {agent_type}, {dpor}, 
-                {broker})
-            
-                """)
             
             
         def new_agent_info():
@@ -686,15 +664,45 @@ class BuyerTran(tk.Frame):
             agent_broker_ent = Entry(top, width=30)
             agent_broker_ent.grid(column = 3, row = 6)
 
+            def data_submit(table_name, first, last, cell, email, agent_type, dpor, broker):
+            
+                try:
+                    conn = sqlite3.connect('rcrg.db')
+                    c = conn.cursor()
+                    print("Successfully Connected to Database!")
+
+                    c.execute(f"""
+            
+                    INSERT INTO {table_name} 
+                    (agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
+            
+                    VALUES 
+                    ("{first}", "{last}", "{cell}", 
+                    "{email}", "{agent_type}", "{dpor}", 
+                    "{broker}")
+            
+                    """)
+
+                except:
+                    pass
+
+                finally:
+                    c.close()
+                    conn.close()
+
+                
+
             #Need to See if we can use lambda to close the pop-up window when the data is successfully passed. This would allow us to remove the close button.
             pass_data_button = Button(top, text = "Submit Data",
-                                      command = lambda:[data_submit(agent_table, first=agent_first_ent.get(), last=agent_last_ent.get(), cell=agent_cell_ent.get(), 
-                                                        email=agent_email_ent.get(), agent_type=agent_type_select.get(), dpor=agent_dpor_ent.get(), broker=agent_broker_ent.get())])
-            pass_data_button.grid(column=3, row=6)
+                                      command = lambda:[data_submit(agent_table, agent_first_ent.get(), agent_last_ent.get(), agent_cell_ent.get(), 
+                                                        agent_email_ent.get(), clicked_agent_type.get(), agent_dpor_ent.get(), agent_broker_ent.get())])
+            pass_data_button.grid(column=3, row=7)
 
             close_button = Button(top, text = "Close the Window",
                               command= top.destroy)
-            close_button.grid(column=3, row=7)
+            close_button.grid(column=3, row=8)
+
+
             
 
 
