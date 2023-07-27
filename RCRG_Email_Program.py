@@ -665,26 +665,24 @@ class BuyerTran(tk.Frame):
             agent_broker_ent.grid(column = 3, row = 6)
 
             def data_submit(table_name, first, last, cell, email, agent_type, dpor, broker):
-            
+
                 try:
                     conn = sqlite3.connect('rcrg.db')
                     c = conn.cursor()
                     print("Successfully Connected to Database!")
 
+                    print(type(first))
+                    print(type(agent_type))  
+
                     c.execute(f"""
             
-                    INSERT INTO {table_name} 
-                    (agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
-            
-                    VALUES 
-                    ("{first}", "{last}", "{cell}", 
-                    "{email}", "{agent_type}", "{dpor}", 
-                    "{broker}")
-            
+                    INSERT INTO {table_name} (agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
+                    VALUES ("{first}", "{last}", "{cell}", "{email}", "{agent_type}", "{dpor}", "{broker}")
+
                     """)
 
                 except:
-                    pass
+                    print("Hello Error!")
 
                 finally:
                     c.close()
