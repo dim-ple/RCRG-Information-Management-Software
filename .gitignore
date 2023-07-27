@@ -153,3 +153,4 @@ cython_debug/
 .vscode/launch.json
 rcrg.db
 Contact_Dictionaries.py
+database.py
