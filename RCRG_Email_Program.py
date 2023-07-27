@@ -382,7 +382,7 @@ class BuyerTran(tk.Frame):
             shutil.copy('C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\{property_address}\\Contract-Addenda')
 
         def buyer_email():
-            property_address = txt1.get()
+            property_address = prop_add_ent.get()
             selling_agent = clicked_agents.get()
             client_name1 = txt3.get()
             client_email = txt4.get()
@@ -432,7 +432,7 @@ class BuyerTran(tk.Frame):
             mailItem.Display()
 
         def attorney_email():
-            property_address = txt1.get()
+            property_address = prop_add_ent.get()
             selling_agent = clicked_agents.get()
             commission = txt2.get()
             attorney_contact = clicked_attorneys.get()
@@ -487,7 +487,7 @@ class BuyerTran(tk.Frame):
         def lender_email():
             lender_contact = clicked_lenders.get()
             EMD_Status = clicked_boolean.get()
-            property_address = txt1.get()
+            property_address = prop_add_ent.get()
             selling_agent = clicked_agents.get()
             client_name1 = txt3.get()
             client_name2 = ' '
@@ -553,7 +553,7 @@ class BuyerTran(tk.Frame):
             mailItem.Display()
 
         def listing_agent_email():
-            property_address = txt1.get()
+            property_address = prop_add_ent.get()
             selling_agent = clicked_agents.get()
             attorney_contact = clicked_attorneys.get()
             listing_agent = txt5.get()
@@ -616,7 +616,7 @@ class BuyerTran(tk.Frame):
             clicked_agents.set("Agents")
             clicked_lenders.set("Lenders")
             clicked_attorneys.set("Attorneys")
-            txt1.delete("0", "end")
+            prop_add_ent.delete("0", "end")
             txt2.delete("0", "end")
             txt3.delete("0", "end")
             txt4.delete("0", "end")
