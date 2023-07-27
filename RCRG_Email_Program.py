@@ -232,81 +232,81 @@ class BuyerTran(tk.Frame):
         seller_name_ent = Entry(self, width=38)
         seller_name_ent.grid(column = 3, row = 11)
 
-        #2nd Q & A - Agent
-        lbl2 = Label(self, text = "Who is the Selling Agent?")
-        lbl2.grid(column = 2, row = 12)
-        drop1 = OptionMenu(self, clicked_agents, *agents)
-        drop1.grid(column = 3, row = 12)
+        #2nd Q & A - Selling Agent
+        sell_agent_lbl = Label(self, text = "Who is the Selling Agent?")
+        sell_agent_lbl.grid(column = 2, row = 12)
+        sell_agent_drop = OptionMenu(self, clicked_agents, *agents)
+        sell_agent_drop.grid(column = 3, row = 12)
 
         #3rd Q & A - Commission
-        lbl3 = Label(self, text = "What is the Selling Agent's Commission")
-        lbl3.grid(column = 2, row = 13)
-        txt2 = Entry(self, width=8)
-        txt2.grid(column = 3, row = 13)
+        comm_lbl = Label(self, text = "What is the Selling Agent's Commission")
+        comm_lbl.grid(column = 2, row = 13)
+        comm_ent = Entry(self, width=8)
+        comm_ent.grid(column = 3, row = 13)
 
         #Transaction Fee (Radio 3 option - 395, 495, 0)
-        lbl4 = Label(self, text="What is the Admin Fee?")
-        lbl4.grid(column=2, row=14)
-        radio3 = Radiobutton(self, text="N/A", variable = clicked_admin_fee,
+        admin_fee_lbl = Label(self, text="What is the Admin Fee?")
+        admin_fee_lbl.grid(column=2, row=14)
+        radio0 = Radiobutton(self, text="N/A", variable = clicked_admin_fee,
                             value="0")
-        radio3.grid(column=3, row=14)
-        radio4 = Radiobutton(self, text="$495", variable = clicked_admin_fee,
+        radio0.grid(column=3, row=14)
+        radio495 = Radiobutton(self, text="$495", variable = clicked_admin_fee,
                             value="495")
-        radio4.grid(column=4, row=14)
-        radio5 = Radiobutton(self, text="$395", variable = clicked_admin_fee,
+        radio495.grid(column=4, row=14)
+        radio395 = Radiobutton(self, text="$395", variable = clicked_admin_fee,
                              value="395")
-        radio5.grid(column=5, row=14)
+        radio395.grid(column=5, row=14)
         clicked_admin_fee.set("395")
 
         #5th Q & A - Client Name
-        lbl5 = Label(self, text = "What is the Client's Full Name? For Multiple Names, separate with a ';'")
-        lbl5.grid(column=2, row=15)
-        txt3 = Entry(self, width=38)
-        txt3.grid(column=3, row=15)
+        client_name_lbl = Label(self, text = "What is the Client's Full Name? For Multiple Names, separate with a ';'")
+        client_name_lbl.grid(column=2, row=15)
+        client_name_ent = Entry(self, width=38)
+        client_name_ent.grid(column=3, row=15)
 
         #Client Phone Number(s)
 
         #6th Q & A - Lender
-        lbl6 = Label(self, text = "Who is the Lender?")
-        lbl6.grid(column = 2, row = 16)
-        drop2 = OptionMenu(self, clicked_lenders, *lenders)
-        drop2.grid(column = 3, row = 16)
+        lender_lbl = Label(self, text = "Who is the Lender?")
+        lender_lbl.grid(column = 2, row = 16)
+        lender_drop = OptionMenu(self, clicked_lenders, *lenders)
+        lender_drop.grid(column = 3, row = 16)
 
         #7th Q & A - EMD
-        lbl7 = Label(self, text="Do we have the EMD?")
-        lbl7.grid(column = 2, row = 17)
-        radio1 = Radiobutton(self, text = "Yes", variable = clicked_boolean,
+        emd_lbl = Label(self, text="Do we have the EMD?")
+        emd_lbl.grid(column = 2, row = 17)
+        radio_emd_yes = Radiobutton(self, text = "Yes", variable = clicked_boolean,
                             value=True)
-        radio1.grid(column = 3, row = 17)
-        radio2 = Radiobutton(self, text = "No", variable = clicked_boolean,
+        radio_emd_yes.grid(column = 3, row = 17)
+        radio_emd_no = Radiobutton(self, text = "No", variable = clicked_boolean,
                             value=False)
-        radio2.grid(column = 4, row = 17)
+        radio_emd_no.grid(column = 4, row = 17)
 
         #8th Q & A - Attorney Contact
-        lbl8 = Label(self, text = "Who is the Attorney?")
-        lbl8.grid(column = 2, row = 18)
-        drop3 = OptionMenu(self, clicked_attorneys, *attorneys)
-        drop3.grid(column = 3, row = 18)
+        attorney_lbl = Label(self, text = "Who is the Attorney?")
+        attorney_lbl.grid(column = 2, row = 18)
+        attorney_drop = OptionMenu(self, clicked_attorneys, *attorneys)
+        attorney_drop.grid(column = 3, row = 18)
 
         #9th Q & A - Client E-mail
-        lbl9 = Label(self, text = "What is the Client's E-mail?")
-        lbl9.grid(column = 2, row = 19)
-        txt4 = Entry(self, width=38)
-        txt4.grid(column = 3, row = 19)
+        client_email_lbl = Label(self, text = "What is the Client's E-mail?")
+        client_email_lbl.grid(column = 2, row = 19)
+        client_email_ent = Entry(self, width=38)
+        client_email_ent.grid(column = 3, row = 19)
 
         #Listing Agent Company
         
         #10th Q & A - Listing Agent Name
-        lbl10 = Label(self, text = "What is the Listing Agent's Name")
-        lbl10.grid(column = 2, row = 20)
-        txt5 = Entry(self, width=38)
-        txt5.grid(column = 3, row = 20)
+        la_name_lbl = Label(self, text = "What is the Listing Agent's Name")
+        la_name_lbl.grid(column = 2, row = 20)
+        la_name_ent = Entry(self, width=38)
+        la_name_ent.grid(column = 3, row = 20)
 
         #11th Q & A - Listing Agent E-mail
-        lbl11 = Label(self, text = "What is the Listing Agent's E-mail")
-        lbl11.grid(column = 2, row = 21)
-        txt6 = Entry(self, width=38)
-        txt6.grid(column = 3, row = 21)
+        la_email_lbl = Label(self, text = "What is the Listing Agent's E-mail")
+        la_email_lbl.grid(column = 2, row = 21)
+        la_email_ent = Entry(self, width=38)
+        la_email_ent.grid(column = 3, row = 21)
 
 
         def buyer_folder():
@@ -321,12 +321,12 @@ class BuyerTran(tk.Frame):
             sp = sp_ent.get()
             lp = lp_ent.get()
             selling_agent = clicked_agents.get()
-            listing_agent = txt5.get()
-            listing_email = txt6.get()
-            commission = txt2.get()
-            client1 = txt3.get()
+            listing_agent = la_name_ent.get()
+            listing_email = la_email_ent.get()
+            commission = comm_ent.get()
+            client1 = client_name_ent.get()
             client2 = ' '
-            client_email1 = txt4.get()
+            client_email1 = client_email_ent.get()
             client_email2 = ' '
             attorney_contact = clicked_attorneys.get()
             lender_contact = clicked_lenders.get()
@@ -384,8 +384,8 @@ class BuyerTran(tk.Frame):
         def buyer_email():
             property_address = prop_add_ent.get()
             selling_agent = clicked_agents.get()
-            client_name1 = txt3.get()
-            client_email = txt4.get()
+            client_name1 = client_name_ent.get()
+            client_email = client_email_ent.get()
             Address_To_Client = f"{client_name1}"
 
             if ";" in client_name1:
@@ -434,7 +434,7 @@ class BuyerTran(tk.Frame):
         def attorney_email():
             property_address = prop_add_ent.get()
             selling_agent = clicked_agents.get()
-            commission = txt2.get()
+            commission = comm_ent.get()
             attorney_contact = clicked_attorneys.get()
 
             
@@ -489,7 +489,7 @@ class BuyerTran(tk.Frame):
             EMD_Status = clicked_boolean.get()
             property_address = prop_add_ent.get()
             selling_agent = clicked_agents.get()
-            client_name1 = txt3.get()
+            client_name1 = client_name_ent.get()
             client_name2 = ' '
             client_email_Message = f"client, {client_name1}"
             Client_Subject_Line = f"{client_name1}"
@@ -556,8 +556,8 @@ class BuyerTran(tk.Frame):
             property_address = prop_add_ent.get()
             selling_agent = clicked_agents.get()
             attorney_contact = clicked_attorneys.get()
-            listing_agent = txt5.get()
-            listing_email = txt6.get()
+            listing_agent = la_name_ent.get()
+            listing_email = la_email_ent.get()
             
             
             if clicked_attorneys.get() == "Other":
@@ -617,11 +617,11 @@ class BuyerTran(tk.Frame):
             clicked_lenders.set("Lenders")
             clicked_attorneys.set("Attorneys")
             prop_add_ent.delete("0", "end")
-            txt2.delete("0", "end")
-            txt3.delete("0", "end")
-            txt4.delete("0", "end")
-            txt5.delete("0", "end")
-            txt6.delete("0", "end")
+            comm_ent.delete("0", "end")
+            client_name_ent.delete("0", "end")
+            client_email_ent.delete("0", "end")
+            la_name_ent.delete("0", "end")
+            la_email_ent.delete("0", "end")
             clicked_boolean.set(False)
             clicked_admin_fee.set("395")
             
