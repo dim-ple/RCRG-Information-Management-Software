@@ -681,12 +681,15 @@ class BuyerTran(tk.Frame):
 
                     """)
 
+                    conn.commit() # Don't forget your commit statement
+
                 except:
                     print("Hello Error!")
 
                 finally:
                     c.close()
                     conn.close()
+                    print("Connection to Database Closed!")
 
                 
 
