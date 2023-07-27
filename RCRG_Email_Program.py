@@ -679,9 +679,6 @@ class BuyerTran(tk.Frame):
                     c = conn.cursor()
                     print("Successfully Connected to Database!")
 
-                    print(type(first))
-                    print(type(agent_type))  
-
                     c.execute(f"""
             
                     INSERT INTO {table_name} (agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
