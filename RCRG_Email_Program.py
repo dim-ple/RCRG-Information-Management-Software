@@ -294,19 +294,12 @@ class BuyerTran(tk.Frame):
         client_email_ent = Entry(self, width=38)
         client_email_ent.grid(column = 3, row = 19)
 
-        #Listing Agent Company
-        
         #10th Q & A - Listing Agent Name
-        la_name_lbl = Label(self, text = "What is the Listing Agent's Name")
+        la_name_lbl = Label(self, text = "Who is the Listing Agent?")
         la_name_lbl.grid(column = 2, row = 20)
         la_name_ent = Entry(self, width=38)
         la_name_ent.grid(column = 3, row = 20)
 
-        #11th Q & A - Listing Agent E-mail
-        la_email_lbl = Label(self, text = "What is the Listing Agent's E-mail")
-        la_email_lbl.grid(column = 2, row = 21)
-        la_email_ent = Entry(self, width=38)
-        la_email_ent.grid(column = 3, row = 21)
 
 
         def buyer_folder():
@@ -716,19 +709,27 @@ class BuyerTran(tk.Frame):
 
         new_folder_button = Button(self, text = "Create New Folder",
                                    command = lambda:[buyer_folder()])
-        new_folder_button.grid(column=3, row = 23)
+        new_folder_button.grid(column = 3, row = 23)
 
         clear_fields_button = Button(self, text = "Reset Fields",
                                      command = lambda:[clear_fields()])
-        clear_fields_button.grid(column=3, row = 24)
+        clear_fields_button.grid(column = 3, row = 24)
 
         close_button = Button(self, text = "Close the Window",
-                              command= controller.destroy)
-        close_button.grid(column=3, row = 25)
+                              command = controller.destroy)
+        close_button.grid(column = 3, row = 25)
 
         new_agent_button = Button(self, text="New Agent",
                                   command = lambda: new_agent_info())
-        new_agent_button.grid(column=4, row = 19)
+        new_agent_button.grid(column = 4, row = 20)
+
+        search_list_agent_btn = Button(self, text="Agent Search",
+                                  command = lambda: new_agent_info())
+        search_list_agent_btn.grid(column = 4, row = 12)
+        
+        search_sell_agent_btn = Button(self, text="Agent Search",
+                                  command = lambda: new_agent_info())
+        search_sell_agent_btn.grid(column = 5, row = 20)
 
 
 class SellerTran(tk.Frame):
