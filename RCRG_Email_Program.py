@@ -315,7 +315,7 @@ class BuyerTran(tk.Frame):
             lp = lp_ent.get()
             selling_agent = clicked_agents.get()
             listing_agent = la_name_ent.get()
-            listing_email = la_email_ent.get()
+            #listing_email = la_email_ent.get()
             commission = comm_ent.get()
             client1 = client_name_ent.get()
             client2 = ' '
@@ -353,7 +353,7 @@ class BuyerTran(tk.Frame):
                         'Seller Attorney Email': '', 'Buyer Attorney Firm': attorney[attorney_contact][2], 'Buyer Attorney Contact': attorney[attorney_contact][3], 'Buyer Attorney Office Phone': '',
                         'Buyer Attorney Fax': '', 'Buyer Attorney Email': attorney[attorney_contact][0], 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
                         'Listing Company Name': '', 'Listing Agent Name': listing_agent, 'Transaction Coordinator': '', 'Listing Agent Phone': '',
-                        'Listing Agent E-mail': listing_email, 'Selling Company Name': 'The Rick Cox Realty Group', 'Selling Agent Name': rcrg[selling_agent][1], 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
+                        'Listing Agent E-mail': '', 'Selling Company Name': 'The Rick Cox Realty Group', 'Selling Agent Name': rcrg[selling_agent][1], 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
                         'Selling Agent Phone': rcrg[selling_agent][4], 'Selling Agent Email': rcrg[selling_agent][0], 'Escrow Deposit': '', 'Held by': '', 'Commission': commission + ' to Selling Agent',
                         'Transac\x98on Fee': admin_fee, 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
             
@@ -550,7 +550,7 @@ class BuyerTran(tk.Frame):
             selling_agent = clicked_agents.get()
             attorney_contact = clicked_attorneys.get()
             listing_agent = la_name_ent.get()
-            listing_email = la_email_ent.get()
+            #listing_email = la_email_ent.get()
             
             
             if clicked_attorneys.get() == "Other":
@@ -568,10 +568,10 @@ class BuyerTran(tk.Frame):
             mailItem.HTMLBody = 'Coordinator Introduction'
 
             #To: Operating Logic - Dictionary Call
-            if listing_email == "":
-                mailItem.To = " "
-            else:
-                mailItem.To = listing_email
+            #if listing_email == "":
+                #mailItem.To = " "
+            #else:
+                #mailItem.To = listing_email
 
             #CC: Operating Logic - Dictionary Call
             if selling_agent == "Other":
@@ -604,7 +604,6 @@ class BuyerTran(tk.Frame):
 
             mailItem.Display()
         
-
         def clear_fields():
             clicked_agents.set("Agents")
             clicked_lenders.set("Lenders")
@@ -614,11 +613,10 @@ class BuyerTran(tk.Frame):
             client_name_ent.delete("0", "end")
             client_email_ent.delete("0", "end")
             la_name_ent.delete("0", "end")
-            la_email_ent.delete("0", "end")
+            #la_email_ent.delete("0", "end")
             clicked_boolean.set(False)
             clicked_admin_fee.set("395")
-            
-            
+               
         def new_agent_info():
             
             agent_table = "agents"
@@ -701,6 +699,10 @@ class BuyerTran(tk.Frame):
                               command= top.destroy)
             close_button.grid(column=3, row=8)
 
+        def agent_search():
+            
+            
+            pass
 
         #Execute Button
         submit_button = Button(self, text = "Submit",
