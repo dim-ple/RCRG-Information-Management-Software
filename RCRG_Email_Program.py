@@ -21,6 +21,7 @@ import sqlite3
 agents = []
 lenders = []
 attorneys =[]
+agents2 = []
 
 for agent in rcrg:
     agents.append(agent)
@@ -701,6 +702,19 @@ class BuyerTran(tk.Frame):
 
         def agent_search():
             
+            top = Toplevel(parent)
+            top.geometry("450x175")
+            top.title("Agent Search")
+
+            '''agent_seach = Label(top, text = "Agent First Name:")
+            agent_first_lbl.grid(column = 2, row = 0)
+            agent_first_ent = Entry(top, width=20)
+            agent_first_ent.grid(column = 3, row = 0)
+
+            agent_last_lbl = Label(top, text = "Agent Last Name:")
+            agent_last_lbl.grid(column = 2, row = 1)
+            agent_last_ent = Entry(top, width=20)
+            agent_last_ent.grid(column = 3, row = 1)'''
             
             pass
 
