@@ -617,6 +617,78 @@ class BuyerTran(tk.Frame):
             #la_email_ent.delete("0", "end")
             clicked_boolean.set(False)
             clicked_admin_fee.set("395")
+
+        def new_lender_info():
+            
+            lender_table = "lenders"
+
+            top = Toplevel(parent)
+            top.geometry("450x175")
+            top.title("New Lender Info - Input Form")
+
+            lender_name_lbl = Label(top, text = "Mortgage Company Name:")
+            lender_name_lbl.grid(column = 2, row = 0)
+            lender_name_ent = Entry(top, width=20)
+            lender_name_ent.grid(column = 3, row = 0)
+
+            lo_first_lbl = Label(top, text = "Loan Officer First Name:")
+            lo_first_lbl.grid(column = 2, row = 1)
+            lo_first_ent = Entry(top, width=20)
+            lo_first_ent.grid(column = 3, row = 1)
+
+            lo_last_lbl = Label(top, text = "Loan Officer Last Name:")
+            lo_last_lbl.grid(column = 2, row = 2)
+            lo_last_ent = Entry(top, width=20)
+            lo_last_ent.grid(column = 3, row = 2)
+           
+            lo_phone_lbl = Label(top, text = "Loan Officer Phone #:")
+            lo_phone_lbl.grid(column = 2, row = 3)
+            lo_phone_ent = Entry(top, width=38)
+            lo_phone_ent.grid(column = 3, row = 3)
+
+            # Add Agent Type field (Dropdown selection, default to 'Salesperson')
+            lo_email_lbl = Label(top, text = "Loan Officer E-mail:")
+            lo_email_lbl.grid(column = 2, row = 4)
+            lo_email_ent = Entry(top, width=38)
+            lo_email_ent.grid(column = 3, row = 4)
+
+            lp_email_lbl = Label(top, text = "Loan Processor E-mail:")
+            lp_email_lbl.grid(column = 2, row = 5)
+            lp_email_ent = Entry(top, width=17)
+            lp_email_ent.grid(column = 3, row = 5)
+
+            def data_submit(table_name, lender_co, lo_first, lo_last, lo_phone, lo_email, lp_email):
+
+                try:
+                    conn = sqlite3.connect('rcrg.db')
+                    c = conn.cursor()
+                    print("Successfully Connected to Database!")
+
+                    c.execute(f"""
+            
+                    INSERT INTO {table_name} (lendercompany, lofirst, lolast, lophone, loemail, lpemail) 
+                    VALUES ("{lender_co}", "{lo_first}", "{lo_last}", "{lo_phone}", "{lo_email}", "{lp_email}")
+
+                    """)
+
+                    conn.commit() # Don't forget your commit statement
+
+                except:
+                    print("Hello Error!")
+
+                finally:
+                    c.close()
+                    conn.close()
+                    print("Connection to Database Closed!")
+
+            pass_data_button = Button(top, text = "Submit Data",
+                                      command = lambda:[data_submit(lender_table, lender_name_ent.get(), lo_first_ent.get(), lo_last_ent.get(), 
+                                                        lo_phone_ent.get(), lo_email_ent.get(), lp_email_ent.get())])
+            pass_data_button.grid(column=3, row=6)
+
+            close_button = Button(top, text = "Close the Window",
+                              command= top.destroy)
+            close_button.grid(column=3, row=7)
                
         def new_agent_info():
             
@@ -664,45 +736,6 @@ class BuyerTran(tk.Frame):
             agent_broker_ent = Entry(top, width=30)
             agent_broker_ent.grid(column = 3, row = 6)
 
-        def new_lender_info():
-            
-            top = Toplevel(parent)
-            top.geometry("450x175")
-            top.title("New Lender Info - Input Form")
-
-            lender_name_lbl = Label(top, text = "Mortgage Company Name:")
-            lender_name_lbl.grid(column = 2, row = 0)
-            lender_name_ent = Entry(top, width=20)
-            lender_name_ent.grid(column = 3, row = 0)
-
-            lo_first_name_lbl = Label(top, text = "Loan Officer First Name:")
-            lo_first_name_lbl.grid(column = 2, row = 1)
-            lo_first_name_ent = Entry(top, width=20)
-            lo_first_name_ent.grid(column = 3, row = 1)
-
-            lo_last_name_lbl = Label(top, text = "Loan Officer Last Name:")
-            lo_last_name_lbl.grid(column = 2, row = 2)
-            lo_last_name_ent = Entry(top, width=20)
-            lo_last_name_ent.grid(column = 3, row = 2)
-           
-            lo_phone_lbl = Label(top, text = "Loan Officer Phone #:")
-            lo_phone_lbl.grid(column = 2, row = 3)
-            lo_phone_ent = Entry(top, width=38)
-            lo_phone_ent.grid(column = 3, row = 3)
-
-            # Add Agent Type field (Dropdown selection, default to 'Salesperson')
-            lo_email_lbl = Label(top, text = "Loan Officer E-mail:")
-            lo_email_lbl.grid(column = 2, row = 4)
-            lo_email_ent = Entry(top, width=38)
-            lo_email_ent.grid(column = 3, row = 4)
-
-            lp_email_lbl = Label(top, text = "Loan Processor E-mail:")
-            lp_email_lbl.grid(column = 2, row = 5)
-            lp_email_ent = Entry(top, width=17)
-            lp_email_ent.grid(column = 3, row = 5)
-
-
-
 
             def data_submit(table_name, first, last, cell, email, agent_type, dpor, broker):
 
@@ -740,13 +773,13 @@ class BuyerTran(tk.Frame):
                               command= top.destroy)
             close_button.grid(column=3, row=8)
 
-        def agent_search():
+        '''def agent_search():
             
             top = Toplevel(parent)
             top.geometry("450x175")
             top.title("Agent Search")
 
-            '''agent_seach = Label(top, text = "Agent First Name:")
+            agent_seach = Label(top, text = "Agent First Name:")
             agent_first_lbl.grid(column = 2, row = 0)
             agent_first_ent = Entry(top, width=20)
             agent_first_ent.grid(column = 3, row = 0)
@@ -755,8 +788,6 @@ class BuyerTran(tk.Frame):
             agent_last_lbl.grid(column = 2, row = 1)
             agent_last_ent = Entry(top, width=20)
             agent_last_ent.grid(column = 3, row = 1)'''
-            
-            pass
 
         #Execute Button
         submit_button = Button(self, text = "Submit",
