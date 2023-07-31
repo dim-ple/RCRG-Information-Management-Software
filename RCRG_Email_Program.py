@@ -664,6 +664,46 @@ class BuyerTran(tk.Frame):
             agent_broker_ent = Entry(top, width=30)
             agent_broker_ent.grid(column = 3, row = 6)
 
+        def new_lender_info():
+            
+            top = Toplevel(parent)
+            top.geometry("450x175")
+            top.title("New Lender Info - Input Form")
+
+            lender_name_lbl = Label(top, text = "Mortgage Company Name:")
+            lender_name_lbl.grid(column = 2, row = 0)
+            lender_name_ent = Entry(top, width=20)
+            lender_name_ent.grid(column = 3, row = 0)
+
+            lo_first_name_lbl = Label(top, text = "Loan Officer First Name:")
+            lo_first_name_lbl.grid(column = 2, row = 1)
+            lo_first_name_ent = Entry(top, width=20)
+            lo_first_name_ent.grid(column = 3, row = 1)
+
+            lo_last_name_lbl = Label(top, text = "Loan Officer Last Name:")
+            lo_last_name_lbl.grid(column = 2, row = 2)
+            lo_last_name_ent = Entry(top, width=20)
+            lo_last_name_ent.grid(column = 3, row = 2)
+           
+            lo_phone_lbl = Label(top, text = "Loan Officer Phone #:")
+            lo_phone_lbl.grid(column = 2, row = 3)
+            lo_phone_ent = Entry(top, width=38)
+            lo_phone_ent.grid(column = 3, row = 3)
+
+            # Add Agent Type field (Dropdown selection, default to 'Salesperson')
+            lo_email_lbl = Label(top, text = "Loan Officer E-mail:")
+            lo_email_lbl.grid(column = 2, row = 4)
+            lo_email_ent = Entry(top, width=38)
+            lo_email_ent.grid(column = 3, row = 4)
+
+            lp_email_lbl = Label(top, text = "Loan Processor E-mail:")
+            lp_email_lbl.grid(column = 2, row = 5)
+            lp_email_ent = Entry(top, width=17)
+            lp_email_ent.grid(column = 3, row = 5)
+
+
+
+
             def data_submit(table_name, first, last, cell, email, agent_type, dpor, broker):
 
                 try:
@@ -739,13 +779,17 @@ class BuyerTran(tk.Frame):
                                   command = lambda: new_agent_info())
         new_agent_button.grid(column = 4, row = 20)
 
-        search_list_agent_btn = Button(self, text="Agent Search",
+        new_lender_button = Button(self, text="New Lender",
+                                  command = lambda: new_lender_info())
+        new_lender_button.grid(column = 4, row = 16)
+
+        '''search_list_agent_btn = Button(self, text="Agent Search",
                                   command = lambda: new_agent_info())
         search_list_agent_btn.grid(column = 4, row = 12)
         
         search_sell_agent_btn = Button(self, text="Agent Search",
                                   command = lambda: new_agent_info())
-        search_sell_agent_btn.grid(column = 5, row = 20)
+        search_sell_agent_btn.grid(column = 5, row = 20)'''
 
 
 class SellerTran(tk.Frame):
