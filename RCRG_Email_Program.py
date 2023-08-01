@@ -23,6 +23,13 @@ lenders = []
 attorneys =[]
 agents2 = []
 
+#Cols for Database Tables
+agent_cols = "(agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker)"
+client_cols = "(clientfirst, clientlast, clientphone, clientemail, mailingstreetnum, mailingstreetname, mailingstreettype, mailingcity, mailingstate, mailingzip, agentid, lenderid)"
+lender_cols = "(lendercompany, lofirst, lolast, lophone, loemail, lpemail)"
+property_cols = "(propstreetnum, propstreetname, propstreettype, propcity, propstate, propzip, hoaid)"
+hoa_cols = "(hoaname, hoamgmtco, hoaphone, hoaemail)"
+
 for agent in rcrg:
     agents.append(agent)
 
@@ -300,7 +307,6 @@ class BuyerTran(tk.Frame):
         la_name_lbl.grid(column = 2, row = 20)
         la_name_ent = Entry(self, width=38)
         la_name_ent.grid(column = 3, row = 20)
-
 
 
         def buyer_folder():
@@ -618,6 +624,46 @@ class BuyerTran(tk.Frame):
             clicked_boolean.set(False)
             clicked_admin_fee.set("395")
 
+        def data_submit(table_name, *cols):
+            ins_statement = 'INSERT INTO '
+            val_statement = 'VALUES ("'
+            end_char = ')'
+            list_string = []
+            
+            if table_name == 'agents':
+                ins_statement += agent_cols
+
+            for col in cols:
+                val_statement += col + '", "'
+
+            
+            list_string = list(val_statement)
+            list_string.pop(len(list_string)-1)
+            list_string.pop(len(list_string)-1)
+            list_string.pop(len(list_string)-1)
+            new_string = "".join(list_string)
+
+            val_statement = new_string + end_char
+
+            query = ins_statement + val_statement
+
+            try:
+                conn = sqlite3.connect('rcrg.db')
+                c = conn.cursor()
+                print("Successfully Connected to Database!")
+
+                c.execute(query)
+
+                conn.commit() # Don't forget your commit statement
+
+            except:
+                print("Hello Error!")
+
+            finally:
+                c.close()
+                conn.close()
+                print("Connection to Database Closed!")
+  
         def new_lender_info():
             
             lender_table = "lenders"
@@ -737,29 +783,8 @@ class BuyerTran(tk.Frame):
             agent_broker_ent.grid(column = 3, row = 6)
 
 
-            def data_submit(table_name, first, last, cell, email, agent_type, dpor, broker):
-
-                try:
-                    conn = sqlite3.connect('rcrg.db')
-                    c = conn.cursor()
-                    print("Successfully Connected to Database!")
-
-                    c.execute(f"""
             
-                    INSERT INTO {table_name} (agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker) 
-                    VALUES ("{first}", "{last}", "{cell}", "{email}", "{agent_type}", "{dpor}", "{broker}")
-
-                    """)
-
-                    conn.commit() # Don't forget your commit statement
-
-                except:
-                    print("Hello Error!")
-
-                finally:
-                    c.close()
-                    conn.close()
-                    print("Connection to Database Closed!")
+            
 
                 
 
