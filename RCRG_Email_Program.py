@@ -21,7 +21,6 @@ import sqlite3
 agents = []
 lenders = []
 attorneys =[]
-agents2 = []
 
 #Cols for Database Tables
 agent_cols = "(agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker)"
@@ -698,8 +697,6 @@ class BuyerTran(tk.Frame):
                 print("Connection to Database Closed!")
   
         def new_lender_info():
-            
-            lender_table = "lenders"
 
             top = Toplevel(parent)
             top.geometry("450x175")
@@ -737,7 +734,7 @@ class BuyerTran(tk.Frame):
             lp_email_ent.grid(column = 3, row = 5)
 
             pass_data_button = Button(top, text = "Submit Data",
-                                      command = lambda:[data_submit(query_creator(lender_table, lender_name_ent.get(), lo_first_ent.get(), lo_last_ent.get(), 
+                                      command = lambda:[data_submit(query_creator("lenders", lender_name_ent.get(), lo_first_ent.get(), lo_last_ent.get(), 
                                                         lo_phone_ent.get(), lo_email_ent.get(), lp_email_ent.get()))])
             pass_data_button.grid(column=3, row=6)
 
@@ -747,9 +744,7 @@ class BuyerTran(tk.Frame):
                
         def new_agent_info():
             
-            agent_table = "agents"
             clicked_agent_type = StringVar()
-
 
             top = Toplevel(parent)
             top.geometry("450x175")
@@ -792,7 +787,7 @@ class BuyerTran(tk.Frame):
             agent_broker_ent.grid(column = 3, row = 6)
    
             pass_data_button = Button(top, text = "Submit Data",
-                                      command = lambda:[data_submit(query_creator(agent_table, agent_first_ent.get(), agent_last_ent.get(), agent_cell_ent.get(), 
+                                      command = lambda:[data_submit(query_creator("agents", agent_first_ent.get(), agent_last_ent.get(), agent_cell_ent.get(), 
                                                         agent_email_ent.get(), clicked_agent_type.get(), agent_dpor_ent.get(), agent_broker_ent.get()))])
             pass_data_button.grid(column=3, row=7)
 
@@ -1550,4 +1545,3 @@ class NewListing(tk.Frame):
 if __name__ == '__main__':
     app = MainFrame()
     app.mainloop()
-
