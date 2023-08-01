@@ -2,6 +2,7 @@ import sqlite3
 
 agents = []
 database = []
+key_dict = {}
 
 try:
     conn = sqlite3.connect('rcrg.db')
@@ -29,4 +30,5 @@ for agent in agents:
     
     i+=1
 
+print(agents)
 print(database)

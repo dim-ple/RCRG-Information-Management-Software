@@ -624,29 +624,62 @@ class BuyerTran(tk.Frame):
             clicked_boolean.set(False)
             clicked_admin_fee.set("395")
 
-        def data_submit(table_name, *cols):
+        def query_creator(table_name, *cols):
+    
+            # Declare string for the beginning of our insert statement
             ins_statement = 'INSERT INTO '
+    
+            # Declare string for the beginning of our Values statement
             val_statement = 'VALUES ("'
+    
+            # Declare string for the end of our statement 
             end_char = ')'
+
+            # Declare empty list which will help us adjust our expanded query strings later 
             list_string = []
-            
+    
+            # Check table name to import correct column names for sql query
             if table_name == 'agents':
                 ins_statement += agent_cols
+            elif table_name == 'lenders':
+                ins_statement += lender_cols
+            elif table_name == 'clients':
+                ins_statement += client_cols
+            elif table_name == 'properties':
+                ins_statement += property_cols
+            elif table_name == 'hoas':
+                ins_statement += hoa_cols
 
+            # Once the correct table is found, iterate through all argument columns passed 
+            # into the function and append them to the Values statement
             for col in cols:
                 val_statement += col + '", "'
 
-            
+            # Convert our string into a list, each character is assigned to an index value
+            # within the list
             list_string = list(val_statement)
+            
+            # We know that we will have to remove 3 characters from the end of the string
+            # so we use the pop function at the last index of the string to remove these
             list_string.pop(len(list_string)-1)
             list_string.pop(len(list_string)-1)
             list_string.pop(len(list_string)-1)
+            
+            # We then join the characters back together to form a new string
             new_string = "".join(list_string)
 
+            # Then we append the string to our end character, assigning it to the values
+            # statement
             val_statement = new_string + end_char
 
+            # We then concatenate the Insert & Values statements, assigning them to the query string
             query = ins_statement + val_statement
 
+            # The function returns our query as a string
+            return query
+
+        def data_submit(query):
+            
             try:
                 conn = sqlite3.connect('rcrg.db')
                 c = conn.cursor()
@@ -654,10 +687,10 @@ class BuyerTran(tk.Frame):
 
                 c.execute(query)
 
-                conn.commit() # Don't forget your commit statement
+                conn.commit() 
 
             except:
-                print("Hello Error!")
+                print("There was an error connecting to the Database!")
 
             finally:
                 c.close()
@@ -703,33 +736,9 @@ class BuyerTran(tk.Frame):
             lp_email_ent = Entry(top, width=17)
             lp_email_ent.grid(column = 3, row = 5)
 
-            def data_submit(table_name, lender_co, lo_first, lo_last, lo_phone, lo_email, lp_email):
-
-                try:
-                    conn = sqlite3.connect('rcrg.db')
-                    c = conn.cursor()
-                    print("Successfully Connected to Database!")
-
-                    c.execute(f"""
-            
-                    INSERT INTO {table_name} (lendercompany, lofirst, lolast, lophone, loemail, lpemail) 
-                    VALUES ("{lender_co}", "{lo_first}", "{lo_last}", "{lo_phone}", "{lo_email}", "{lp_email}")
-
-                    """)
-
-                    conn.commit() # Don't forget your commit statement
-
-                except:
-                    print("Hello Error!")
-
-                finally:
-                    c.close()
-                    conn.close()
-                    print("Connection to Database Closed!")
-
             pass_data_button = Button(top, text = "Submit Data",
-                                      command = lambda:[data_submit(lender_table, lender_name_ent.get(), lo_first_ent.get(), lo_last_ent.get(), 
-                                                        lo_phone_ent.get(), lo_email_ent.get(), lp_email_ent.get())])
+                                      command = lambda:[data_submit(query_creator(lender_table, lender_name_ent.get(), lo_first_ent.get(), lo_last_ent.get(), 
+                                                        lo_phone_ent.get(), lo_email_ent.get(), lp_email_ent.get()))])
             pass_data_button.grid(column=3, row=6)
 
             close_button = Button(top, text = "Close the Window",
@@ -781,17 +790,10 @@ class BuyerTran(tk.Frame):
             agent_broker_lbl.grid(column = 2, row = 6)
             agent_broker_ent = Entry(top, width=30)
             agent_broker_ent.grid(column = 3, row = 6)
-
-
-            
-            
-
-                
-
-            #Need to See if we can use lambda to close the pop-up window when the data is successfully passed. This would allow us to remove the close button.
+   
             pass_data_button = Button(top, text = "Submit Data",
-                                      command = lambda:[data_submit(agent_table, agent_first_ent.get(), agent_last_ent.get(), agent_cell_ent.get(), 
-                                                        agent_email_ent.get(), clicked_agent_type.get(), agent_dpor_ent.get(), agent_broker_ent.get())])
+                                      command = lambda:[data_submit(query_creator(agent_table, agent_first_ent.get(), agent_last_ent.get(), agent_cell_ent.get(), 
+                                                        agent_email_ent.get(), clicked_agent_type.get(), agent_dpor_ent.get(), agent_broker_ent.get()))])
             pass_data_button.grid(column=3, row=7)
 
             close_button = Button(top, text = "Close the Window",
