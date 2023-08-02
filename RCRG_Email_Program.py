@@ -1,23 +1,33 @@
+# Imports tkinter for UI design
 import tkinter as tk
 from tkinter import font as tkfont
 from tkinter import StringVar, BooleanVar, Label, Entry, OptionMenu, Radiobutton, Button, Toplevel
 
+# Library for Calendar & Data entry widgets used in the UI
 from tkcalendar import Calendar, DateEntry
 
+# Library for copying and flattening PDFs
 import shutil
 
+#Imports a library to help interact with MS Outlook
 import os
 import win32com.client as win32
 
+# Import dictionaries with Agent, lender and attorney info - will remove from repository when SQL query is full fleshed out and 
+# lists can be populated with data from the database
 from Contact_Dictionaries import rcrg, lender, attorney
 
+# Imports our system time reference module which will help determine the proper greeting in our e-mail templates
 from DateAndTime import Time
 from DateAndTime import datetime
 
+# Imports a library to help fill our PDFs
 from fillpdf import fillpdfs 
 
+# Imports the sqlite3 library so we can access the DB, run and commit querys
 import sqlite3
 
+# Empty lists to be utilized by the tkinter UI. Populated by the brute force for loops below
 agents = []
 lenders = []
 attorneys =[]
@@ -29,6 +39,7 @@ lender_cols = "(lendercompany, lofirst, lolast, lophone, loemail, lpemail)"
 property_cols = "(propstreetnum, propstreetname, propstreettype, propcity, propstate, propzip, hoaid)"
 hoa_cols = "(hoaname, hoamgmtco, hoaphone, hoaemail)"
 
+# Loops to populate our agents, lenders and attorneys lists
 for agent in rcrg:
     agents.append(agent)
 
@@ -37,14 +48,6 @@ for lend in lender:
 
 for office_name in attorney:
     attorneys.append(office_name)
-
-commissions = [
-    "6% Total, 3/3",
-    "5.5% Total, 2.75/2.75",
-    "5% Total, 2.5/2.5",
-    "5% Total, 2/3",
-    "Other"
-    ]
 
 admin_fees = [
     395.0,
@@ -55,7 +58,7 @@ admin_fees = [
 teams = [
     "Alpha",
     "Bravo"
-    ]
+]
 
 loanType = [
     "Conventional",
@@ -65,7 +68,7 @@ loanType = [
     "USDA",
 ]
 
-
+# Creates our MainFrame class which will be our Parent class for the UI
 class MainFrame(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -90,7 +93,7 @@ class MainFrame(tk.Tk):
         
         self.up_frame('WelcomePage')
 
-
+    # When a child frame is called, the program pages "up" to the selected frame
     def up_frame(self, page_name):
         page = self.listing[page_name]
         page.tkraise()
@@ -852,6 +855,14 @@ class SellerTran(tk.Frame):
         self.controller = controller
         self.id = controller.id
 
+        # Default Commission options for SellerTran Function
+        commissions = ["6% Total, 3/3",
+                       "5.5% Total, 2.75/2.75",
+                       "5% Total, 2.5/2.5",
+                       "5% Total, 2/3",
+                       "Other"]
+        
+        
         label = tk.Label(self, text = 'New Seller Transaction \n' + controller.id.get(), font = controller.titlefont)
         label.grid(column=1, row=0)
 
