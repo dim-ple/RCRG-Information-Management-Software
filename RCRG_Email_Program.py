@@ -1543,9 +1543,51 @@ class NewListing(tk.Frame):
                 os.mkdir("Photos")
 
                 shutil.copy('C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\{property_address}\\Contract-Addenda')
+
+            def admin_email():
+                property_address = txt1.get()
+                listing_agent = clicked_agents.get()
+            
+                olApp = win32.Dispatch('Outlook.Application')
+                olNS = olApp.GetNameSpace('MAPI')
+
+                mailItem = olApp.CreateItem(0)
+                mailItem.Subject = 'New Listing Request: ' + property_address + f' ({listing_agent})'
+                mailItem.BodyFormat = 1
+
+                if listing_agent == "Other":
+                    agent_name = " "
+                    mailItem.CC = " "
+                else:
+                    agent_name = rcrg[listing_agent][1]
+                    mailItem.CC = rcrg[listing_agent][0]
+
+                html_body =f"""
+                    <p class=MsoNormal>Good {Time}, Amy!<br><br></p>
+                    <p class=MsoNormal> {listing_agent} has a listing up and coming for the property located at {property_address}. Would you mind starting the below new listing processes?:<br><br></p>
+                    <ol>
+                        <li class=MsoListParagraph style='margin-left:0in;mso-list:l0 level1 lfo1'>Create the Incomplete Listing<o:p></o:p></li>
+                        <li class=MsoListParagraph style='margin-left:0in;mso-list:l0 level1 lfo1'>Create a Transaction in the Agent&#8217;s TransactionDesk<o:p></o:p></li>
+                        <li class=MsoListParagraph style='margin-left:0in;mso-list:l0 level1 lfo1'>Add the Listing to the &#8220;Coming Soon&#8221; whiteboard<o:p></o:p></li>
+                    </ol>
+                    <p class=MsoNormal> Kind regards, <br><br></p>
+                    <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
+                    <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
+                    <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
+                    <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>E-mail:</span> </b><a href="mailto:Harrison@RickCoxRealty.com"><span style='font-family:"Arial",sans-serif'>Harrison@RickCoxRealty.com</span> </a><o:p></o:p></p>
+                    <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>2913 Fox Chase Lane</span> <o:p></o:p></p>
+                    <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>Midlothian, VA 23112</span> <o:p></o:p></p>
+                    <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><a href="http://www.rickcoxrealty.com/"><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>www.RickCoxRealty.com</span> </b></a><o:p></o:p></p>
+                    """
                 
+                mailItem.HTMLBody = html_body
+                mailItem.To = 'amy@rickcoxrealty.com'
+                mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('harrison@rickcoxrealty.com')))
+
+                mailItem.Display()
+
             #Execute Button
-            submit_button = Button(self, text = 'Submit', command = seller_folder)
+            submit_button = Button(self, text = 'Submit', command = lambda:[seller_folder(), admin_email()])
             submit_button.grid(column = 3, row = 3)
 
             close_button = Button(self, text = "Close the Window",

@@ -30,5 +30,7 @@ for agent in agents:
     
     i+=1
 
+
+
 print(agents)
 print(database)
