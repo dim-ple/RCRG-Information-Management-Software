@@ -334,8 +334,6 @@ class BuyerTran(tk.Frame):
             lender_contact = clicked_lenders.get()
             admin_fee = clicked_admin_fee.get()
 
-            
-
             if ";" in client1:
                 i = client1.find(";")
                 client2 = client1[(i+2):]
@@ -347,7 +345,6 @@ class BuyerTran(tk.Frame):
                 client_email1 = client_email1[0:i]
 
             fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
-
 
             data_dict = {'Property Address': property_address, 'City': city, 'State': 'VA', 'Zip': zip, 'County': county,
                         'CVRMLS': mls, 'Sales Price': '$'+sp, 'Offer Date_af_date': '', 'Date2_af_date': '',
@@ -1578,7 +1575,7 @@ class NewListing(tk.Frame):
                     <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>2913 Fox Chase Lane</span> <o:p></o:p></p>
                     <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>Midlothian, VA 23112</span> <o:p></o:p></p>
                     <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><a href="http://www.rickcoxrealty.com/"><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>www.RickCoxRealty.com</span> </b></a><o:p></o:p></p>
-                    """
+                """
                 
                 mailItem.HTMLBody = html_body
                 mailItem.To = 'amy@rickcoxrealty.com'
