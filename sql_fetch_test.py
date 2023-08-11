@@ -23,14 +23,19 @@ finally:
     print("Connection to Database Closed!")
 
 i = 0
-
 for agent in agents:
     
     database.append(agents[i][1] + " " + agents[i][2])
     
     i+=1
 
+j =0
+for entry in agents:
+    key_dict[database[j]] = entry
+    j += 1
 
 
-print(agents)
-print(database)
+#print(agents)
+#print(database)
+#print(key_dict)
+print(key_dict['Rick Cox'][1])

@@ -1,7 +1,7 @@
 # Imports tkinter for UI design
 import tkinter as tk
 from tkinter import font as tkfont
-from tkinter import StringVar, BooleanVar, Label, Entry, OptionMenu, Radiobutton, Button, Toplevel
+from tkinter import StringVar, BooleanVar, Label, Entry, OptionMenu, Radiobutton, Button, Toplevel, ttk
 
 # Library for Calendar & Data entry widgets used in the UI
 from tkcalendar import Calendar, DateEntry
