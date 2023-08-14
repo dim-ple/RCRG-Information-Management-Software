@@ -201,114 +201,124 @@ class BuyerTran(tk.Frame):
         mls_ent.grid(column = 3, row = 4)
 
         #Sales Price
-        sp_lbl = Label(self, text = "What is the Sales Price?")
+        sp_lbl = Label(self, text = "What is the Sales Price? (Do not enter special characters)")
         sp_lbl.grid(column = 2, row = 5)
         sp_ent = Entry(self, width=20)
         sp_ent.grid(column = 3, row = 5)
 
         #List Price
-        lp_lbl = Label(self, text = "What was the List Price?")
+        lp_lbl = Label(self, text = "What was the List Price? (Do not enter special characters)")
         lp_lbl.grid(column = 2, row = 6)
         lp_ent = Entry(self, width=20)
         lp_ent.grid(column = 3, row = 6)
 
+        #List Date
+        list_date_lbl = Label(self, text = "What was the List Date?")
+        list_date_lbl.grid(column = 2, row = 7)
+        list_date_picker = DateEntry(self, width=16, background="magenta3", foreground="white", bd=2)
+        list_date_picker.grid(column = 3, row = 7)
+        
         #Offer Date
         offer_date_lbl = Label(self, text = "What was the Offer Date?")
-        offer_date_lbl.grid(column = 2, row = 7)
+        offer_date_lbl.grid(column = 2, row = 8)
         offer_date_picker = DateEntry(self, width=16, background="magenta3", foreground="white", bd=2)
-        offer_date_picker.grid(column = 3, row = 7)
+        offer_date_picker.grid(column = 3, row = 8)
 
         #Ratification Date
         ratif_date_lbl = Label(self, text = "What was the Date of Ratification?")
-        ratif_date_lbl.grid(column = 2, row = 8)
+        ratif_date_lbl.grid(column = 2, row = 9)
         ratif_date_picker = DateEntry(self, width=16, background="magenta3", foreground="white", bd=2)
-        ratif_date_picker.grid(column = 3, row = 8)
+        ratif_date_picker.grid(column = 3, row = 9)
 
         #Close Date
         close_date_lbl = Label(self, text = "What is the Closing Date?")
-        close_date_lbl.grid(column = 2, row = 9)
+        close_date_lbl.grid(column = 2, row = 10)
         close_date_picker = DateEntry(self, width=16, background="magenta3", foreground="white", bd=2)
-        close_date_picker.grid(column = 3, row = 9)
+        close_date_picker.grid(column = 3, row = 10)
 
         #Seller Paid Closing Costs
-        spcc_lbl = Label(self, text = "Seller Paid Closing Costs?")
-        spcc_lbl.grid(column = 2, row = 10)
+        spcc_lbl = Label(self, text = "Seller Paid Closing Costs? (Do not enter special characters)")
+        spcc_lbl.grid(column = 2, row = 11)
         spcc_ent = Entry(self, width=38)
-        spcc_ent.grid(column = 3, row = 10)
+        spcc_ent.grid(column = 3, row = 11)
 
         #Seller Name
         seller_name_lbl = Label(self, text = "What is the Seller(s) Full Name? For Multiple Names, separate with a ';'")
-        seller_name_lbl.grid(column = 2, row = 11)
-        seller_name_ent = Entry(self, width=38)
-        seller_name_ent.grid(column = 3, row = 11)
+        seller_name_lbl.grid(column = 2, row = 12)
+        seller_name_ent = Entry(self, width=10)
+        seller_name_ent.grid(column = 3, row = 12)
 
         #2nd Q & A - Selling Agent
         sell_agent_lbl = Label(self, text = "Who is the Selling Agent?")
-        sell_agent_lbl.grid(column = 2, row = 12)
+        sell_agent_lbl.grid(column = 2, row = 13)
         sell_agent_drop = OptionMenu(self, clicked_agents, *agents)
-        sell_agent_drop.grid(column = 3, row = 12)
+        sell_agent_drop.grid(column = 3, row = 13)
 
         #3rd Q & A - Commission
         comm_lbl = Label(self, text = "What is the Selling Agent's Commission")
-        comm_lbl.grid(column = 2, row = 13)
+        comm_lbl.grid(column = 2, row = 14)
         comm_ent = Entry(self, width=8)
-        comm_ent.grid(column = 3, row = 13)
+        comm_ent.grid(column = 3, row = 14)
 
         #Transaction Fee (Radio 3 option - 395, 495, 0)
         admin_fee_lbl = Label(self, text="What is the Admin Fee?")
-        admin_fee_lbl.grid(column=2, row=14)
+        admin_fee_lbl.grid(column=2, row=15)
         radio0 = Radiobutton(self, text="N/A", variable = clicked_admin_fee,
                             value="0")
-        radio0.grid(column=3, row=14)
+        radio0.grid(column=3, row=15)
         radio495 = Radiobutton(self, text="$495", variable = clicked_admin_fee,
                             value="495")
-        radio495.grid(column=4, row=14)
+        radio495.grid(column=4, row=15)
         radio395 = Radiobutton(self, text="$395", variable = clicked_admin_fee,
                              value="395")
-        radio395.grid(column=5, row=14)
+        radio395.grid(column=5, row=15)
         clicked_admin_fee.set("395")
 
         #5th Q & A - Client Name
         client_name_lbl = Label(self, text = "What is the Client's Full Name? For Multiple Names, separate with a ';'")
-        client_name_lbl.grid(column=2, row=15)
+        client_name_lbl.grid(column=2, row=16)
         client_name_ent = Entry(self, width=38)
-        client_name_ent.grid(column=3, row=15)
+        client_name_ent.grid(column=3, row=16)
 
         #Client Phone Number(s)
+        client_phone_lbl = Label(self, text = "What is the Client's Phone Number?")
+        client_phone_lbl.grid(column=2, row=17)
+        client_phone_ent = Entry(self, width=38)
+        client_phone_ent.grid(column=3, row=17)
 
         #6th Q & A - Lender
         lender_lbl = Label(self, text = "Who is the Lender?")
-        lender_lbl.grid(column = 2, row = 16)
+        lender_lbl.grid(column = 2, row = 18)
         lender_drop = OptionMenu(self, clicked_lenders, *lenders)
-        lender_drop.grid(column = 3, row = 16)
+        lender_drop.grid(column = 3, row = 18)
 
         #7th Q & A - EMD
         emd_lbl = Label(self, text="Do we have the EMD?")
-        emd_lbl.grid(column = 2, row = 17)
+        emd_lbl.grid(column = 2, row = 19)
         radio_emd_yes = Radiobutton(self, text = "Yes", variable = clicked_boolean,
                             value=True)
-        radio_emd_yes.grid(column = 3, row = 17)
+        radio_emd_yes.grid(column = 3, row = 19)
         radio_emd_no = Radiobutton(self, text = "No", variable = clicked_boolean,
                             value=False)
-        radio_emd_no.grid(column = 4, row = 17)
+        radio_emd_no.grid(column = 4, row = 19)
 
         #8th Q & A - Attorney Contact
         attorney_lbl = Label(self, text = "Who is the Attorney?")
-        attorney_lbl.grid(column = 2, row = 18)
+        attorney_lbl.grid(column = 2, row = 20)
         attorney_drop = OptionMenu(self, clicked_attorneys, *attorneys)
-        attorney_drop.grid(column = 3, row = 18)
+        attorney_drop.grid(column = 3, row = 20)
 
         #9th Q & A - Client E-mail
         client_email_lbl = Label(self, text = "What is the Client's E-mail?")
-        client_email_lbl.grid(column = 2, row = 19)
+        client_email_lbl.grid(column = 2, row = 21)
         client_email_ent = Entry(self, width=38)
-        client_email_ent.grid(column = 3, row = 19)
+        client_email_ent.grid(column = 3, row = 21)
 
         #10th Q & A - Listing Agent Name
         la_name_lbl = Label(self, text = "Who is the Listing Agent?")
-        la_name_lbl.grid(column = 2, row = 20)
+        la_name_lbl.grid(column = 2, row = 22)
         la_name_ent = Entry(self, width=38)
-        la_name_ent.grid(column = 3, row = 20)
+        la_name_ent.grid(column = 3, row = 22)
 
 
         def buyer_folder():
@@ -321,13 +331,20 @@ class BuyerTran(tk.Frame):
             county = prop_county_ent.get()
             mls = mls_ent.get()
             sp = sp_ent.get()
+            spcc = spcc_ent.get()
             lp = lp_ent.get()
+            list_date = list_date_picker.get()
+            offer_date = offer_date_picker.get()
+            ratif_date = ratif_date_picker.get()
+            close_date = close_date_picker.get()
+            seller= seller_name_ent.get()
             selling_agent = clicked_agents.get()
             listing_agent = la_name_ent.get()
             #listing_email = la_email_ent.get()
             commission = comm_ent.get()
             client1 = client_name_ent.get()
             client2 = ' '
+            client_phone = client_phone_ent.get()
             client_email1 = client_email_ent.get()
             client_email2 = ' '
             attorney_contact = clicked_attorneys.get()
@@ -347,12 +364,12 @@ class BuyerTran(tk.Frame):
             fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
 
             data_dict = {'Property Address': property_address, 'City': city, 'State': 'VA', 'Zip': zip, 'County': county,
-                        'CVRMLS': mls, 'Sales Price': '$'+sp, 'Offer Date_af_date': '', 'Date2_af_date': '',
-                        'Rat-Date_af_date': '', 'Closing Date_af_date': '', 'List Price': '$'+lp, 'Closing Costs Paid by Seller': '',
-                        'Seller': '', 'Purchaser': 'Yes', 'Seller 1': '', 'Seller 2': '', 'Seller Email 1': '', 'Seller Email 2': '',
+                        'CVRMLS': mls, 'Sales Price': sp, 'Offer Date_af_date': offer_date, 'Date2_af_date': list_date,
+                        'Rat-Date_af_date': ratif_date, 'Closing Date_af_date': close_date, 'List Price': lp, 'Closing Costs Paid by Seller': spcc,
+                        'Seller': '', 'Purchaser': 'Yes', 'Seller 1': seller, 'Seller 2': '', 'Seller Email 1': '', 'Seller Email 2': '',
                         'Seller Cell': '', 'Seller Work': '', 'Seller Home': '', 'Seller Fax': '', 'Seller Forwarding Address': '',
                         'Seller City': '', 'Seller State': '', 'Seller Zip': '', 'Buyer 1': client1, 'Buyer 2': client2,
-                        'Buyer Email': client_email1, 'Buyer Email 2': client_email2, 'Buyer Cell': '', 'Buyer Work': '', 'Buyer Home': '',
+                        'Buyer Email': client_email1, 'Buyer Email 2': client_email2, 'Buyer Cell': client_phone, 'Buyer Work': '', 'Buyer Home': '',
                         'Buyer Fax': '', 'Home Warranty': '', 'Home Inspec\x98on Co': '', 'Termite Co': '', 'FuelOil Co': '',
                         'Well  Sep\x98c Co': '', 'Lender': lender_contact, 'Loan Officer Name': lender[lender_contact][2], 'Loan Officer Phone': lender[lender_contact][3], 'Loan Officer Email': lender[lender_contact][0],
                         'Seller Attorney Firm': '', 'Seller Attorney Contact': '', 'Seller Office Phone': '', 'Seller Attorney Fax': '',
@@ -558,8 +575,9 @@ class BuyerTran(tk.Frame):
             listing_agent = la_name_ent.get()
             #listing_email = la_email_ent.get()
             
-            
-            if clicked_attorneys.get() == "Other":
+            # Conditional statment to determine string included in our intro e-mail to the listing agent. It is far more likely that our clients have already decided on
+            # an Attorney or Title Company at the get-go, so the first check is whether the option "Other" was not selected.
+            if clicked_attorneys.get() != "Other":
                 attorney_msg = f"Our purchaser will be using {attorney[attorney_contact][2]} for their title and settlement needs. The primary contact will be {attorney[attorney_contact][3]}, their e-mail is {attorney[attorney_contact][0]}."
             else:
                 attorney_msg = "Our purchaser has not yet decided on who they will be using for their title and settlement needs. Once they have decided, I will let you know!"
