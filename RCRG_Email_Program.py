@@ -281,7 +281,7 @@ class BuyerTran(tk.Frame):
         client_name_ent.grid(column=3, row=16)
 
         #Client Phone Number(s)
-        client_phone_lbl = Label(self, text = "What is the Client's Phone Number?")
+        client_phone_lbl = Label(self, text = "What is the Client's Phone Number? For Multiple Numbers, separate with a ';'")
         client_phone_lbl.grid(column=2, row=17)
         client_phone_ent = Entry(self, width=38)
         client_phone_ent.grid(column=3, row=17)
@@ -344,7 +344,8 @@ class BuyerTran(tk.Frame):
             commission = comm_ent.get()
             client1 = client_name_ent.get()
             client2 = ' '
-            client_phone = client_phone_ent.get()
+            client_phone1 = client_phone_ent.get()
+            client_phone2 = ' '
             client_email1 = client_email_ent.get()
             client_email2 = ' '
             attorney_contact = clicked_attorneys.get()
@@ -361,6 +362,11 @@ class BuyerTran(tk.Frame):
                 client_email2 = client_email1[(i+2):]
                 client_email1 = client_email1[0:i]
 
+            if ";" in client_phone1:
+                i = client_phone1.find(";")
+                client_phone2 = client_phone1[(i+2):0]
+                client_phone1 = client_phone1[0:i]
+
             fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
 
             data_dict = {'Property Address': property_address, 'City': city, 'State': 'VA', 'Zip': zip, 'County': county,
@@ -369,7 +375,7 @@ class BuyerTran(tk.Frame):
                         'Seller': '', 'Purchaser': 'Yes', 'Seller 1': seller, 'Seller 2': '', 'Seller Email 1': '', 'Seller Email 2': '',
                         'Seller Cell': '', 'Seller Work': '', 'Seller Home': '', 'Seller Fax': '', 'Seller Forwarding Address': '',
                         'Seller City': '', 'Seller State': '', 'Seller Zip': '', 'Buyer 1': client1, 'Buyer 2': client2,
-                        'Buyer Email': client_email1, 'Buyer Email 2': client_email2, 'Buyer Cell': client_phone, 'Buyer Work': '', 'Buyer Home': '',
+                        'Buyer Email': client_email1, 'Buyer Email 2': client_email2, 'Buyer Cell': client_phone1, 'Buyer Work': client_phone2, 'Buyer Home': '',
                         'Buyer Fax': '', 'Home Warranty': '', 'Home Inspec\x98on Co': '', 'Termite Co': '', 'FuelOil Co': '',
                         'Well  Sep\x98c Co': '', 'Lender': lender_contact, 'Loan Officer Name': lender[lender_contact][2], 'Loan Officer Phone': lender[lender_contact][3], 'Loan Officer Email': lender[lender_contact][0],
                         'Seller Attorney Firm': '', 'Seller Attorney Contact': '', 'Seller Office Phone': '', 'Seller Attorney Fax': '',
