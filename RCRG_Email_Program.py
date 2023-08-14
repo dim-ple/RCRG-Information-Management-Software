@@ -832,27 +832,27 @@ class BuyerTran(tk.Frame):
         #Execute Button
         submit_button = Button(self, text = "Submit",
                                command = lambda:[buyer_email(), attorney_email(), listing_agent_email(), lender_email()])
-        submit_button.grid(column = 3, row = 22)
+        submit_button.grid(column = 3, row = 23)
 
         new_folder_button = Button(self, text = "Create New Folder",
                                    command = lambda:[buyer_folder()])
-        new_folder_button.grid(column = 3, row = 23)
+        new_folder_button.grid(column = 3, row = 24)
 
         clear_fields_button = Button(self, text = "Reset Fields",
                                      command = lambda:[clear_fields()])
-        clear_fields_button.grid(column = 3, row = 24)
+        clear_fields_button.grid(column = 3, row = 25)
 
         close_button = Button(self, text = "Close the Window",
                               command = controller.destroy)
-        close_button.grid(column = 3, row = 25)
+        close_button.grid(column = 3, row = 26)
 
         new_agent_button = Button(self, text="New Agent",
                                   command = lambda: new_agent_info())
-        new_agent_button.grid(column = 4, row = 20)
+        new_agent_button.grid(column = 4, row = 22)
 
         new_lender_button = Button(self, text="New Lender",
                                   command = lambda: new_lender_info())
-        new_lender_button.grid(column = 4, row = 16)
+        new_lender_button.grid(column = 4, row = 18)
 
         '''search_list_agent_btn = Button(self, text="Agent Search",
                                   command = lambda: new_agent_info())
