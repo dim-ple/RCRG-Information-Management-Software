@@ -56,32 +56,46 @@ class MainFrame(tk.Tk):
 
     # Constructor Method setting our window size, font, font size, container, frame ID
     def __init__(self, *args, **kwargs):
+        
+        # Calls our tkinter constructor
         tk.Tk.__init__(self, *args, **kwargs)
+       
+        # Sets the font for our MainFrame and all child frames defined later in the program
         self.titlefont = tkfont.Font(family = 'Verdana', size = 12,
                                      weight = "bold", slant = 'roman')
         
+        # To make things simple, we're setting our parent and any child frames to the grid set-up. As much as I'd just liek to pack everything, 
+        # labels and entry boxes may need to pair up on the same row.
         container = tk.Frame()
         container.grid(row=0, column=0, sticky='nesw')
 
+        # Sets the base dimensions of our MainFrame and any children of the MainFrame (this will be inherited by most frames defined later in the program)
         self.geometry('1000x800')
+        
+        # Sets our class ID to a string variable to be used late when setting our welcome message on each frame
         self.id = tk.StringVar()
         self.id.set("RCRG Admin")
 
+        # Initilize an empty dictionary that will serve as our frame stack
         self.listing = {}
         
-        # Iterates through all of our created child frames, appends them to our listing dictionary so user can transition from frame to frame when
-        # up_frame method is called
+        # Iterates through all of our created child frames, appends them to our listing dictionary stack so user can transition from frame to frame when
+        # a frame is selected and the up_frame method is called
         for p in (WelcomePage, BuyerTran, SellerTran, TeamMeeting, ZillowTeam, BuyerZillow, SellerZillow, NewListing):
             page_name = p.__name__
             frame = p(parent = container, controller = self)
             frame.grid(row=0, column=0, sticky='nsew')
             self.listing[page_name] = frame
         
+        # When the program starts, up_frame method is called and the user's landing page will always be the WelcomePage frame
         self.up_frame('WelcomePage')
 
     # When a child frame is called, the program pages "up" to the selected frame
     def up_frame(self, page_name):
+        # When the method is called, the page variable is set to which ever page from the listing dictionary we would like to navigate to
         page = self.listing[page_name]
+        
+        # Then we use the tkraise method to push up to the frame we need in our stack
         page.tkraise()
 
 
