@@ -1,7 +1,7 @@
 # Imports tkinter for UI design
 import tkinter as tk
 from tkinter import font as tkfont
-from tkinter import StringVar, BooleanVar, Label, Entry, OptionMenu, Radiobutton, Button, Toplevel, ttk
+from tkinter import StringVar, BooleanVar, Label, Entry, OptionMenu, Radiobutton, Button, Toplevel
 
 # Library for Calendar & Data entry widgets used in the UI
 from tkcalendar import Calendar, DateEntry
@@ -9,7 +9,7 @@ from tkcalendar import Calendar, DateEntry
 # Library for copying and flattening PDFs
 import shutil
 
-#Imports a library to help interact with MS Outlook
+#Imports os library to help interact with MS Outlook and the Windows OS
 import os
 import win32com.client as win32
 
@@ -27,12 +27,13 @@ from fillpdf import fillpdfs
 # Imports the sqlite3 library so we can access the DB, run and commit querys
 import sqlite3
 
-# Empty lists to be utilized by the tkinter UI. Populated by the brute force for loops below
+# Empty lists to be utilized by the tkinter UI. Populated by the brute force for-loops below
+# **Eventually will be replaced with SQL query population**
 agents = []
 lenders = []
 attorneys =[]
 
-#Cols for Database Tables
+#Columns for Database Tables, used in Query Creator function calls
 agent_cols = "(agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker)"
 client_cols = "(clientfirst, clientlast, clientphone, clientemail, mailingstreetnum, mailingstreetname, mailingstreettype, mailingcity, mailingstate, mailingzip, agentid, lenderid)"
 lender_cols = "(lendercompany, lofirst, lolast, lophone, loemail, lpemail)"
@@ -49,28 +50,11 @@ for lend in lender:
 for office_name in attorney:
     attorneys.append(office_name)
 
-admin_fees = [
-    395.0,
-    495.0,
-    0.0
-]
-
-teams = [
-    "Alpha",
-    "Bravo"
-]
-
-loanType = [
-    "Conventional",
-    "FHA",
-    "Cash",
-    "VHDA",
-    "USDA",
-]
 
 # Creates our MainFrame class which will be our Parent class for the UI
 class MainFrame(tk.Tk):
 
+    # Constructor Method setting our window size, font, font size, container, frame ID
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         self.titlefont = tkfont.Font(family = 'Verdana', size = 12,
@@ -85,6 +69,8 @@ class MainFrame(tk.Tk):
 
         self.listing = {}
         
+        # Iterates through all of our created child frames, appends them to our listing dictionary so user can transition from frame to frame when
+        # up_frame method is called
         for p in (WelcomePage, BuyerTran, SellerTran, TeamMeeting, ZillowTeam, BuyerZillow, SellerZillow, NewListing):
             page_name = p.__name__
             frame = p(parent = container, controller = self)
@@ -156,7 +142,7 @@ class BuyerTran(tk.Frame):
         bou1 = tk.Button(self, text = "Back to Main", 
                         command = lambda: controller.up_frame("WelcomePage"))
         bou1.grid(column=1, row=1)
-
+        
         clicked_agents = StringVar()
         clicked_agents.set("Agents")
 
@@ -884,6 +870,8 @@ class SellerTran(tk.Frame):
                        "Other"]
         
         
+        
+        
         label = tk.Label(self, text = 'New Seller Transaction \n' + controller.id.get(), font = controller.titlefont)
         label.grid(column=1, row=0)
 
@@ -1150,6 +1138,7 @@ class ZillowTeam(tk.Frame):
         drop1 = OptionMenu(self, clicked_team, *teams)
         drop1.grid(column =3, row=3)
 
+        teams = ["Alpha", "Bravo"]
 
         def team_meeting_email():
             team_on = clicked_team.get()
@@ -1615,7 +1604,7 @@ class NewListing(tk.Frame):
                               command= controller.destroy)
             close_button.grid(column=3, row=4)
 
-
+# Starts our application
 if __name__ == '__main__':
     app = MainFrame()
     app.mainloop()
