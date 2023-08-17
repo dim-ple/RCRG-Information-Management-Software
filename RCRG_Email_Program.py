@@ -101,12 +101,16 @@ class MainFrame(tk.Tk):
 
 class WelcomePage(tk.Frame):
     
+    # Constructor Method for our WelcomePage (again, our landing page whenever a user utilizes the program), our constructor uses a Model-View-Controller model
+    # self is passed to represent our current frame, parent is passed to represent our MainFrame application window or root window
+    # and controller which helps us interact with other defined class frames
     def __init__(self, parent, controller):
+        
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.id = controller.id
 
-        
+        # Add labels and buttons to access other frames
         label = tk.Label(self, text = 'Welcome Page \n' + controller.id.get(), font = controller.titlefont)
         label.grid(column=1, row=0)
 
