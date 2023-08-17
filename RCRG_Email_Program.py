@@ -1146,13 +1146,13 @@ class ZillowTeam(tk.Frame):
         clicked_team = StringVar()
         clicked_team.set("Teams")
 
+        teams = ["Alpha", "Bravo"]
 
         lbl1 = Label(self, text = "Which Team is ON to Receive Zillow Leads")
         lbl1.grid(column = 2, row = 3)
         drop1 = OptionMenu(self, clicked_team, *teams)
         drop1.grid(column =3, row=3)
 
-        teams = ["Alpha", "Bravo"]
 
         def team_meeting_email():
             team_on = clicked_team.get()
