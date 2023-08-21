@@ -374,8 +374,8 @@ class BuyerTran(tk.Frame):
 
             if ";" in seller1:
                 i = seller1.find(";")
-                seller2 = seller[(i+2):0]
-                seller1 = seller[0:i]
+                seller2 = seller1[(i+2):0]
+                seller1 = seller1[0:i]
 
 
             fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
@@ -383,7 +383,7 @@ class BuyerTran(tk.Frame):
             data_dict = {'Property Address': property_address, 'City': city, 'State': 'VA', 'Zip': zip, 'County': county,
                         'CVRMLS': mls, 'Sales Price': sp, 'Offer Date_af_date': offer_date, 'Date2_af_date': list_date,
                         'Rat-Date_af_date': ratif_date, 'Closing Date_af_date': close_date, 'List Price': lp, 'Closing Costs Paid by Seller': spcc,
-                        'Seller': '', 'Purchaser': 'Yes', 'Seller 1': seller, 'Seller 2': '', 'Seller Email 1': '', 'Seller Email 2': '',
+                        'Seller': '', 'Purchaser': 'Yes', 'Seller 1': seller1, 'Seller 2': seller2, 'Seller Email 1': '', 'Seller Email 2': '',
                         'Seller Cell': '', 'Seller Work': '', 'Seller Home': '', 'Seller Fax': '', 'Seller Forwarding Address': '',
                         'Seller City': '', 'Seller State': '', 'Seller Zip': '', 'Buyer 1': client1, 'Buyer 2': client2,
                         'Buyer Email': client_email1, 'Buyer Email 2': client_email2, 'Buyer Cell': client_phone1, 'Buyer Work': client_phone2, 'Buyer Home': '',
