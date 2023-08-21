@@ -1,18 +1,19 @@
 import sqlite3
 
-agents = []
-database = []
-key_dict = {}
+def SQLPopList(table, lst, dict)
+    lst = []
+    database = []
+    key_dict = {}
 
 try:
     conn = sqlite3.connect('rcrg.db')
     c = conn.cursor()
     print("Successfully Connected to Database!")
 
-    c.execute('SELECT * FROM agents')
+    c.execute(f'SELECT * FROM {table}')
 
     for row in c:
-        agents.append(row)
+        lst.append(row)
 
 except:
     print("Hello Error!")
@@ -23,20 +24,15 @@ finally:
     print("Connection to Database Closed!")
 
 i = 0
-for agent in agents:
+for row in lst:
     
-    database.append(agents[i][1] + " " + agents[i][2])
+    database.append(lst[i][1] + " " + lst[i][2])
     
     i+=1
 
 j =0
 
-for entry in agents:
+for row in lst:
     key_dict[database[j]] = entry
     j += 1
 
-
-print(agents)
-#print(database)
-#print(key_dict)
-#print(key_dict['Rick Cox'][1])
