@@ -29,9 +29,36 @@ import sqlite3
 
 # Empty lists to be utilized by the tkinter UI. Populated by the brute force for-loops below
 # **Eventually will be replaced with SQL query population**
-agents = []
+def SQLPopList(table_name, list_name):
+    
+        new_list = []
+
+        try:
+            conn = sqlite3.connect('rcrg.db')
+            c = conn.cursor()
+            print("Successfully Connected to Database!")
+
+            c.execute(f'SELECT * FROM {table_name}')
+
+            for row in c:
+                new_list.append(row)
+
+        except:
+            print("Hello Error!")
+
+        finally:
+            c.close()
+            conn.close()
+            print("Connection to Database Closed!")
+
+        list_name = new_list
+
+
 lenders = []
 attorneys =[]
+agents = []
+
+SQLPopList('agents', agents)
 
 #Columns for Database Tables, used in Query Creator function calls
 agent_cols = "(agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker)"
@@ -41,9 +68,6 @@ property_cols = "(propstreetnum, propstreetname, propstreettype, propcity, props
 hoa_cols = "(hoaname, hoamgmtco, hoaphone, hoaemail)"
 
 # Loops to populate our agents, lenders and attorneys lists
-for agent in rcrg:
-    agents.append(agent)
-
 for lend in lender:
     lenders.append(lend)
 
@@ -160,7 +184,7 @@ class BuyerTran(tk.Frame):
         bou1 = tk.Button(self, text = "Back to Main", 
                         command = lambda: controller.up_frame("WelcomePage"))
         bou1.grid(column=1, row=1)
-        
+
         clicked_agents = StringVar()
         clicked_agents.set("Agents")
 
@@ -823,7 +847,7 @@ class BuyerTran(tk.Frame):
    
             pass_data_button = Button(top, text = "Submit Data",
                                       command = lambda:[data_submit(query_creator("agents", agent_first_ent.get(), agent_last_ent.get(), agent_cell_ent.get(), 
-                                                        agent_email_ent.get(), clicked_agent_type.get(), agent_dpor_ent.get(), agent_broker_ent.get()))])
+                                                        agent_email_ent.get(), clicked_agent_type.get(), agent_dpor_ent.get(), agent_broker_ent.get())), SQLPopList('agents', agents)])
             pass_data_button.grid(column=3, row=7)
 
             close_button = Button(top, text = "Close the Window",
@@ -870,6 +894,7 @@ class BuyerTran(tk.Frame):
         new_lender_button = Button(self, text="New Lender",
                                   command = lambda: new_lender_info())
         new_lender_button.grid(column = 4, row = 18)
+
 
         '''search_list_agent_btn = Button(self, text="Agent Search",
                                   command = lambda: new_agent_info())
@@ -1582,13 +1607,10 @@ class NewListing(tk.Frame):
             def admin_email():
                 property_address = txt1.get()
                 listing_agent = clicked_agents.get()
-            
+                
                 olApp = win32.Dispatch('Outlook.Application')
                 olNS = olApp.GetNameSpace('MAPI')
-
                 mailItem = olApp.CreateItem(0)
-                mailItem.Subject = 'New Listing Request: ' + property_address + f' ({agent_name})'
-                mailItem.BodyFormat = 1
 
                 if listing_agent == "Other":
                     agent_name = " "
@@ -1596,6 +1618,9 @@ class NewListing(tk.Frame):
                 else:
                     agent_name = rcrg[listing_agent][1]
                     mailItem.CC = rcrg[listing_agent][0]
+            
+                mailItem.Subject = 'New Listing Request: ' + property_address + f' ({agent_name})'
+                mailItem.BodyFormat = 1
 
                 html_body =f"""
                     <p class=MsoNormal>Good {Time}, Amy!<br><br></p>

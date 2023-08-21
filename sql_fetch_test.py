@@ -30,12 +30,13 @@ for agent in agents:
     i+=1
 
 j =0
+
 for entry in agents:
     key_dict[database[j]] = entry
     j += 1
 
 
-#print(agents)
+print(agents)
 #print(database)
 #print(key_dict)
-print(key_dict['Rick Cox'][1])
+#print(key_dict['Rick Cox'][1])
