@@ -341,7 +341,8 @@ class BuyerTran(tk.Frame):
             offer_date = offer_date_picker.get()
             ratif_date = ratif_date_picker.get()
             close_date = close_date_picker.get()
-            seller= seller_name_ent.get()
+            seller1 = seller_name_ent.get()
+            seller2 = ' '
             selling_agent = clicked_agents.get()
             listing_agent = la_name_ent.get()
             #listing_email = la_email_ent.get()
@@ -370,6 +371,12 @@ class BuyerTran(tk.Frame):
                 i = client_phone1.find(";")
                 client_phone2 = client_phone1[(i+2):0]
                 client_phone1 = client_phone1[0:i]
+
+            if ";" in seller1:
+                i = seller1.find(";")
+                seller2 = seller[(i+2):0]
+                seller1 = seller[0:i]
+
 
             fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
 
