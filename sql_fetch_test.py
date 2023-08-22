@@ -1,38 +1,39 @@
 import sqlite3
 
-def SQLPopList(table, lst, dict)
+def SQLPopList(table):
+    
     lst = []
     database = []
     key_dict = {}
 
-try:
-    conn = sqlite3.connect('rcrg.db')
-    c = conn.cursor()
-    print("Successfully Connected to Database!")
+    try:
+        conn = sqlite3.connect('rcrg.db')
+        c = conn.cursor()
+        print("Successfully Connected to Database!")
 
-    c.execute(f'SELECT * FROM {table}')
+        c.execute(f'SELECT * FROM {table}')
 
-    for row in c:
-        lst.append(row)
+        for row in c:
+            lst.append(row)
 
-except:
-    print("Hello Error!")
+    except:
+        print("Hello Error!")
 
-finally:
-    c.close()
-    conn.close()
-    print("Connection to Database Closed!")
+    finally:
+        c.close()
+        conn.close()
+        print("Connection to Database Closed!")
 
-i = 0
-for row in lst:
-    
-    database.append(lst[i][1] + " " + lst[i][2])
-    
-    i+=1
+    i = 0
+    for row in lst:
+        database.append(lst[i][1] + " " + lst[i][2])
+        i+=1
 
-j =0
+    j =0
+    for row in lst:
+        key_dict[database[j]] = row
+        j += 1
 
-for row in lst:
-    key_dict[database[j]] = entry
-    j += 1
+    print(key_dict)
 
+SQLPopList("agents")

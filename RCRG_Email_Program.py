@@ -29,36 +29,47 @@ import sqlite3
 
 # Empty lists to be utilized by the tkinter UI. Populated by the brute force for-loops below
 # **Eventually will be replaced with SQL query population**
-def SQLPopList(table_name, list_name):
+def SQLPopList(table_name):
     
-        new_list = []
+    new_list = []
+    key_database = []
+    dict = {}
 
-        try:
-            conn = sqlite3.connect('rcrg.db')
-            c = conn.cursor()
-            print("Successfully Connected to Database!")
+    try:
+        conn = sqlite3.connect('rcrg.db')
+        c = conn.cursor()
+        print("Successfully Connected to Database!")
 
-            c.execute(f'SELECT * FROM {table_name}')
+        c.execute(f'SELECT * FROM {table_name}')
 
-            for row in c:
-                new_list.append(row)
+        for row in c:
+            new_list.append(row)
 
-        except:
-            print("Hello Error!")
+    except:
+        print("There was an error connecting to the RCRG Database.")
 
-        finally:
-            c.close()
-            conn.close()
-            print("Connection to Database Closed!")
+    finally:
+        c.close()
+        conn.close()
+        print("Connection to Database Closed.")
 
-        list_name = new_list
+    
+    i = 0
+    for row in new_list:
+        key_database.append(new_list[i][1] + " " + new_list[i][2])
+        i+=1
+
+    j =0
+    for entry in new_list:
+        dict[key_database[j]] = entry
+        j += 1
+
+    return key_database, dict
+
 
 
 lenders = []
 attorneys =[]
-agents = []
-
-SQLPopList('agents', agents)
 
 #Columns for Database Tables, used in Query Creator function calls
 agent_cols = "(agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker)"
@@ -198,6 +209,8 @@ class BuyerTran(tk.Frame):
         clicked_attorneys = StringVar()
         clicked_attorneys.set("Attorneys")
 
+        agent_options, agent_db = SQLPopList('agents')
+
         #1st Q & A - Property Address
         prop_add_lbl = Label(self, text = "What is the Property Address?")
         prop_add_lbl.grid(column = 2, row = 0)
@@ -279,7 +292,7 @@ class BuyerTran(tk.Frame):
         #2nd Q & A - Selling Agent
         sell_agent_lbl = Label(self, text = "Who is the Selling Agent?")
         sell_agent_lbl.grid(column = 2, row = 13)
-        sell_agent_drop = OptionMenu(self, clicked_agents, *agents)
+        sell_agent_drop = OptionMenu(self, clicked_agents, *agent_options)
         sell_agent_drop.grid(column = 3, row = 13)
 
         #3rd Q & A - Commission
@@ -417,8 +430,8 @@ class BuyerTran(tk.Frame):
                         'Seller Attorney Email': '', 'Buyer Attorney Firm': attorney[attorney_contact][2], 'Buyer Attorney Contact': attorney[attorney_contact][3], 'Buyer Attorney Office Phone': '',
                         'Buyer Attorney Fax': '', 'Buyer Attorney Email': attorney[attorney_contact][0], 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
                         'Listing Company Name': '', 'Listing Agent Name': listing_agent, 'Transaction Coordinator': '', 'Listing Agent Phone': '',
-                        'Listing Agent E-mail': '', 'Selling Company Name': 'The Rick Cox Realty Group', 'Selling Agent Name': rcrg[selling_agent][1], 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
-                        'Selling Agent Phone': rcrg[selling_agent][4], 'Selling Agent Email': rcrg[selling_agent][0], 'Escrow Deposit': '', 'Held by': '', 'Commission': commission + ' to Selling Agent',
+                        'Listing Agent E-mail': '', 'Selling Company Name': agent_db[selling_agent][7], 'Selling Agent Name': selling_agent, 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
+                        'Selling Agent Phone': agent_db[selling_agent][3], 'Selling Agent Email': agent_db[selling_agent][4], 'Escrow Deposit': '', 'Held by': '', 'Commission': commission + ' to Selling Agent',
                         'Transac\x98on Fee': admin_fee, 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
             
             fillpdfs.write_fillable_pdf('Transaction Info Sheet(Fillable).pdf', 'Transaction Info Sheet(f).pdf', data_dict)
@@ -847,7 +860,7 @@ class BuyerTran(tk.Frame):
    
             pass_data_button = Button(top, text = "Submit Data",
                                       command = lambda:[data_submit(query_creator("agents", agent_first_ent.get(), agent_last_ent.get(), agent_cell_ent.get(), 
-                                                        agent_email_ent.get(), clicked_agent_type.get(), agent_dpor_ent.get(), agent_broker_ent.get())), SQLPopList('agents', agents)])
+                                                        agent_email_ent.get(), clicked_agent_type.get(), agent_dpor_ent.get(), agent_broker_ent.get()))])
             pass_data_button.grid(column=3, row=7)
 
             close_button = Button(top, text = "Close the Window",
@@ -919,7 +932,7 @@ class SellerTran(tk.Frame):
                        "5% Total, 2/3",
                        "Other"]
         
-        
+        agent_options, agent_db  = SQLPopList('agents')
         
         
         label = tk.Label(self, text = 'New Seller Transaction \n' + controller.id.get(), font = controller.titlefont)
@@ -947,7 +960,7 @@ class SellerTran(tk.Frame):
         #2nd Q & A - Agent
         lbl2 = Label(self, text = "Who is the Listing Agent?")
         lbl2.grid(column = 2, row = 1)
-        drop1 = OptionMenu(self, clicked_agents, *agents)
+        drop1 = OptionMenu(self, clicked_agents, *agent_options)
         drop1.grid(column = 3, row = 1)
 
         #3rd Q & A - Commission
@@ -1309,6 +1322,8 @@ class BuyerZillow(tk.Frame):
                         command = lambda: controller.up_frame("WelcomePage"))
         bou1.grid(column=1, row=1)
 
+        agents = SQLPopList('agents')
+
         clicked_agents = StringVar()
         clicked_agents.set("Agents")
 
@@ -1426,6 +1441,8 @@ class SellerZillow(tk.Frame):
         bou1 = tk.Button(self, text = "Back to Main", 
                         command = lambda: controller.up_frame("WelcomePage"))
         bou1.grid(column=1, row=1)
+
+        agents = SQLPopList('agents')
 
         clicked_agents = StringVar()
         clicked_agents.set("Agents")
@@ -1547,6 +1564,8 @@ class NewListing(tk.Frame):
 
             clicked_agents = StringVar()
             clicked_agents.set("Agents")
+
+            agents = agents = SQLPopList('agents')
 
             lbl1 = Label(self, text = "What is the Property Address?")
             lbl1.grid(column = 2, row = 0)
