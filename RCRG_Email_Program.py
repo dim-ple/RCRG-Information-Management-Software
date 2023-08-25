@@ -72,7 +72,7 @@ lenders = []
 attorneys =[]
 
 #Columns for Database Tables, used in Query Creator function calls
-agent_cols = "(agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker)"
+agent_cols = "(agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker, path)"
 client_cols = "(clientfirst, clientlast, clientphone, clientemail, mailingstreetnum, mailingstreetname, mailingstreettype, mailingcity, mailingstate, mailingzip, agentid, lenderid)"
 lender_cols = "(lendercompany, lofirst, lolast, lophone, loemail, lpemail)"
 property_cols = "(propstreetnum, propstreetname, propstreettype, propcity, propstate, propzip, hoaid)"
@@ -439,7 +439,7 @@ class BuyerTran(tk.Frame):
             if selling_agent == "Other":
                 path = " "
             else:
-                path = rcrg[selling_agent][3]
+                path = agent_db[selling_agent][8]
                 os.chdir(path)
 
             os.mkdir(property_address)
@@ -475,8 +475,8 @@ class BuyerTran(tk.Frame):
                 agent_name = " "
                 mailItem.CC = " "
             else:
-                agent_name = rcrg[selling_agent][1]
-                mailItem.CC = rcrg[selling_agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
+                mailItem.CC = agent_db[selling_agent][4] + " amy@rickcoxrealty.com;"
 
             html_body = f"""
                 <p class=MsoNormal>Good {Time}, {Address_To_Client}!<br><br></p>
@@ -529,8 +529,8 @@ class BuyerTran(tk.Frame):
                 agent_name = " "
                 mailItem.CC = " "
             else:
-                agent_name = rcrg[selling_agent][1]
-                mailItem.CC = rcrg[selling_agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
+                mailItem.CC = agent_db[selling_agent][4] + " amy@rickcoxrealty.com;"
                 
 
             html_body =f"""
@@ -592,8 +592,8 @@ class BuyerTran(tk.Frame):
                 agent_name = " "
                 mailItem.CC = " "
             else:
-                agent_name = rcrg[selling_agent][1]
-                mailItem.CC = rcrg[selling_agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
+                mailItem.CC = agent_db[selling_agent][4] + " amy@rickcoxrealty.com;"
 
             #EMD Logic
             if EMD_Status == True:
@@ -656,8 +656,8 @@ class BuyerTran(tk.Frame):
                 agent_name = " "
                 mailItem.CC = " "
             else:
-                agent_name = rcrg[selling_agent][1]
-                mailItem.CC = rcrg[selling_agent][0] + " amy@rickcoxrealty.com;"
+                agent_name = agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
+                mailItem.CC = agent_db[selling_agent][4] + " amy@rickcoxrealty.com;"
                 
 
             html_body =f"""
