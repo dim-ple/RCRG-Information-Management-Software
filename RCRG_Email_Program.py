@@ -406,12 +406,12 @@ class BuyerTran(tk.Frame):
 
             if ";" in client_phone1:
                 i = client_phone1.find(";")
-                client_phone2 = client_phone1[(i+2):0]
+                client_phone2 = client_phone1[(i+2):]
                 client_phone1 = client_phone1[0:i]
 
             if ";" in seller1:
                 i = seller1.find(";")
-                seller2 = seller1[(i+2):0]
+                seller2 = seller1[(i+2):]
                 seller1 = seller1[0:i]
 
 
