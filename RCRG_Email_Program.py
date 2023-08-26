@@ -209,6 +209,7 @@ class BuyerTran(tk.Frame):
         clicked_attorneys = StringVar()
         clicked_attorneys.set("Attorneys")
 
+        # Populates our agent names list and database for use with the UI and fillpdf
         agent_options, agent_db = SQLPopList('agents')
 
         #1st Q & A - Property Address
