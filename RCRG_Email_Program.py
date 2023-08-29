@@ -470,12 +470,15 @@ class BuyerTran(tk.Frame):
             mailItem.Subject = 'Your New Purchase of ' + property_address
             mailItem.BodyFormat = 1
 
-            if selling_agent == "Other":
-                agent_name = " "
-                mailItem.CC = " "
-            else:
-                agent_name = agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
-                mailItem.CC = agent_db[selling_agent][4] + " amy@rickcoxrealty.com;"
+            agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
+            mailItem.CC = " " if (selling_agent == "Other") else agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
+
+            #if selling_agent == "Other":
+                #agent_name = " "
+                #mailItem.CC = " "
+            #else:
+                #agent_name = agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
+                #mailItem.CC = agent_db[selling_agent][4] + " amy@rickcoxrealty.com;"
 
             html_body = f"""
                 <p class=MsoNormal>Good {Time}, {Address_To_Client}!<br><br></p>
