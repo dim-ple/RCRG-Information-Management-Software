@@ -54,15 +54,13 @@ def SQLPopList(table_name):
         print("Connection to Database Closed.")
 
     
-    i = 0
-    for row in new_list:
+    
+    # Pythonic Way of adding an iterable to a for-loop!
+    for i, row in enumerate(new_list):
         key_database.append(new_list[i][1] + " " + new_list[i][2])
-        i+=1
 
-    j =0
-    for entry in new_list:
+    for j, entry in enumerate(new_list):
         dict[key_database[j]] = entry
-        j += 1
 
     return key_database, dict
 
