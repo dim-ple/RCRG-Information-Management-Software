@@ -473,13 +473,6 @@ class BuyerTran(tk.Frame):
             agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
             mailItem.CC = " " if (selling_agent == "Other") else agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
 
-            #if selling_agent == "Other":
-                #agent_name = " "
-                #mailItem.CC = " "
-            #else:
-                #agent_name = agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
-                #mailItem.CC = agent_db[selling_agent][4] + " amy@rickcoxrealty.com;"
-
             html_body = f"""
                 <p class=MsoNormal>Good {Time}, {Address_To_Client}!<br><br></p>
                 <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I work with {agent_name} and will be assisting with your purchase of {property_address}. Attached, you will find copies of the fully-executed contract and any addenda or disclosures in conjunction with your closing.<br><br></p>
@@ -519,24 +512,16 @@ class BuyerTran(tk.Frame):
             mailItem.HTMLBody = 'Attorney E-mail'
 
             #To: Operating Logic - Dictionary Call
-            if attorney_contact == "Other":
-                Attorney_Name = " "
-                mailItem.To = " "
-            else:
-                Attorney_Name = attorney[attorney_contact][1]
-                mailItem.To = attorney[attorney_contact][0]
+            attorney_name = " " if (attorney_contact == "Other") else attorney[attorney_contact][1]
+            mailItem.To = " " if (attorney_contact == "Other") else attorney[attorney_contact][0]
 
             #CC: Operating Logic - Dictionary Call
-            if selling_agent == "Other":
-                agent_name = " "
-                mailItem.CC = " "
-            else:
-                agent_name = agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
-                mailItem.CC = agent_db[selling_agent][4] + " amy@rickcoxrealty.com;"
+            agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
+            mailItem.CC = " " if (selling_agent == "Other") else agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
                 
 
             html_body =f"""
-                <p class=MsoNormal>Good {Time}, {Attorney_Name}!<br><br></p>
+                <p class=MsoNormal>Good {Time}, {attorney_name}!<br><br></p>
                 <p class=MsoNormal>{agent_name}'s client would like to use your office for the title and settlement work needed for their purchase of {property_address}. Please find the ratified contract, transaction information sheet and tax record attached!<br><br></p>
                 <p class=MsoNormal> Please note that the selling agent's commission for this transaction will be {commission}. Additionally, our brokerage will charge a $395.00 Administrative Fee to the purchaser at closing. Please overnight both checks to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
                 <p class=MsoNormal>CC: {agent_name}, Selling Agent; Team Administrator, Amy Foldes;<br><br></p>
@@ -583,19 +568,11 @@ class BuyerTran(tk.Frame):
             mailItem.HTMLBody = 'Lender E-mail'
 
             #Addressee Operating Logic - Database
-            if lender_contact == "Other":
-                Lender_Name = " "
-                mailItem.To = " "
-            else:
-                Lender_Name = lender[lender_contact][1]
-                mailItem.To = lender[lender_contact][0]
+            lender_name = " " if (lender_contact == "Other") else lender[lender_contact][1]
+            mailItem.To = " " if (lender_contact == "Other") else lender[lender_contact][0]
                 
-            if selling_agent == "Other":
-                agent_name = " "
-                mailItem.CC = " "
-            else:
-                agent_name = agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
-                mailItem.CC = agent_db[selling_agent][4] + " amy@rickcoxrealty.com;"
+            agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
+            mailItem.CC = " " if (selling_agent == "Other") else agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
 
             #EMD Logic
             if EMD_Status == True:
@@ -606,7 +583,7 @@ class BuyerTran(tk.Frame):
                 EMD = ""
                 
             html_body =f"""
-                <p class=MsoNormal>Good {Time}, {Lender_Name}!<br><br></p>
+                <p class=MsoNormal>Good {Time}, {lender_name}!<br><br></p>
                 <p class=MsoNormal>Please find a ratified contract attached for {agent_name}'s {client_email_Message}! {EMD}<br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
@@ -1048,10 +1025,10 @@ class SellerTran(tk.Frame):
 
             #To: Operating Logic - Dictionary Call
             if attorney_contact == "Other":
-                Attorney_Name = " "
+                attorney_name = " "
                 mailItem.To = " "
             else:
-                Attorney_Name = attorney[attorney_contact][1]
+                attorney_name = attorney[attorney_contact][1]
                 mailItem.To = attorney[attorney_contact][0]
 
             #CC: Operating Logic - Dictionary Call
@@ -1073,7 +1050,7 @@ class SellerTran(tk.Frame):
                 commission_split = "5% total, split 2.5% to the Listing Agent and 2.5% to the Selling Agent"    
 
             html_body =f"""
-                <p class=MsoNormal>Good {Time}, {Attorney_Name}!<br><br></p>
+                <p class=MsoNormal>Good {Time}, {attorney_name}!<br><br></p>
                 <p class=MsoNormal>{agent_name}'s client would like to use your office for the deed preparation necessary for their sale of {property_address}. Please find the ratified contract, transaction information sheet and tax record attached!<br><br></p>
                 <p class=MsoNormal> Please note that the commission for this transaction will be {commission_split}. Additionally, our brokerage will charge a $395.00 Administrative Fee to the seller at closing. Should the purchaser's attorney ask, we would like both checks mailed to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
                 <p class=MsoNormal>CC: {agent_name}, Listing Agent; Amy Foldes, Team Administrator<br><br></p>
