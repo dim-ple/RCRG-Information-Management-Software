@@ -631,12 +631,8 @@ class BuyerTran(tk.Frame):
                 #mailItem.To = listing_email
 
             #CC: Operating Logic - Dictionary Call
-            if selling_agent == "Other":
-                agent_name = " "
-                mailItem.CC = " "
-            else:
-                agent_name = agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
-                mailItem.CC = agent_db[selling_agent][4] + " amy@rickcoxrealty.com;"
+            agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
+            mailItem.CC = " " if (selling_agent == "Other") else agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
                 
 
             html_body =f"""
