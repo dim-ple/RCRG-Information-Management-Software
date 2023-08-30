@@ -209,6 +209,9 @@ class BuyerTran(tk.Frame):
 
         # Populates our agent names list and database for use with the UI and fillpdf
         agent_options, agent_db = SQLPopList('agents')
+        lender_options, lender_db = SQLPopList('lenders')
+        #attorney_options, attorney_db = SQLPopList('attorneys')
+
 
         #1st Q & A - Property Address
         prop_add_lbl = Label(self, text = "What is the Property Address?")
@@ -329,7 +332,7 @@ class BuyerTran(tk.Frame):
         #6th Q & A - Lender
         lender_lbl = Label(self, text = "Who is the Lender?")
         lender_lbl.grid(column = 2, row = 18)
-        lender_drop = OptionMenu(self, clicked_lenders, *lenders)
+        lender_drop = OptionMenu(self, clicked_lenders, *lender_options)
         lender_drop.grid(column = 3, row = 18)
 
         #7th Q & A - EMD
@@ -424,7 +427,7 @@ class BuyerTran(tk.Frame):
                         'Seller City': '', 'Seller State': '', 'Seller Zip': '', 'Buyer 1': client1, 'Buyer 2': client2,
                         'Buyer Email': client_email1, 'Buyer Email 2': client_email2, 'Buyer Cell': client_phone1, 'Buyer Work': client_phone2, 'Buyer Home': '',
                         'Buyer Fax': '', 'Home Warranty': '', 'Home Inspec\x98on Co': '', 'Termite Co': '', 'FuelOil Co': '',
-                        'Well  Sep\x98c Co': '', 'Lender': lender_contact, 'Loan Officer Name': lender[lender_contact][2], 'Loan Officer Phone': lender[lender_contact][3], 'Loan Officer Email': lender[lender_contact][0],
+                        'Well  Sep\x98c Co': '', 'Lender': lender_contact, 'Loan Officer Name': lender_db[lender_contact][2], 'Loan Officer Phone': lender_db[lender_contact][4], 'Loan Officer Email': lender_db[lender_contact][5],
                         'Seller Attorney Firm': '', 'Seller Attorney Contact': '', 'Seller Office Phone': '', 'Seller Attorney Fax': '',
                         'Seller Attorney Email': '', 'Buyer Attorney Firm': attorney[attorney_contact][2], 'Buyer Attorney Contact': attorney[attorney_contact][3], 'Buyer Attorney Office Phone': '',
                         'Buyer Attorney Fax': '', 'Buyer Attorney Email': attorney[attorney_contact][0], 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
