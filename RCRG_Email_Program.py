@@ -54,13 +54,16 @@ def SQLPopList(table_name):
         print("Connection to Database Closed.")
 
     
-    
-    # Pythonic Way of adding an iterable to a for-loop!
-    for i, row in enumerate(new_list):
-        key_database.append(new_list[i][1] + " " + new_list[i][2])
+    if table_name == 'agents':
+        for i, row in enumerate(new_list):
+            key_database.append(new_list[i][1] + " " + new_list[i][2])
+    else:
+        for i, row in enumerate(new_list):
+            key_database.append(new_list[i][1] + " (" + new_list[i][2] + ")")
+
 
     for j, entry in enumerate(new_list):
-        dict[key_database[j]] = entry
+            dict[key_database[j]] = entry
 
     return key_database, dict
 
@@ -210,8 +213,7 @@ class BuyerTran(tk.Frame):
         # Populates our agent names list and database for use with the UI and fillpdf
         agent_options, agent_db = SQLPopList('agents')
         lender_options, lender_db = SQLPopList('lenders')
-        #attorney_options, attorney_db = SQLPopList('attorneys')
-
+        attorney_options, attorney_db = SQLPopList('attorneys')
 
         #1st Q & A - Property Address
         prop_add_lbl = Label(self, text = "What is the Property Address?")
@@ -348,7 +350,7 @@ class BuyerTran(tk.Frame):
         #8th Q & A - Attorney Contact
         attorney_lbl = Label(self, text = "Who is the Attorney?")
         attorney_lbl.grid(column = 2, row = 20)
-        attorney_drop = OptionMenu(self, clicked_attorneys, *attorneys)
+        attorney_drop = OptionMenu(self, clicked_attorneys, *attorney_options)
         attorney_drop.grid(column = 3, row = 20)
 
         #9th Q & A - Client E-mail
@@ -427,10 +429,10 @@ class BuyerTran(tk.Frame):
                         'Seller City': '', 'Seller State': '', 'Seller Zip': '', 'Buyer 1': client1, 'Buyer 2': client2,
                         'Buyer Email': client_email1, 'Buyer Email 2': client_email2, 'Buyer Cell': client_phone1, 'Buyer Work': client_phone2, 'Buyer Home': '',
                         'Buyer Fax': '', 'Home Warranty': '', 'Home Inspec\x98on Co': '', 'Termite Co': '', 'FuelOil Co': '',
-                        'Well  Sep\x98c Co': '', 'Lender': lender_contact, 'Loan Officer Name': lender_db[lender_contact][2], 'Loan Officer Phone': lender_db[lender_contact][4], 'Loan Officer Email': lender_db[lender_contact][5],
+                        'Well  Sep\x98c Co': '', 'Lender': lender_db[lender_contact][1], 'Loan Officer Name': lender_db[lender_contact][2] + lender_db[lender_contact][3], 'Loan Officer Phone': lender_db[lender_contact][4], 'Loan Officer Email': lender_db[lender_contact][5],
                         'Seller Attorney Firm': '', 'Seller Attorney Contact': '', 'Seller Office Phone': '', 'Seller Attorney Fax': '',
-                        'Seller Attorney Email': '', 'Buyer Attorney Firm': attorney[attorney_contact][2], 'Buyer Attorney Contact': attorney[attorney_contact][3], 'Buyer Attorney Office Phone': '',
-                        'Buyer Attorney Fax': '', 'Buyer Attorney Email': attorney[attorney_contact][0], 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
+                        'Seller Attorney Email': '', 'Buyer Attorney Firm': attorney_db[attorney_contact][1], 'Buyer Attorney Contact': attorney_db[attorney_contact][2] + attorney_db[attorney_contact][3], 'Buyer Attorney Office Phone': attorney_db[attorney_contact][4],
+                        'Buyer Attorney Fax': '', 'Buyer Attorney Email': attorney_db[attorney_contact][5], 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
                         'Listing Company Name': '', 'Listing Agent Name': listing_agent, 'Transaction Coordinator': '', 'Listing Agent Phone': '',
                         'Listing Agent E-mail': '', 'Selling Company Name': agent_db[selling_agent][7], 'Selling Agent Name': selling_agent, 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
                         'Selling Agent Phone': agent_db[selling_agent][3], 'Selling Agent Email': agent_db[selling_agent][4], 'Escrow Deposit': '', 'Held by': '', 'Commission': commission + ' to Selling Agent',
@@ -438,11 +440,12 @@ class BuyerTran(tk.Frame):
             
             fillpdfs.write_fillable_pdf('Transaction Info Sheet(Fillable).pdf', 'Transaction Info Sheet(f).pdf', data_dict)
             
-            if selling_agent == "Other":
-                path = " "
-            else:
-                path = agent_db[selling_agent][8]
-                os.chdir(path)
+            path = " " if selling_agent == "Other" else agent_db[selling_agent][8]
+            
+            
+
+            
+            os.chdir(path)
 
             os.mkdir(property_address)
 
@@ -515,8 +518,8 @@ class BuyerTran(tk.Frame):
             mailItem.HTMLBody = 'Attorney E-mail'
 
             #To: Operating Logic - Dictionary Call
-            attorney_name = " " if (attorney_contact == "Other") else attorney[attorney_contact][1]
-            mailItem.To = " " if (attorney_contact == "Other") else attorney[attorney_contact][0]
+            attorney_name = " " if (attorney_contact == "Other") else attorney_db[attorney_contact][2]
+            mailItem.To = " " if (attorney_contact == "Other") else attorney_db[attorney_contact][5]
 
             #CC: Operating Logic - Dictionary Call
             agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
@@ -571,8 +574,8 @@ class BuyerTran(tk.Frame):
             mailItem.HTMLBody = 'Lender E-mail'
 
             #Addressee Operating Logic - Database
-            lender_name = " " if (lender_contact == "Other") else lender[lender_contact][1]
-            mailItem.To = " " if (lender_contact == "Other") else lender[lender_contact][0]
+            lender_name = " " if (lender_contact == "Other") else lender_db[lender_contact][2]
+            mailItem.To = " " if (lender_contact == "Other") else lender_db[lender_contact][5]
                 
             agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
             mailItem.CC = " " if (selling_agent == "Other") else agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
