@@ -617,7 +617,7 @@ class BuyerTran(tk.Frame):
             # Conditional statment to determine string included in our intro e-mail to the listing agent. It is far more likely that our clients have already decided on
             # an Attorney or Title Company at the get-go, so the first check is whether the option "Other" was not selected.
             if clicked_attorneys.get() != "Other":
-                attorney_msg = f"Our purchaser will be using {attorney[attorney_contact][2]} for their title and settlement needs. The primary contact will be {attorney[attorney_contact][3]}, their e-mail is {attorney[attorney_contact][0]}."
+                attorney_msg = f"Our purchaser will be using {attorney_db[attorney_contact][1]} for their title and settlement needs. The primary contact will be {attorney_db[attorney_contact][2]} {attorney_db[attorney_contact][3]}, their e-mail is {attorney_db[attorney_contact][5]}."
             else:
                 attorney_msg = "Our purchaser has not yet decided on who they will be using for their title and settlement needs. Once they have decided, I will let you know!"
 
