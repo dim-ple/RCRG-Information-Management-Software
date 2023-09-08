@@ -434,8 +434,8 @@ class BuyerTran(tk.Frame):
             mailItem.Subject = 'Your New Purchase of ' + property_address
             mailItem.BodyFormat = 1
 
-            agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
-            mailItem.CC = " " if (selling_agent == "Other") else agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
+            agent_name = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][1] + " " + rcrg_agent_db[selling_agent][2]
+            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
 
             html_body = f"""
                 <p class=MsoNormal>Good {Time}, {Address_To_Client}!<br><br></p>
@@ -480,8 +480,8 @@ class BuyerTran(tk.Frame):
             mailItem.To = " " if (attorney_contact == "Other") else attorney_db[attorney_contact][5]
 
             #CC: Operating Logic - Dictionary Call
-            agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
-            mailItem.CC = " " if (selling_agent == "Other") else agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
+            agent_name = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][1] + " " + rcrg_agent_db[selling_agent][2]
+            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
                 
 
             html_body =f"""
@@ -535,8 +535,8 @@ class BuyerTran(tk.Frame):
             lender_name = " " if (lender_contact == "Other") else lender_db[lender_contact][2]
             mailItem.To = " " if (lender_contact == "Other") else lender_db[lender_contact][5]
                 
-            agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
-            mailItem.CC = " " if (selling_agent == "Other") else agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
+            agent_name = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][1] + " " + rcrg_agent_db[selling_agent][2]
+            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
 
             #EMD Logic
             if EMD_Status == True:
@@ -595,8 +595,8 @@ class BuyerTran(tk.Frame):
                 #mailItem.To = listing_email
 
             #CC: Operating Logic - Dictionary Call
-            agent_name = " " if (selling_agent == "Other") else agent_db[selling_agent][1] + " " + agent_db[selling_agent][2]
-            mailItem.CC = " " if (selling_agent == "Other") else agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
+            agent_name = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][1] + " " + rcrg_agent_db[selling_agent][2]
+            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
                 
 
             html_body =f"""
@@ -856,7 +856,6 @@ class BuyerTran(tk.Frame):
                                   command = lambda: new_agent_info())
         search_sell_agent_btn.grid(column = 5, row = 20)'''
 
-
 class SellerTran(tk.Frame):
     
     def __init__(self, parent, controller):
@@ -872,6 +871,7 @@ class SellerTran(tk.Frame):
                        "Other"]
         
         rcrg_agent_options, rcrg_agent_db  = SQLPopList('rcrg')
+        attorney_options, attorney_db = SQLPopList('attorneys')
         
         
         label = tk.Label(self, text = 'New Seller Transaction \n' + controller.id.get(), font = controller.titlefont)
@@ -923,7 +923,7 @@ class SellerTran(tk.Frame):
         #6th Q & A - Attorney Contact
         lbl6 = Label(self, text = "Who is the Attorney?")
         lbl6.grid(column = 2, row = 5)
-        drop3 = OptionMenu(self, clicked_attorneys, *attorneys)
+        drop3 = OptionMenu(self, clicked_attorneys, *attorney_options)
         drop3.grid(column = 3, row = 5)
 
 
@@ -940,12 +940,9 @@ class SellerTran(tk.Frame):
             mailItem.Subject = 'Your Sale of ' + property_address
             mailItem.BodyFormat = 1
 
-            if listing_agent == "Other":
-                agent_name = " "
-                mailItem.CC = " "
-            else:
-                agent_name = rcrg[listing_agent][1]
-                mailItem.CC = rcrg[listing_agent][0] + " amy@rickcoxrealty.com;"
+            agent_name = " " if (listing_agent == "Other") else rcrg_agent_db[listing_agent][1] + " " + rcrg_agent_db[listing_agent][2]
+            mailItem.CC = " " if (listing_agent == "Other") else rcrg_agent_db[listing_agent][4] + "; amy@rickcoxrealty.com;"
+            
 
             html_body =f"""
                 <p class=MsoNormal>Good {Time}, {client_name}!<br><br></p>
@@ -984,20 +981,12 @@ class SellerTran(tk.Frame):
             mailItem.HTMLBody = 'Attorney E-mail'
 
             #To: Operating Logic - Dictionary Call
-            if attorney_contact == "Other":
-                attorney_name = " "
-                mailItem.To = " "
-            else:
-                attorney_name = attorney[attorney_contact][1]
-                mailItem.To = attorney[attorney_contact][0]
+            attorney_name = " " if (attorney_contact == "Other") else attorney_db[attorney_contact][2]
+            mailItem.To = " " if (attorney_contact == "Other") else attorney_db[attorney_contact][5]
 
             #CC: Operating Logic - Dictionary Call
-            if listing_agent == "Other":
-                agent_name = " "
-                mailItem.CC = " "
-            else:
-                agent_name = rcrg[listing_agent][1]
-                mailItem.CC = rcrg[listing_agent][0] + " amy@rickcoxrealty.com;"
+            agent_name = " " if (listing_agent == "Other") else rcrg_agent_db[listing_agent][1] + " " + rcrg_agent_db[listing_agent][2]
+            mailItem.CC = " " if (listing_agent == "Other") else rcrg_agent_db[listing_agent][4] + "; amy@rickcoxrealty.com;"
             
             #Operation Logic - Commission String based on Option Menu choice
             if commission == "Other":
