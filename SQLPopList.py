@@ -5,7 +5,7 @@ def SQLPopList(table_name, list_name):
     new_list = []
 
     try:
-        conn = sqlite3.connect('rcrg.db')
+        conn = sqlite3.connect('rcrgbrokerage.db')
         c = conn.cursor()
         print("Successfully Connected to Database!")
 
