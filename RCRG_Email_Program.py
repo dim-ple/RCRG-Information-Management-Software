@@ -36,7 +36,7 @@ def SQLPopList(table_name):
     dict = {}
 
     try:
-        conn = sqlite3.connect('rcrgbrokerage.db')
+        conn = sqlite3.connect('rcrgbroker.db')
         c = conn.cursor()
         print("Successfully Connected to Database!")
 
@@ -727,7 +727,7 @@ class BuyerTran(tk.Frame):
         def data_submit(query):
             
             try:
-                conn = sqlite3.connect('rcrgbrokerage.db')
+                conn = sqlite3.connect('rcrgbroker.db')
                 c = conn.cursor()
                 print("Successfully Connected to Database!")
 
