@@ -636,6 +636,13 @@ class BuyerTran(tk.Frame):
 
         def query_creator(table_name, *cols):
     
+            rcrg_cols = "(agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker, path)"
+            lender_cols ="(lendercompany, lofirst, lolast, lophone, loemail, lpemail)"
+            client_cols = "()"
+            attorney_cols = "()"
+            hoa_cols = "()"
+            property_cols = "()"
+            
             # Declare string for the beginning of our insert statement
             ins_statement = 'INSERT INTO '
     
@@ -649,8 +656,10 @@ class BuyerTran(tk.Frame):
             list_string = []
     
             # Check table name to import correct column names for sql query
-            if table_name == 'agents':
-                ins_statement += agent_cols
+            if table_name == 'rcrg':
+                ins_statement += rcrg_cols
+            elif table_name == 'attorneys':
+                ins_statement += attorney_cols
             elif table_name == 'lenders':
                 ins_statement += lender_cols
             elif table_name == 'clients':
@@ -659,6 +668,7 @@ class BuyerTran(tk.Frame):
                 ins_statement += property_cols
             elif table_name == 'hoas':
                 ins_statement += hoa_cols
+            
 
             # Once the correct table is found, iterate through all argument columns passed 
             # into the function and append them to the Values statement
