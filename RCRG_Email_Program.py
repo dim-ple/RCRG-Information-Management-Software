@@ -816,22 +816,6 @@ class BuyerTran(tk.Frame):
                               command= top.destroy)
             close_button.grid(column=3, row=8)
 
-        '''def agent_search():
-            
-            top = Toplevel(parent)
-            top.geometry("450x175")
-            top.title("Agent Search")
-
-            agent_seach = Label(top, text = "Agent First Name:")
-            agent_first_lbl.grid(column = 2, row = 0)
-            agent_first_ent = Entry(top, width=20)
-            agent_first_ent.grid(column = 3, row = 0)
-
-            agent_last_lbl = Label(top, text = "Agent Last Name:")
-            agent_last_lbl.grid(column = 2, row = 1)
-            agent_last_ent = Entry(top, width=20)
-            agent_last_ent.grid(column = 3, row = 1)'''
-
         #Execute Button
         submit_button = Button(self, text = "Submit",
                                command = lambda:[buyer_email(), attorney_email(), listing_agent_email(), lender_email()])
@@ -1538,8 +1522,8 @@ class NewListing(tk.Frame):
                         'Seller Attorney Firm': '', 'Seller Attorney Contact': '', 'Seller Office Phone': '', 'Seller Attorney Fax': '',
                         'Seller Attorney Email': '', 'Buyer Attorney Firm': '', 'Buyer Attorney Contact': '', 'Buyer Attorney Office Phone': '',
                         'Buyer Attorney Fax': '', 'Buyer Attorney Email': '', 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
-                        'Listing Company Name': 'The Rick Cox Realty Group', 'Listing Agent Name': rcrg[listing_agent][1], 'Transaction Coordinator': 'Harrison Goehring - harrison@rickcoxrealty.com', 'Listing Agent Phone': rcrg[listing_agent][4],
-                        'Listing Agent E-mail': rcrg[listing_agent][0], 'Selling Company Name': '', 'Selling Agent Name': '', 'Selling Agent TC': '',
+                        'Listing Company Name': 'The Rick Cox Realty Group', 'Listing Agent Name': rcrg_agents_db[listing_agent][1], 'Transaction Coordinator': 'Harrison Goehring - harrison@rickcoxrealty.com', 'Listing Agent Phone': rcrg_agents_db[listing_agent][4],
+                        'Listing Agent E-mail': rcrg_agents_db[listing_agent][0], 'Selling Company Name': '', 'Selling Agent Name': '', 'Selling Agent TC': '',
                         'Selling Agent Phone': '', 'Selling Agent Email': '', 'Escrow Deposit': '', 'Held by': '', 'Commission': '',
                         'Transac\x98on Fee': '395.00', 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
             
@@ -1548,7 +1532,7 @@ class NewListing(tk.Frame):
                 if listing_agent == "Other":
                     path = " "
                 else:
-                    path = rcrg[listing_agent][3]
+                    path = rcrg_agents_db[listing_agent][3]
                     os.chdir(path)
 
                 os.mkdir(property_address)
