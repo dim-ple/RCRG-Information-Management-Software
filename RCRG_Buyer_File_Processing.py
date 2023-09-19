@@ -202,7 +202,7 @@ class BuyerTran(tk.Frame):
         #Seller Name
         seller_name_lbl = Label(self, text = "What is the Seller(s) Full Name? For Multiple Names, separate with a ';'")
         seller_name_lbl.grid(column = 2, row = 12)
-        seller_name_ent = Entry(self, width=10)
+        seller_name_ent = Entry(self, width=38)
         seller_name_ent.grid(column = 3, row = 12)
 
         #2nd Q & A - Selling Agent
@@ -276,6 +276,38 @@ class BuyerTran(tk.Frame):
         la_name_lbl.grid(column = 2, row = 22)
         la_name_ent = Entry(self, width=38)
         la_name_ent.grid(column = 3, row = 22)
+
+        la_phone_lbl = Label(self, text = "What is the Listing Agent's Phone Number?")
+        la_phone_lbl.grid(column=2, row=23)
+        la_phone_ent = Entry(self, width=38)
+        la_phone_ent.grid(column = 3, row = 23)
+
+        la_email_lbl = Label(self, text = "What is the Listing Agent's E-mail?")
+        la_email_lbl.grid(column=2, row=24)
+        la_email_ent = Entry(self, width=38)
+        la_email_ent.grid(column = 3, row = 24)
+
+        listing_broker_lbl = Label(self, text = "What is the name of the Listing Agent's Brokerage?")
+        listing_broker_lbl.grid(column=2, row=25)
+        listing_broker_ent = Entry(self, width=38)
+        listing_broker_ent.grid(column = 3, row = 25)
+
+        #Execute Button
+        submit_button = Button(self, text = "Submit",
+                               command = lambda:[buyer_email(), attorney_email(), listing_agent_email(), lender_email()])
+        submit_button.grid(column = 3, row = 26)
+
+        new_folder_button = Button(self, text = "Create New Folder",
+                                   command = lambda:[buyer_folder()])
+        new_folder_button.grid(column = 3, row = 27)
+
+        clear_fields_button = Button(self, text = "Reset Fields",
+                                     command = lambda:[clear_fields()])
+        clear_fields_button.grid(column = 3, row = 28)
+
+        close_button = Button(self, text = "Close the Window",
+                              command = controller.destroy)
+        close_button.grid(column = 3, row = 29)
 
 
         def buyer_folder():
@@ -389,18 +421,18 @@ class BuyerTran(tk.Frame):
             mailItem.BodyFormat = 1
 
             agent_name = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][1] + " " + rcrg_agent_db[selling_agent][2]
-            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
+            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4]
 
             html_body = f"""
                 <p class=MsoNormal>Good {Time}, {Address_To_Client}!<br><br></p>
-                <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I work with {agent_name} and will be assisting with your purchase of {property_address}. Attached, you will find copies of the fully-executed contract and any addenda or disclosures in conjunction with your closing.<br><br></p>
+                <p class=MsoNormal>My name is Amy Foldes and I am the Team Administrator for the Rick Cox Realty Group. I work with {agent_name} and will be assisting with your purchase of {property_address}. Attached, you will find copies of the fully-executed contract and any addenda or disclosures in conjunction with your closing.<br><br></p>
                 <p class=MsoNormal>Should you have any questions regarding closing or any aspect of the transaction leading up to that point, please feel free to reach out me. My congratulations to you on your upcoming home purchase!<br><br></p>
                 <p class=MsoNormal>CC: Your agent, {agent_name}; Team Administrator, Amy Foldes; <br><br></p>
                 <p class=MsoNormal>Kind regards, <br><br></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Amy Foldes</span> </b><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Team Administrator @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>E-mail:</span> </b><a href="mailto:Harrison@RickCoxRealty.com"><span style='font-family:"Arial",sans-serif'>Harrison@RickCoxRealty.com</span> </a><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>E-mail:</span> </b><a href="mailto:Amy@RickCoxRealty.com"><span style='font-family:"Arial",sans-serif'>Amy@RickCoxRealty.com</span> </a><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>2913 Fox Chase Lane</span> <o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>Midlothian, VA 23112</span> <o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><a href="http://www.rickcoxrealty.com/"><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>www.RickCoxRealty.com</span> </b></a><o:p></o:p></p>
@@ -410,7 +442,7 @@ class BuyerTran(tk.Frame):
             mailItem.To = client_email
             
 
-            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('harrison@rickcoxrealty.com')))
+            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('amy@rickcoxrealty.com')))
 
             mailItem.Display()
 
@@ -444,10 +476,10 @@ class BuyerTran(tk.Frame):
                 <p class=MsoNormal> Please note that the selling agent's commission for this transaction will be {commission}. Additionally, our brokerage will charge a $395.00 Administrative Fee to the purchaser at closing. Please overnight both checks to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
                 <p class=MsoNormal>CC: {agent_name}, Selling Agent; Team Administrator, Amy Foldes;<br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Amy Folders</span> </b><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Team Administrator @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>E-mail:</span> </b><a href="mailto:Harrison@RickCoxRealty.com"><span style='font-family:"Arial",sans-serif'>Harrison@RickCoxRealty.com</span> </a><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>E-mail:</span> </b><a href="mailto:Amy@RickCoxRealty.com"><span style='font-family:"Arial",sans-serif'>Amy@RickCoxRealty.com</span> </a><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>2913 Fox Chase Lane</span> <o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>Midlothian, VA 23112</span> <o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><a href="http://www.rickcoxrealty.com/"><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>www.RickCoxRealty.com</span> </b></a><o:p></o:p></p>
@@ -455,7 +487,7 @@ class BuyerTran(tk.Frame):
                 
             mailItem.HTMLBody = html_body
 
-            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('harrison@rickcoxrealty.com')))
+            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('amy@rickcoxrealty.com')))
 
             mailItem.Display()
 
@@ -504,10 +536,10 @@ class BuyerTran(tk.Frame):
                 <p class=MsoNormal>Good {Time}, {lender_name}!<br><br></p>
                 <p class=MsoNormal>Please find a ratified contract attached for {agent_name}'s {client_email_Message}! {EMD}<br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Amy Foldes</span> </b><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Team Administrator @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>E-mail:</span> </b><a href="mailto:Harrison@RickCoxRealty.com"><span style='font-family:"Arial",sans-serif'>Harrison@RickCoxRealty.com</span> </a><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>E-mail:</span> </b><a href="mailto:Amy@RickCoxRealty.com"><span style='font-family:"Arial",sans-serif'>Amy@RickCoxRealty.com</span> </a><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>2913 Fox Chase Lane</span> <o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>Midlothian, VA 23112</span> <o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><a href="http://www.rickcoxrealty.com/"><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>www.RickCoxRealty.com</span> </b></a><o:p></o:p></p>
@@ -515,7 +547,7 @@ class BuyerTran(tk.Frame):
                 
             mailItem.HTMLBody = html_body
 
-            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('harrison@rickcoxrealty.com')))
+            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('amy@rickcoxrealty.com')))
 
             mailItem.Display()
 
@@ -550,20 +582,20 @@ class BuyerTran(tk.Frame):
 
             #CC: Operating Logic - Dictionary Call
             agent_name = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][1] + " " + rcrg_agent_db[selling_agent][2]
-            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
+            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4]
                 
 
             html_body =f"""
                 <p class=MsoNormal>Good {Time}, {listing_agent}!<br><br></p>
-                <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I will be assisting {agent_name} and their client on the purchase of {property_address}. I look forward to working with you!<br><br></p>
+                <p class=MsoNormal>My name is Amy Foldes and I am the Team Administrator for the Rick Cox Realty Group. I will be assisting {agent_name} and their client on the purchase of {property_address}. I look forward to working with you!<br><br></p>
                 <p class=MsoNormal>{attorney_msg} Would you mind providing me with the contact for the Seller's Attorney or Title Company who will be handling the deed preparation for the Seller once that information becomes available?<br><br></p>
                 <p class=MsoNormal>Additionally, would your seller be willing to share who their current utility providers for Electricity, Water/Sewer, Internet, Trash and Gas are?<br><br></p>
                 <p class=MsoNormal>CC: {agent_name}, Selling Agent; Team Administrator, Amy Foldes;<br><br></p>
                 <p class=MsoNormal>Kind regards & thanks,<br><br></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Amy Foldes</span> </b><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Team Administrator @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>Phone:</span> </b><span style='font-family:"Arial",sans-serif'>(804)447-2834</span> <o:p></o:p></p>
-                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>E-mail:</span> </b><a href="mailto:Harrison@RickCoxRealty.com"><span style='font-family:"Arial",sans-serif'>Harrison@RickCoxRealty.com</span> </a><o:p></o:p></p>
+                <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>E-mail:</span> </b><a href="mailto:Amy@RickCoxRealty.com"><span style='font-family:"Arial",sans-serif'>Amy@RickCoxRealty.com</span> </a><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>2913 Fox Chase Lane</span> <o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><span style='font-family:"Arial",sans-serif;color:#1F3864'>Midlothian, VA 23112</span> <o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><a href="http://www.rickcoxrealty.com/"><b><span style='font-family:"Arial",sans-serif;color:#1F3864'>www.RickCoxRealty.com</span> </b></a><o:p></o:p></p>
@@ -571,7 +603,7 @@ class BuyerTran(tk.Frame):
                 
             mailItem.HTMLBody = html_body
 
-            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('harrison@rickcoxrealty.com')))
+            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('amy@rickcoxrealty.com')))
 
             mailItem.Display()
         
@@ -579,246 +611,25 @@ class BuyerTran(tk.Frame):
             clicked_agents.set("Agents")
             clicked_lenders.set("Lenders")
             clicked_attorneys.set("Attorneys")
+            prop_zip_ent.delete("0", "end")
+            prop_city_ent.delete("0", "end")
+            prop_county_ent.delete("0", "end")
+            mls_ent.delete("0", "end")
+            sp_ent.delete("0", "end")
+            lp_ent.delete("0", "end")
+            spcc_ent.delete("0", "end")
+            seller_name_ent.delete("0", "end")
             prop_add_ent.delete("0", "end")
             comm_ent.delete("0", "end")
             client_name_ent.delete("0", "end")
             client_email_ent.delete("0", "end")
+            client_phone_ent.delete("0", "end")
             la_name_ent.delete("0", "end")
-            #la_email_ent.delete("0", "end")
+            listing_broker_ent.delete("0", "end")
+            la_email_ent.delete("0", "end")
             clicked_boolean.set(False)
             clicked_admin_fee.set("395")
 
-        def query_creator(table_name, *cols):
-    
-            rcrg_cols = "(agentfirst, agentlast, agentphone, agentemail, agenttype, agentlicensenum, agentbroker, path)"
-            lender_cols ="(lendercompany, lofirst, lolast, lophone, loemail, lpemail)"
-            client_cols = "()"
-            attorney_cols = "()"
-            hoa_cols = "()"
-            property_cols = "()"
-            
-            # Declare string for the beginning of our insert statement
-            ins_statement = 'INSERT INTO '
-    
-            # Declare string for the beginning of our Values statement
-            val_statement = 'VALUES ("'
-    
-            # Declare string for the end of our statement 
-            end_char = ')'
-
-            # Declare empty list which will help us adjust our expanded query strings later 
-            list_string = []
-    
-            # Check table name to import correct column names for sql query
-            if table_name == 'rcrg':
-                ins_statement += rcrg_cols
-            elif table_name == 'attorneys':
-                ins_statement += attorney_cols
-            elif table_name == 'lenders':
-                ins_statement += lender_cols
-            elif table_name == 'clients':
-                ins_statement += client_cols
-            elif table_name == 'properties':
-                ins_statement += property_cols
-            elif table_name == 'hoas':
-                ins_statement += hoa_cols
-            
-
-            # Once the correct table is found, iterate through all argument columns passed 
-            # into the function and append them to the Values statement
-            for col in cols:
-                val_statement += col + '", "'
-
-            # Convert our string into a list, each character is assigned to an index value
-            # within the list
-            list_string = list(val_statement)
-            
-            # We know that we will have to remove 3 characters from the end of the string
-            # so we use the pop function at the last index of the string to remove these
-            list_string.pop(len(list_string)-1)
-            list_string.pop(len(list_string)-1)
-            list_string.pop(len(list_string)-1)
-            
-            # We then join the characters back together to form a new string
-            new_string = "".join(list_string)
-
-            # Then we append the string to our end character, assigning it to the values
-            # statement
-            val_statement = new_string + end_char
-
-            # We then concatenate the Insert & Values statements, assigning them to the query string
-            query = ins_statement + val_statement
-
-            # The function returns our query as a string
-            return query
-
-        def data_submit(query):
-            
-            try:
-                conn = sqlite3.connect('rcrgbroker.db')
-                c = conn.cursor()
-                print("Successfully Connected to Database!")
-
-                c.execute(query)
-
-                conn.commit() 
-
-            except:
-                print("There was an error connecting to the Database!")
-
-            finally:
-                c.close()
-                conn.close()
-                print("Connection to Database Closed!")
-  
-        def new_lender_info():
-
-            top = Toplevel(parent)
-            top.geometry("450x175")
-            top.title("New Lender Info - Input Form")
-
-            lender_name_lbl = Label(top, text = "Mortgage Company Name:")
-            lender_name_lbl.grid(column = 2, row = 0)
-            lender_name_ent = Entry(top, width=20)
-            lender_name_ent.grid(column = 3, row = 0)
-
-            lo_first_lbl = Label(top, text = "Loan Officer First Name:")
-            lo_first_lbl.grid(column = 2, row = 1)
-            lo_first_ent = Entry(top, width=20)
-            lo_first_ent.grid(column = 3, row = 1)
-
-            lo_last_lbl = Label(top, text = "Loan Officer Last Name:")
-            lo_last_lbl.grid(column = 2, row = 2)
-            lo_last_ent = Entry(top, width=20)
-            lo_last_ent.grid(column = 3, row = 2)
-           
-            lo_phone_lbl = Label(top, text = "Loan Officer Phone #:")
-            lo_phone_lbl.grid(column = 2, row = 3)
-            lo_phone_ent = Entry(top, width=38)
-            lo_phone_ent.grid(column = 3, row = 3)
-
-            # Add Agent Type field (Dropdown selection, default to 'Salesperson')
-            lo_email_lbl = Label(top, text = "Loan Officer E-mail:")
-            lo_email_lbl.grid(column = 2, row = 4)
-            lo_email_ent = Entry(top, width=38)
-            lo_email_ent.grid(column = 3, row = 4)
-
-            lp_email_lbl = Label(top, text = "Loan Processor E-mail:")
-            lp_email_lbl.grid(column = 2, row = 5)
-            lp_email_ent = Entry(top, width=17)
-            lp_email_ent.grid(column = 3, row = 5)
-
-            pass_data_button = Button(top, text = "Submit Data",
-                                      command = lambda:[data_submit(query_creator("lenders", lender_name_ent.get(), lo_first_ent.get(), lo_last_ent.get(), 
-                                                        lo_phone_ent.get(), lo_email_ent.get(), lp_email_ent.get()))])
-            pass_data_button.grid(column=3, row=6)
-
-            close_button = Button(top, text = "Close the Window",
-                              command= top.destroy)
-            close_button.grid(column=3, row=7)
-               
-        def new_agent_info():
-            
-            clicked_agent_type = StringVar()
-
-            top = Toplevel(parent)
-            top.geometry("450x175")
-            top.title("New Agent Info - Input Form")
-
-            agent_first_lbl = Label(top, text = "Agent First Name:")
-            agent_first_lbl.grid(column = 2, row = 0)
-            agent_first_ent = Entry(top, width=20)
-            agent_first_ent.grid(column = 3, row = 0)
-
-            agent_last_lbl = Label(top, text = "Agent Last Name:")
-            agent_last_lbl.grid(column = 2, row = 1)
-            agent_last_ent = Entry(top, width=20)
-            agent_last_ent.grid(column = 3, row = 1)
-
-            agent_cell_lbl = Label(top, text = "Agent Cell:")
-            agent_cell_lbl.grid(column = 2, row = 2)
-            agent_cell_ent = Entry(top, width=20)
-            agent_cell_ent.grid(column = 3, row = 2)
-           
-            agent_email_lbl = Label(top, text = "Agent E-mail:")
-            agent_email_lbl.grid(column = 2, row = 3)
-            agent_email_ent = Entry(top, width=38)
-            agent_email_ent.grid(column = 3, row = 3)
-
-            # Add Agent Type field (Dropdown selection, default to 'Salesperson')
-            agent_type_lbl = Label(top, text = "Agent Type:")
-            agent_type_lbl.grid(column = 2, row = 4)
-            agent_type_select = OptionMenu(top, clicked_agent_type, "Salesperson", "Principal Broker")
-            agent_type_select.grid(column = 3, row = 4)
-
-            agent_dpor_lbl = Label(top, text = "Agent DPOR License Number:")
-            agent_dpor_lbl.grid(column = 2, row = 5)
-            agent_dpor_ent = Entry(top, width=17)
-            agent_dpor_ent.grid(column = 3, row = 5)
-
-            agent_broker_lbl = Label(top, text = "Agent Brokerage Name:")
-            agent_broker_lbl.grid(column = 2, row = 6)
-            agent_broker_ent = Entry(top, width=30)
-            agent_broker_ent.grid(column = 3, row = 6)
-   
-            pass_data_button = Button(top, text = "Submit Data",
-                                      command = lambda:[data_submit(query_creator("agents", agent_first_ent.get(), agent_last_ent.get(), agent_cell_ent.get(), 
-                                                        agent_email_ent.get(), clicked_agent_type.get(), agent_dpor_ent.get(), agent_broker_ent.get()))])
-            pass_data_button.grid(column=3, row=7)
-
-            close_button = Button(top, text = "Close the Window",
-                              command= top.destroy)
-            close_button.grid(column=3, row=8)
-
-        '''def agent_search():
-            
-            top = Toplevel(parent)
-            top.geometry("450x175")
-            top.title("Agent Search")
-
-            agent_seach = Label(top, text = "Agent First Name:")
-            agent_first_lbl.grid(column = 2, row = 0)
-            agent_first_ent = Entry(top, width=20)
-            agent_first_ent.grid(column = 3, row = 0)
-
-            agent_last_lbl = Label(top, text = "Agent Last Name:")
-            agent_last_lbl.grid(column = 2, row = 1)
-            agent_last_ent = Entry(top, width=20)
-            agent_last_ent.grid(column = 3, row = 1)'''
-
-        #Execute Button
-        submit_button = Button(self, text = "Submit",
-                               command = lambda:[buyer_email(), attorney_email(), listing_agent_email(), lender_email()])
-        submit_button.grid(column = 3, row = 23)
-
-        new_folder_button = Button(self, text = "Create New Folder",
-                                   command = lambda:[buyer_folder()])
-        new_folder_button.grid(column = 3, row = 24)
-
-        clear_fields_button = Button(self, text = "Reset Fields",
-                                     command = lambda:[clear_fields()])
-        clear_fields_button.grid(column = 3, row = 25)
-
-        close_button = Button(self, text = "Close the Window",
-                              command = controller.destroy)
-        close_button.grid(column = 3, row = 26)
-
-        new_agent_button = Button(self, text="New Agent",
-                                  command = lambda: new_agent_info())
-        new_agent_button.grid(column = 4, row = 22)
-
-        new_lender_button = Button(self, text="New Lender",
-                                  command = lambda: new_lender_info())
-        new_lender_button.grid(column = 4, row = 18)
-
-
-        '''search_list_agent_btn = Button(self, text="Agent Search",
-                                  command = lambda: new_agent_info())
-        search_list_agent_btn.grid(column = 4, row = 12)
-        
-        search_sell_agent_btn = Button(self, text="Agent Search",
-                                  command = lambda: new_agent_info())
-        search_sell_agent_btn.grid(column = 5, row = 20)'''
 
 
 if __name__ == '__main__':
