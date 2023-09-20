@@ -200,7 +200,7 @@ class BuyerTran(tk.Frame):
         spcc_ent.grid(column = 3, row = 11)
 
         #Seller Name
-        seller_name_lbl = Label(self, text = "What is the Seller(s) Full Name? For Multiple Names, separate with a ';'")
+        seller_name_lbl = Label(self, text = "What is the Seller(s) Full Name? For multiple names, separate with a ';'")
         seller_name_lbl.grid(column = 2, row = 12)
         seller_name_ent = Entry(self, width=38)
         seller_name_ent.grid(column = 3, row = 12)
@@ -232,13 +232,13 @@ class BuyerTran(tk.Frame):
         clicked_admin_fee.set("395")
 
         #5th Q & A - Client Name
-        client_name_lbl = Label(self, text = "What is the Client's Full Name? For Multiple Names, separate with a ';'")
+        client_name_lbl = Label(self, text = "What is the Client's Full Name? For multiple names, separate with a ';'")
         client_name_lbl.grid(column=2, row=16)
         client_name_ent = Entry(self, width=38)
         client_name_ent.grid(column=3, row=16)
 
         #Client Phone Number(s)
-        client_phone_lbl = Label(self, text = "What is the Client's Phone Number? For Multiple Numbers, separate with a ';'")
+        client_phone_lbl = Label(self, text = "What is the Client's Phone Number? For multiple numbers, separate with a ';'")
         client_phone_lbl.grid(column=2, row=17)
         client_phone_ent = Entry(self, width=38)
         client_phone_ent.grid(column=3, row=17)
@@ -266,7 +266,7 @@ class BuyerTran(tk.Frame):
         attorney_drop.grid(column = 3, row = 20)
 
         #9th Q & A - Client E-mail
-        client_email_lbl = Label(self, text = "What is the Client's E-mail?")
+        client_email_lbl = Label(self, text = "What is the Client's E-mail? For multiple emails, separate with a ';'")
         client_email_lbl.grid(column = 2, row = 21)
         client_email_ent = Entry(self, width=38)
         client_email_ent.grid(column = 3, row = 21)
@@ -305,9 +305,13 @@ class BuyerTran(tk.Frame):
                                      command = lambda:[clear_fields()])
         clear_fields_button.grid(column = 3, row = 28)
 
+        fill_fields_test_button = Button(self, text = "Test Fill the Fields",
+                                         command = lambda:[fill_fields()])
+        fill_fields_test_button.grid(column=3, row=29)
+
         close_button = Button(self, text = "Close the Window",
                               command = controller.destroy)
-        close_button.grid(column = 3, row = 29)
+        close_button.grid(column = 3, row = 30)
 
 
         def buyer_folder():
@@ -330,7 +334,9 @@ class BuyerTran(tk.Frame):
             seller2 = ' '
             selling_agent = clicked_agents.get()
             listing_agent = la_name_ent.get()
-            #listing_email = la_email_ent.get()
+            listing_email = la_email_ent.get()
+            listing_phone = la_phone_ent.get()
+            listing_broker = listing_broker_ent.get()
             commission = comm_ent.get()
             client1 = client_name_ent.get()
             client2 = ' '
@@ -377,8 +383,8 @@ class BuyerTran(tk.Frame):
                         'Seller Attorney Firm': '', 'Seller Attorney Contact': '', 'Seller Office Phone': '', 'Seller Attorney Fax': '',
                         'Seller Attorney Email': '', 'Buyer Attorney Firm': attorney_db[attorney_contact][1], 'Buyer Attorney Contact': attorney_db[attorney_contact][2] + " " + attorney_db[attorney_contact][3], 'Buyer Attorney Office Phone': attorney_db[attorney_contact][4],
                         'Buyer Attorney Fax': '', 'Buyer Attorney Email': attorney_db[attorney_contact][5], 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
-                        'Listing Company Name': '', 'Listing Agent Name': listing_agent, 'Transaction Coordinator': '', 'Listing Agent Phone': '',
-                        'Listing Agent E-mail': '', 'Selling Company Name': rcrg_agent_db[selling_agent][7], 'Selling Agent Name': selling_agent, 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
+                        'Listing Company Name': listing_broker, 'Listing Agent Name': listing_agent, 'Transaction Coordinator': '', 'Listing Agent Phone': listing_phone,
+                        'Listing Agent E-mail': listing_email, 'Selling Company Name': rcrg_agent_db[selling_agent][7], 'Selling Agent Name': selling_agent, 'Selling Agent TC': 'Harrison Goehring - harrison@rickcoxrealty.com',
                         'Selling Agent Phone': rcrg_agent_db[selling_agent][3], 'Selling Agent Email': rcrg_agent_db[selling_agent][4], 'Escrow Deposit': '', 'Held by': '', 'Commission': commission + ' to Selling Agent',
                         'Transac\x98on Fee': admin_fee, 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
             
@@ -629,6 +635,28 @@ class BuyerTran(tk.Frame):
             la_email_ent.delete("0", "end")
             clicked_boolean.set(False)
             clicked_admin_fee.set("395")
+
+        def fill_fields():
+            clicked_agents.set("Rick Cox")
+            clicked_lenders.set("Alcova Mortgage (Eric)")
+            clicked_attorneys.set("Atlantic Coast Settlement Services (Susan)")
+            prop_zip_ent.insert("0", "23112")
+            prop_city_ent.insert("0", "Chesterfield")
+            prop_county_ent.insert("0", "Chesterfield")
+            mls_ent.insert("0", "2311441")
+            sp_ent.insert("0", "300000")
+            lp_ent.insert("0", "300000")
+            spcc_ent.insert("0", "3000")
+            seller_name_ent.insert("0", "Billy Bob; Millie Bo")
+            prop_add_ent.insert("0", "123 Busy Street")
+            comm_ent.insert("0", "3%")
+            client_name_ent.insert("0", "Robbie Bob; Bobbie Rob")
+            client_email_ent.insert("0", "www@gmail.com; eee@gmail.com")
+            client_phone_ent.insert("0", "804-555-5555; 912-104-5556")
+            la_name_ent.insert("0", "Test Agent")
+            listing_broker_ent.insert("0", "Test Broker")
+            la_phone_ent.insert("0", "804-111-3332")
+            la_email_ent.insert("0", "Test@email.com")
 
 
 
