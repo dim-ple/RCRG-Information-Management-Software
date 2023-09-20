@@ -427,7 +427,7 @@ class BuyerTran(tk.Frame):
             mailItem.BodyFormat = 1
 
             agent_name = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][1] + " " + rcrg_agent_db[selling_agent][2]
-            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4]
+            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; harrison@rickcoxrealty.com;"
 
             html_body = f"""
                 <p class=MsoNormal>Good {Time}, {Address_To_Client}!<br><br></p>
@@ -448,7 +448,7 @@ class BuyerTran(tk.Frame):
             mailItem.To = client_email
             
 
-            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('amy@rickcoxrealty.com')))
+            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('Amy@rickcoxrealty.com')))
 
             mailItem.Display()
 
@@ -473,7 +473,7 @@ class BuyerTran(tk.Frame):
 
             #CC: Operating Logic - Dictionary Call
             agent_name = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][1] + " " + rcrg_agent_db[selling_agent][2]
-            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
+            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; harrison@rickcoxrealty.com;"
                 
 
             html_body =f"""
@@ -493,7 +493,7 @@ class BuyerTran(tk.Frame):
                 
             mailItem.HTMLBody = html_body
 
-            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('amy@rickcoxrealty.com')))
+            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('Amy@rickcoxrealty.com')))
 
             mailItem.Display()
 
@@ -528,7 +528,7 @@ class BuyerTran(tk.Frame):
             mailItem.To = " " if (lender_contact == "Other") else lender_db[lender_contact][5]
                 
             agent_name = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][1] + " " + rcrg_agent_db[selling_agent][2]
-            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; amy@rickcoxrealty.com;"
+            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; harrison@rickcoxrealty.com;"
 
             #EMD Logic
             if EMD_Status == True:
@@ -553,7 +553,7 @@ class BuyerTran(tk.Frame):
                 
             mailItem.HTMLBody = html_body
 
-            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('amy@rickcoxrealty.com')))
+            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('Amy@rickcoxrealty.com')))
 
             mailItem.Display()
 
@@ -580,15 +580,8 @@ class BuyerTran(tk.Frame):
             mailItem.BodyFormat = 1
             mailItem.HTMLBody = 'Coordinator Introduction'
 
-            #To: Operating Logic - Dictionary Call
-            #if listing_email == "":
-                #mailItem.To = " "
-            #else:
-                #mailItem.To = listing_email
-
-            #CC: Operating Logic - Dictionary Call
             agent_name = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][1] + " " + rcrg_agent_db[selling_agent][2]
-            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4]
+            mailItem.CC = " " if (selling_agent == "Other") else rcrg_agent_db[selling_agent][4] + "; harrison@rickcoxrealty.com;"
                 
 
             html_body =f"""
@@ -609,7 +602,7 @@ class BuyerTran(tk.Frame):
                 
             mailItem.HTMLBody = html_body
 
-            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('amy@rickcoxrealty.com')))
+            mailItem._oleobj_.Invoke(*(64209, 0, 8, 0, olNS.Accounts.Item('Amy@rickcoxrealty.com')))
 
             mailItem.Display()
         
