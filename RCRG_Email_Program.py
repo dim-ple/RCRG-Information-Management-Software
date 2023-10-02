@@ -1529,11 +1529,7 @@ class NewListing(tk.Frame):
             
                 fillpdfs.write_fillable_pdf('Transaction Info Sheet(Fillable).pdf', 'Transaction Info Sheet(f).pdf', data_dict)
 
-                if listing_agent == "Other":
-                    path = " "
-                else:
-                    path = rcrg_agents_db[listing_agent][3]
-                    os.chdir(path)
+                path = " " if listing_agent == "Other" else rcrg_agents_db[listing_agent][8]
 
                 os.mkdir(property_address)
 
