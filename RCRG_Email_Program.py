@@ -58,7 +58,7 @@ class MainFrame(tk.Tk):
         self.titlefont = tkfont.Font(family = 'Verdana', size = 12,
                                      weight = "bold", slant = 'roman')
         
-        # To make things simple, we're setting our parent and any child frames to the grid set-up. As much as I'd just liek to pack everything, 
+        # To make things simple, we're setting our parent and any child frames to the grid set-up. As much as I'd just like to pack everything, 
         # labels and entry boxes may need to pair up on the same row.
         container = tk.Frame()
         container.grid(row=0, column=0, sticky='nesw')
@@ -1487,7 +1487,7 @@ class NewListing(tk.Frame):
             clicked_agents = StringVar()
             clicked_agents.set("Agents")
 
-            rcrg_agents, rcrg_agents_db = SQLPopList('rcrg')
+            rcrg_agents, rcrg_agent_db = SQLPopList('rcrg')
 
             lbl1 = Label(self, text = "What is the Property Address?")
             lbl1.grid(column = 2, row = 0)
@@ -1522,15 +1522,17 @@ class NewListing(tk.Frame):
                         'Seller Attorney Firm': '', 'Seller Attorney Contact': '', 'Seller Office Phone': '', 'Seller Attorney Fax': '',
                         'Seller Attorney Email': '', 'Buyer Attorney Firm': '', 'Buyer Attorney Contact': '', 'Buyer Attorney Office Phone': '',
                         'Buyer Attorney Fax': '', 'Buyer Attorney Email': '', 'HOA Name': '', 'HOA Mgmt Co': '', 'HOA Phone': '', 'HOA Email': '',
-                        'Listing Company Name': 'The Rick Cox Realty Group', 'Listing Agent Name': rcrg_agents_db[listing_agent][1], 'Transaction Coordinator': 'Harrison Goehring - harrison@rickcoxrealty.com', 'Listing Agent Phone': rcrg_agents_db[listing_agent][4],
-                        'Listing Agent E-mail': rcrg_agents_db[listing_agent][0], 'Selling Company Name': '', 'Selling Agent Name': '', 'Selling Agent TC': '',
+                        'Listing Company Name': 'The Rick Cox Realty Group', 'Listing Agent Name': rcrg_agent_db[listing_agent][1], 'Transaction Coordinator': 'Harrison Goehring - harrison@rickcoxrealty.com', 'Listing Agent Phone': rcrg_agent_db[listing_agent][4],
+                        'Listing Agent E-mail': rcrg_agent_db[listing_agent][4], 'Selling Company Name': '', 'Selling Agent Name': '', 'Selling Agent TC': '',
                         'Selling Agent Phone': '', 'Selling Agent Email': '', 'Escrow Deposit': '', 'Held by': '', 'Commission': '',
                         'Transac\x98on Fee': '395.00', 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
             
                 fillpdfs.write_fillable_pdf('Transaction Info Sheet(Fillable).pdf', 'Transaction Info Sheet(f).pdf', data_dict)
 
-                path = " " if listing_agent == "Other" else rcrg_agents_db[listing_agent][8]
+                path = " " if listing_agent == "Other" else rcrg_agent_db[listing_agent][8]
 
+                os.chdir(path)
+                
                 os.mkdir(property_address)
 
                 os.chdir(f"{path}\\{property_address}")
@@ -1539,7 +1541,7 @@ class NewListing(tk.Frame):
                 os.mkdir("Invoices-Inspections")
                 os.mkdir("Photos")
 
-                shutil.copy('C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\{property_address}\\Contract-Addenda')
+                shutil.copy(f'C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\Contract-Addenda')
 
             def admin_email():
                 property_address = txt1.get()
@@ -1553,8 +1555,8 @@ class NewListing(tk.Frame):
                     agent_name = " "
                     mailItem.CC = " "
                 else:
-                    agent_name = rcrg[listing_agent][1]
-                    mailItem.CC = rcrg[listing_agent][0]
+                    agent_name = rcrg_agent_db[listing_agent][1]
+                    mailItem.CC = rcrg_agent_db[listing_agent][4]
             
                 mailItem.Subject = 'New Listing Request: ' + property_address + f' ({agent_name})'
                 mailItem.BodyFormat = 1
