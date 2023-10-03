@@ -66,7 +66,7 @@ class MainFrame(tk.Tk):
         # Sets the base dimensions of our MainFrame and any children of the MainFrame (this will be inherited by most frames defined later in the program)
         self.geometry('1000x800')
         
-        # Sets our class ID to a string variable to be used late when setting our welcome message on each frame
+        # Sets our class ID to a string variable to be used later when setting our welcome message on each frame
         self.id = tk.StringVar()
         self.id.set("RCRG Admin")
 
@@ -144,29 +144,37 @@ class WelcomePage(tk.Frame):
 class BuyerTran(tk.Frame):
     
     def __init__(self, parent, controller):
+        
+        # Initializes our construtor method, our controller and frame ID for our frame with the welcome page as our parent frame, allowing us to keep the same
+        # attributes of the parent frame(size)
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.id = controller.id
 
+        # Header label for our frame to tell the user where they've landed
         label = tk.Label(self, text = 'New Buyer Transaction \n' + controller.id.get(), font = controller.titlefont)
         label.grid(column=1, row=0)
 
+        # Creates a button which will bring the user back up a frame to the Welcome Page
         bou1 = tk.Button(self, text = "Back to Main", 
                         command = lambda: controller.up_frame("WelcomePage"))
         bou1.grid(column=1, row=1)
 
+        # Initializes our String Variables which will convert our selection from the agents, lender admin fee and attorneys dropdown menu into a string for use
+        # in referencing dict entries
         clicked_agents = StringVar()
         clicked_agents.set("Agents")
 
         clicked_lenders = StringVar()
         clicked_lenders.set("Lenders")
 
-        clicked_boolean = BooleanVar()
-
         clicked_admin_fee = StringVar()
 
         clicked_attorneys = StringVar()
         clicked_attorneys.set("Attorneys")
+
+        # Initializes our boolean variable for the EMD radial button selection (do we have the EMD, y/n?)
+        clicked_boolean = BooleanVar()
 
         # Populates our agent names list and database for use with the UI and fillpdf
         rcrg_agent_options, rcrg_agent_db = SQLPopList('rcrg')
@@ -323,11 +331,16 @@ class BuyerTran(tk.Frame):
         la_name_ent = Entry(self, width=38)
         la_name_ent.grid(column = 3, row = 22)
 
-
+        # The Buyer Folder function aims to create a new directory, folder structure and creates & fills out a new transaction information sheet in our shared dropbox
+        # when we input all the required data for a newly received contract
         def buyer_folder():
+           
+           # First, the function checks to ensure that our current working directory is within the root folder for our program
+           # this is important as we will be writing to a blank transaction information sheet which will be copied to the new file directory later in our program.
             if os.getcwd() != 'C:\\Users\\rcrgr\\Desktop\\E-mail Programs':
                 os.chdir('C:\\Users\\rcrgr\\Desktop\\E-mail Programs')
         
+            # Retreives all the data entered or selected by the user in the tkinter interface and initializes variables for each        
             property_address = prop_add_ent.get()
             city = prop_city_ent.get()
             zip = prop_zip_ent.get()
@@ -356,6 +369,9 @@ class BuyerTran(tk.Frame):
             lender_contact = clicked_lenders.get()
             admin_fee = clicked_admin_fee.get()
 
+            # The user is instructed in the tkinter interface to add a semi-colon between client names, e-mails, phone numbers and seller names to indicate to the program
+            # that there is a 2nd client, seller, phone # or email. The program checks for the semi-colon using the find method in each of these string fields. If it detects a semi-colon,
+            # it initializes an additional variable
             if ";" in client1:
                 i = client1.find(";")
                 client2 = client1[(i+2):]
@@ -376,9 +392,10 @@ class BuyerTran(tk.Frame):
                 seller2 = seller1[(i+2):]
                 seller1 = seller1[0:i]
 
-
+            # We call the fillpdfs libraries get_form_fields method to pull all the form field names from our blank transaction information sheet
             fillpdfs.get_form_fields("Transaction Info Sheet(Fillable).pdf")
 
+             # We initialize a dictionary that we will later use to fill out the transaction information sheet with the user's entered data.
             data_dict = {'Property Address': property_address, 'City': city, 'State': 'VA', 'Zip': zip, 'County': county,
                         'CVRMLS': mls, 'Sales Price': sp, 'Offer Date_af_date': offer_date, 'Date2_af_date': list_date,
                         'Rat-Date_af_date': ratif_date, 'Closing Date_af_date': close_date, 'List Price': lp, 'Closing Costs Paid by Seller': spcc,
@@ -396,22 +413,24 @@ class BuyerTran(tk.Frame):
                         'Selling Agent Phone': rcrg_agent_db[selling_agent][3], 'Selling Agent Email': rcrg_agent_db[selling_agent][4], 'Escrow Deposit': '', 'Held by': '', 'Commission': commission + ' to Selling Agent',
                         'Transac\x98on Fee': admin_fee, 'Referral Fee': '', 'Paid to': '', 'Referral Address': '', 'Reset': ''}
             
+            
+            # We then write the user's information into the pdf using the write_fillable_pdf method and our data_dict
             fillpdfs.write_fillable_pdf('Transaction Info Sheet(Fillable).pdf', 'Transaction Info Sheet(f).pdf', data_dict)
             
+            # We initialize our path which is referenced from the SQL database for the selected agent
             path = " " if selling_agent == "Other" else rcrg_agent_db[selling_agent][8]
             
-            
-
-            
+            # We change our working directory to our path, we create a folder with the property address as its name
             os.chdir(path)
-
             os.mkdir(property_address)
-
+            
+            # We then move up a level to the folder we just created for the new property transaction. 
+            # Once the directory change has been made, we create two sub-folders 
             os.chdir(f"{path}\\{property_address}")
-
             os.mkdir("Contract-Addenda")
             os.mkdir("Invoices-Inspections")
 
+            # Finally, we use the shutil copy method to copy our transaction information sheet to the new directory and contract-addenda subfolder we created
             shutil.copy('C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\{property_address}\\Contract-Addenda')
 
         def buyer_email():
