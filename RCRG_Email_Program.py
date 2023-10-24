@@ -1560,7 +1560,7 @@ class NewListing(tk.Frame):
                 os.mkdir("Invoices-Inspections")
                 os.mkdir("Photos")
 
-                shutil.copy(f'C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\Contract-Addenda')
+                shutil.copy(f'C:\\Users\\rcrgr\\Desktop\\E-mail Programs\\Transaction Info Sheet(f).pdf', f'{path}\\{property_address}\\Contract-Addenda')
 
             def admin_email():
                 property_address = txt1.get()
