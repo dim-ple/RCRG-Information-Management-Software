@@ -13,10 +13,6 @@ import shutil
 import os
 import win32com.client as win32
 
-# Import dictionaries with Agent, lender and attorney info - will remove from repository when SQL query is full fleshed out and 
-# lists can be populated with data from the database
-from Contact_Dictionaries import rcrg, lender, attorney
-
 # Imports our system time reference module which will help determine the proper greeting in our e-mail templates
 from DateAndTime import Time
 from DateAndTime import datetime
@@ -32,7 +28,9 @@ import sqlite3
 from SQLPopList import SQLPopList
 
 
-
+rcrg=[]
+lender=[]
+attorney=[]
 lenders = []
 attorneys =[]
 
