@@ -27,13 +27,11 @@ import sqlite3
 # **Eventually will be replaced with SQL query population**
 from SQLPopList import SQLPopList
 
-
 rcrg=[]
 lender=[]
 attorney=[]
 lenders = []
 attorneys =[]
-
 
 # Loops to populate our agents, lenders and attorneys lists
 for lend in lender:
