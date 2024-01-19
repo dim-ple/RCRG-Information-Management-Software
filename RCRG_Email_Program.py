@@ -503,7 +503,7 @@ class BuyerTran(tk.Frame):
                 <p class=MsoNormal>Good {Time}, {attorney_name}!<br><br></p>
                 <p class=MsoNormal>{agent_name}'s client would like to use your office for the title and settlement work needed for their purchase of {property_address}. Please find the ratified contract, transaction information sheet and tax record attached!<br><br></p>
                 <p class=MsoNormal> Please note that the selling agent's commission for this transaction will be {commission}. Additionally, our brokerage will charge a $395.00 Administrative Fee to the purchaser at closing. Please overnight both checks to our office at <b> 2913 Fox Chase Lane, Midlothian, VA 23112. </b> Thank you! <br><br></p>
-                <p class=MsoNormal>CC: {agent_name}, Selling Agent; Team Administrator, Amy Foldes;<br><br></p>
+                <p class=MsoNormal>CC: {agent_name}, Selling Agent; Amy Foldes, Team Administrator;<br><br></p>
                 <p class=MsoNormal> Kind regards, <br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
@@ -619,7 +619,7 @@ class BuyerTran(tk.Frame):
                 <p class=MsoNormal>My name is Harrison Goehring and I am the Office Manager for the Rick Cox Realty Group. I will be assisting {agent_name} and their client on the purchase of {property_address}. I look forward to working with you!<br><br></p>
                 <p class=MsoNormal>{attorney_msg} Would you mind providing me with the contact for the Seller's Attorney or Title Company who will be handling the deed preparation for the Seller once that information becomes available?<br><br></p>
                 <p class=MsoNormal>Additionally, would your seller be willing to share who their current utility providers for Electricity, Water/Sewer, Internet, Trash and Gas are?<br><br></p>
-                <p class=MsoNormal>CC: {agent_name}, Selling Agent; Team Administrator, Amy Foldes;<br><br></p>
+                <p class=MsoNormal>CC: {agent_name}, Selling Agent;  Amy Foldes, Team Administrator;<br><br></p>
                 <p class=MsoNormal>Kind regards & thanks,<br><br></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-size:14.0pt;font-family:"Arial",sans-serif;color:#1F3864'>Harrison Goehring</span> </b><o:p></o:p></p>
                 <p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;mso-add-space:auto'><b><span style='font-family:"Arial",sans-serif'>Office Manager @ The Rick Cox Realty Group</span> </b><o:p></o:p></p>
